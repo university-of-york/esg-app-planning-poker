@@ -36,6 +36,15 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+*.js
+*.jsx
+*.d.ts
+!binaryMimeTypes.js
+!index.js
+!jest.config.js
+!next.config.js
+!next-env.d.ts
+!server.js
 
 # IntelliJ
 .idea/

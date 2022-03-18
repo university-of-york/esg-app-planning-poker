@@ -1,0 +1,30 @@
+.button {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    height: fit-content;
+    width: fit-content;
+    padding: 0.4em;
+    font-size: 1.4em;
+    color: white;
+    background-color: #00B3EB;
+    border: none;
+    border-radius: 0.4em;
+    box-shadow: rgba(30, 30, 50, 0.25) 0 7px 29px 0;
+    cursor: pointer;
+    transition: background-color 0.4s, font-weight 0.4s;
+}
+
+.button:hover {
+    background-color: #34C3F0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.button svg {
+    font-size: 1em;
+    height: 1em;
+    width: fit-content;
+    padding: 0 0.5vw;
+}

@@ -1,11 +1,11 @@
-service: planning-poker
+service: esg-app-planning-poker
 
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: v1
+  stage: ${env:STACK_ENV, 'dev'}
   # This role is required to deploy an application to AWS with an ESG Account. See https://wiki.york.ac.uk/display/AWS/AWS%3A+Github+Actions for details
-  cfnRole: arn:aws:iam::${env:AWS_ACCOUNT_ID}:role/GithubActionsDeploymentRole
+#  cfnRole: arn:aws:iam::${env:AWS_ACCOUNT_ID}:role/GithubActionsDeploymentRole
   region: eu-west-1
   memorySize: 1024
   endpointType: regional
@@ -23,19 +23,19 @@ provider:
     minimumCompressionSize: 1000
   iam:
     role:
-      name: planning-poker-role
+      name: planning-poker-role-${self:provider.stage}
       statements:
         - Effect: Allow
-          Resource: "*"
+          Resource: !GetAtt PokerTable.Arn
           Action: dynamodb:Scan
         - Effect: Allow
-          Resource: "*"
+          Resource: !GetAtt PokerTable.Arn
           Action: dynamodb:GetItem
         - Effect: Allow
-          Resource: "*"
+          Resource: !GetAtt PokerTable.Arn
           Action: dynamodb:PutItem
         - Effect: Allow
-          Resource: "*"
+          Resource: !GetAtt PokerTable.Arn
           Action: dynamodb:UpdateItem
 
 functions:
@@ -44,6 +44,66 @@ functions:
     events:
       - http: ANY /
       - http: ANY /{proxy+}
+  getRoom:
+    handler: index.getRoom
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room/{id}
+          method: GET
+          cors:
+            origin: "*"
+  createRoom:
+    handler: index.createRoom
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room
+          method: POST
+          cors:
+            origin: "*"
+  joinRoom:
+    handler: index.joinRoom
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room/{id}/join
+          method: POST
+          cors:
+            origin: "*"
+  submitChoice:
+    handler: index.submitChoice
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room/{id}/choice
+          method: PUT
+          cors:
+            origin: "*"
+  revealRoom:
+    handler: index.revealRoom
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room/{id}/reveal
+          method: POST
+          cors:
+            origin: "*"
+  resetRoom:
+    handler: index.resetRoom
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room/{id}/reset
+          method: POST
+          cors:
+            origin: "*"
 
 plugins:
   - serverless-apigw-binary
@@ -143,4 +203,18 @@ resources:
         - ${self:custom.domainName}
         - ""
 
-  Resources: {}
+  Resources:
+    PokerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: planning-poker-${self:provider.stage}
+        BillingMode: PROVISIONED
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH

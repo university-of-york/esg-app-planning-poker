@@ -1,0 +1,197 @@
+.container {
+}
+
+.overlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.35s;
+}
+
+.content {
+    position: fixed;
+    z-index: 11;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    background-color: white;
+    border-radius: 1vw;
+    font-size: 1em;
+    padding: 1vw;
+    width: 40vw;
+    height: fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation: frombottom 0.35s;
+    transition: border-left-color 0.2s, border-right-color 0.2s;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1vw;
+}
+
+.control {
+    width: fit-content;
+    font-size: 1.2em;
+}
+
+.control.left {
+    justify-content: flex-end;
+}
+
+.control.right {
+    justify-content: flex-start;
+}
+
+.icon {
+    height: 1em;
+    width: fit-content;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes frombottom {
+    from {
+        top: 110%;
+    }
+    to {
+        top: 50%;
+    }
+}
+
+/*@media only screen and (max-width: 4000px) {*/
+/*    .content {*/
+/*        width: 40vw;*/
+/*        border-radius: 1.2vw;*/
+/*        border-left-width: 0.6vw;*/
+/*        border-right-width: 0.6vw;*/
+/*        font-size: 1.4em;*/
+/*        padding: 1vw 2vw;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 3000px) {*/
+/*    .content {*/
+/*        width: 45vw;*/
+/*        border-radius: 1.2vw;*/
+/*        border-left-width: 0.6vw;*/
+/*        border-right-width: 0.6vw;*/
+/*        font-size: 1.4em;*/
+/*        padding: 1vw 2vw;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 2500px) {*/
+/*    .content {*/
+/*        width: 50vw;*/
+/*        border-radius: 1.2vw;*/
+/*        border-left-width: 0.6vw;*/
+/*        border-right-width: 0.6vw;*/
+/*        font-size: 1.2em;*/
+/*        padding: 1vw 2vw;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 2000px) {*/
+/*    .content {*/
+/*        width: 60vw;*/
+/*        border-radius: 1.6vw;*/
+/*        border-left-width: 0.8vw;*/
+/*        border-right-width: 0.8vw;*/
+/*        font-size: 1em;*/
+/*        padding: 1vw 2vw;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 1500px) {*/
+/*    .content {*/
+/*        width: 70vw;*/
+/*        border-radius: 2vw;*/
+/*        border-left-width: 1.2vw;*/
+/*        border-right-width: 1.2vw;*/
+/*        font-size: 1.2em;*/
+/*        padding: 2vw;*/
+/*    }*/
+
+/*    .control {*/
+/*        font-size: 1.4em;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 1000px) {*/
+/*    .content {*/
+/*        width: 75vw;*/
+/*        border-radius: 2.25vw;*/
+/*        border-left-width: 1.4vw;*/
+/*        border-right-width: 1.4vw;*/
+/*        font-size: 1em;*/
+/*        padding: 2vw;*/
+/*    }*/
+
+/*    .control {*/
+/*        font-size: 1.2em;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 800px) {*/
+/*    .content {*/
+/*        width: 80vw;*/
+/*        border-radius: 2.5vw;*/
+/*        border-left-width: 1.6vw;*/
+/*        border-right-width: 1.6vw;*/
+/*        font-size: 0.9em;*/
+/*        padding: 3vw 2vw;*/
+/*    }*/
+
+/*    .control {*/
+/*        font-size: 1.4em;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 600px) {*/
+/*    .content {*/
+/*        width: 85vw;*/
+/*        border-radius: 3vw;*/
+/*        border-left-width: 1.8vw;*/
+/*        border-right-width: 1.8vw;*/
+/*        font-size: 0.9em;*/
+/*        padding: 3vw 2vw;*/
+/*    }*/
+
+/*    .control {*/
+/*        font-size: 1.5em;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 400px) {*/
+/*    .content {*/
+/*        width: 90vw;*/
+/*        border-radius: 3vw;*/
+/*        border-left-width: 2vw;*/
+/*        border-right-width: 2vw;*/
+/*        font-size: 0.8em;*/
+/*        padding: 2vw;*/
+/*    }*/
+/*    .control {*/
+/*        font-size: 1.6em;*/
+/*    }*/
+/*}*/

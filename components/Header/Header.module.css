@@ -26,9 +26,3 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-.name {
-    padding: 1em;
-    font-size: 1.6em;
-    font-weight: bold;
-}
