@@ -39,17 +39,15 @@ const PlanningRoom = (props: PlanningRoomProps) => {
 
     const hasJoinedRoom = room.members.find((member) => member.id === session?.id);
 
-    useEffect(() => {
-        const fetchRoom = async () => {
-            setRoom((await getRoom(props.id)) as Room);
-        };
+    const refresh = async () => setRoom(await getRoom(props.id) as Room);
 
-        const interval = setInterval(fetchRoom, 2000);
+    useEffect(() => {
+        const interval = setInterval(refresh, 2000);
 
         return () => {
             clearInterval(interval);
         };
-    }, [props.id]);
+    }, []);
 
     useEffect(() => {
         const getSession = async () => {
@@ -63,6 +61,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         if (session?.displayName && !hasJoinedRoom) {
             const join = async () => {
                 await joinRoom(room.id, session.id, session.displayName);
+                await refresh();
             };
 
             join();
@@ -73,6 +72,10 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         setDisplayname(event.target.value);
     };
 
+    const handleConfirmation = async () => {
+        await updateDisplayName(_displayName);
+    }
+
     const currentPlayer = room.members.find((member) => member.id === session?.id);
 
     return (
@@ -81,7 +84,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             <Modal
                 className={styles.sessionModal}
                 open={session?.displayName === ""}
-                callback={() => updateDisplayName(_displayName)}
+                callback={handleConfirmation}
             >
                 <label className={styles.name}>Your name</label>
                 <input type="text" value={_displayName} onChange={handleChange} />
@@ -90,7 +93,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             <div className={styles.content}>
                 <h1 className={styles.name}>{room.name}</h1>
 
-                <PokerTable room={room} currentPlayer={currentPlayer} refresh={async () => setRoom(await getRoom(props.id) as Room)} />
+                <PokerTable room={room} currentPlayer={currentPlayer} refresh={refresh} />
             </div>
         </div>
     );

@@ -14,8 +14,22 @@
     padding: 1em;
 }
 
-.invite {
+.invite,
+.reveal,
+.reset {
     margin-top: 1vw;
+}
+
+.invite {
+
+}
+
+.reveal {
+
+}
+
+.reset {
+
 }
 
 .players {
@@ -65,12 +79,16 @@
     margin-top: 1vw;
 }
 
+.choice.revealed {
+    font-size: 2em;
+    font-weight: bold;
+}
+
 .player.current .choice {
     filter: brightness(125%);
 }
 
 .icon {
-    /*font-size: 1em;*/
     height: 2em;
 }
 

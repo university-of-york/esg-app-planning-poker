@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
 import {Room, Member} from "../../types/room";
-import {submitChoice} from "../../utils/api";
+import {resetRoom, revealRoom, submitChoice} from "../../utils/api";
 import {Button} from "../Button/Button";
-import {BASE_URL} from "../../utils/environment";
 // @ts-ignore
 import styles from "./PokerTable.module.css";
 
@@ -24,6 +23,35 @@ const PokerTable = ({room, currentPlayer, refresh}: {room: Room, currentPlayer?:
         submit();
     }
 
+    const handleReveal = () => {
+        if (!currentPlayer) {
+            return;
+        }
+
+        const reveal = async () => {
+            await revealRoom(room.id);
+            await refresh();
+        }
+
+        reveal();
+    }
+
+    const handleReset = () => {
+        if (!currentPlayer) {
+            return;
+        }
+
+        const reset = async () => {
+            await resetRoom(room.id);
+            await refresh();
+        }
+
+        reset();
+    }
+
+    const allChoicesMade = !room.members.find((member) => member.choice === "");
+    const currentPlayerIsHost = room.hostId === currentPlayer?.id;
+
     return (
         <div className={styles.container}>
             <div className={styles.table}>
@@ -37,12 +65,28 @@ const PokerTable = ({room, currentPlayer, refresh}: {room: Room, currentPlayer?:
                 Copy invite link
             </Button>
 
+            {allChoicesMade && currentPlayerIsHost ? room.state === "HIDDEN" ? (
+                <Button
+                    className={styles.reveal}
+                    onClick={handleReveal}
+                >
+                    Reveal
+                </Button>
+            ) : (
+                <Button
+                    className={styles.reset}
+                    onClick={handleReset}
+                >
+                    Reset table
+                </Button>
+            ) : undefined}
+
             <div className={styles.players}>
                 {room.members?.map((member) => {
                     let choice;
 
                     if (room.state === "REVEALED") {
-                        choice = <span className={styles.choice}>{member.choice}</span>
+                        choice = <span className={`${styles.choice} ${styles.revealed}`}>{member.choice}</span>
                     } else {
                         if (member.choice === "") {
                             choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass}/>;

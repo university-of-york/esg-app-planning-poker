@@ -233,7 +233,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.server",
         "Runtime": "nodejs14.x",
@@ -263,7 +263,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.getRoom",
         "Runtime": "nodejs14.x",
@@ -294,7 +294,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.createRoom",
         "Runtime": "nodejs14.x",
@@ -325,7 +325,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.joinRoom",
         "Runtime": "nodejs14.x",
@@ -356,7 +356,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.submitChoice",
         "Runtime": "nodejs14.x",
@@ -387,7 +387,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.revealRoom",
         "Runtime": "nodejs14.x",
@@ -418,7 +418,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/esg-app-planning-poker/dev/1647798009395-2022-03-20T17:40:09.395Z/esg-app-planning-poker.zip"
+          "S3Key": "serverless/esg-app-planning-poker/dev/1647800851750-2022-03-20T18:27:31.750Z/esg-app-planning-poker.zip"
         },
         "Handler": "index.resetRoom",
         "Runtime": "nodejs14.x",
@@ -442,74 +442,74 @@
         "ResetRoomLogGroup"
       ]
     },
-    "ServerLambdaVersion2LNByDgeeGWNODrwg2BAjD991sC2sEFr6kW6gQv048": {
+    "ServerLambdaVersionmHaOxFBtS4dnJrDCjgOXvKjFuxeOXYN148r9LBtRTyE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ServerLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
-    "GetRoomLambdaVersionX7l8ZZa8x5mYnDklgsq76rMbamp8CRtr4gCNkkaBs": {
+    "GetRoomLambdaVersionMCwEUq9qWUQDB1e2j8u1VsVo3RUHnlrliOTbsbrTY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetRoomLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
-    "CreateRoomLambdaVersionrbV4TSDbCzxJn9Cw558erMglRBO25SxXrx7EjXRA": {
+    "CreateRoomLambdaVersionwnYl6oLhPW4kbwHRNp3Vdy8JvdokqoDsg6VhhhxyCo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateRoomLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
-    "JoinRoomLambdaVersiongFrZEUb6HkxI5Jq4oCZrUGQE8DX7btf9AgJRweLMA": {
+    "JoinRoomLambdaVersionUpH9SV7d6Kz6ax1X7WOSIbJMEQnxMs3uds8JZry183w": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "JoinRoomLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
-    "SubmitChoiceLambdaVersionX5KbkZ30GqXmNoiGMaaSaBVPgCS04Y6Tkbj7xghAlA": {
+    "SubmitChoiceLambdaVersionOxM0FJvNZIgiotBIbPJv34THUaO5DivbWWc80CWJdU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SubmitChoiceLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
-    "RevealRoomLambdaVersiond1jXlGnAAGxdXZ8QgJ3rEMY1mYzL63kkdbemkHPMPU": {
+    "RevealRoomLambdaVersiongLxUb1huWdvZ90unrh6jN46SAfpS3tS49cnmWfeStoE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RevealRoomLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
-    "ResetRoomLambdaVersionV1eAuG948hJvxu6LbUXBgSYQpML1yXZ6E6NdL38aIo": {
+    "ResetRoomLambdaVersionwwj92N7foX20DgsSRgLZF2kRvq40a8UAA8OOade7m8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ResetRoomLambdaFunction"
         },
-        "CodeSha256": "5OqYPSxuKmsALlO0jK35T1ApFYr7Vf8PuBCyiR3/RVw="
+        "CodeSha256": "rnsnyLAFEliaAPnymLEfcnwQufLQqQn3grQ+l/e9VUE="
       }
     },
     "ApiGatewayRestApi": {
@@ -1256,7 +1256,7 @@
         "ResetRoomLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1647797994921": {
+    "ApiGatewayDeployment1647800833439": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1576,7 +1576,7 @@
     "ServerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ServerLambdaVersion2LNByDgeeGWNODrwg2BAjD991sC2sEFr6kW6gQv048"
+        "Ref": "ServerLambdaVersionmHaOxFBtS4dnJrDCjgOXvKjFuxeOXYN148r9LBtRTyE"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-ServerLambdaFunctionQualifiedArn"
@@ -1585,7 +1585,7 @@
     "GetRoomLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetRoomLambdaVersionX7l8ZZa8x5mYnDklgsq76rMbamp8CRtr4gCNkkaBs"
+        "Ref": "GetRoomLambdaVersionMCwEUq9qWUQDB1e2j8u1VsVo3RUHnlrliOTbsbrTY"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-GetRoomLambdaFunctionQualifiedArn"
@@ -1594,7 +1594,7 @@
     "CreateRoomLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateRoomLambdaVersionrbV4TSDbCzxJn9Cw558erMglRBO25SxXrx7EjXRA"
+        "Ref": "CreateRoomLambdaVersionwnYl6oLhPW4kbwHRNp3Vdy8JvdokqoDsg6VhhhxyCo"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-CreateRoomLambdaFunctionQualifiedArn"
@@ -1603,7 +1603,7 @@
     "JoinRoomLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "JoinRoomLambdaVersiongFrZEUb6HkxI5Jq4oCZrUGQE8DX7btf9AgJRweLMA"
+        "Ref": "JoinRoomLambdaVersionUpH9SV7d6Kz6ax1X7WOSIbJMEQnxMs3uds8JZry183w"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-JoinRoomLambdaFunctionQualifiedArn"
@@ -1612,7 +1612,7 @@
     "SubmitChoiceLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SubmitChoiceLambdaVersionX5KbkZ30GqXmNoiGMaaSaBVPgCS04Y6Tkbj7xghAlA"
+        "Ref": "SubmitChoiceLambdaVersionOxM0FJvNZIgiotBIbPJv34THUaO5DivbWWc80CWJdU"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-SubmitChoiceLambdaFunctionQualifiedArn"
@@ -1621,7 +1621,7 @@
     "RevealRoomLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RevealRoomLambdaVersiond1jXlGnAAGxdXZ8QgJ3rEMY1mYzL63kkdbemkHPMPU"
+        "Ref": "RevealRoomLambdaVersiongLxUb1huWdvZ90unrh6jN46SAfpS3tS49cnmWfeStoE"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-RevealRoomLambdaFunctionQualifiedArn"
@@ -1630,7 +1630,7 @@
     "ResetRoomLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ResetRoomLambdaVersionV1eAuG948hJvxu6LbUXBgSYQpML1yXZ6E6NdL38aIo"
+        "Ref": "ResetRoomLambdaVersionwwj92N7foX20DgsSRgLZF2kRvq40a8UAA8OOade7m8"
       },
       "Export": {
         "Name": "sls-esg-app-planning-poker-dev-ResetRoomLambdaFunctionQualifiedArn"

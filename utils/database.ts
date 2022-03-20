@@ -14,6 +14,35 @@ const client = new DynamoDBClient({
     region: "eu-west-1",
 });
 
+const create = async (id: string, name: string, hostId: string, hostName: string): Promise<void> => {
+    const command = new PutItemCommand({
+        TableName: POKER_TABLE,
+        Item: {
+            id: { S: id },
+            name: { S: name },
+            hostId: { S: hostId },
+            state: { S: "HIDDEN" },
+            members: {
+                L: [
+                    {
+                        M: {
+                            id: { S: hostId },
+                            displayName: { S: hostName },
+                            choice: { S: "" },
+                        },
+                    },
+                ],
+            },
+        },
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not create room: ${id}`);
+    }
+};
+
 const get = async (id: string): Promise<Room> => {
     const command = new GetItemCommand({
         TableName: POKER_TABLE,
@@ -48,67 +77,6 @@ const get = async (id: string): Promise<Room> => {
             };
         }),
     };
-};
-
-const create = async (id: string, name: string, hostId: string, hostName: string): Promise<void> => {
-    const command = new PutItemCommand({
-        TableName: POKER_TABLE,
-        Item: {
-            id: { S: id },
-            name: { S: name },
-            hostId: { S: hostId },
-            state: { S: "HIDDEN" },
-            members: {
-                L: [
-                    {
-                        M: {
-                            id: { S: hostId },
-                            displayName: { S: hostName },
-                            choice: { S: "" },
-                        },
-                    },
-                ],
-            },
-        },
-    });
-
-    const result = await client.send(command);
-
-    if (result.$metadata.httpStatusCode !== 200) {
-        throw new Error(`Could not create room: ${id}`);
-    }
-};
-
-const reset = async (id: string): Promise<void> => {
-    const existingRoom = await get(id);
-
-    const resetMembers = existingRoom.members.map((member) => ({
-        M: {
-            id: { S: member.id },
-            choice: { S: "" },
-        },
-    }));
-
-    const command = new UpdateItemCommand({
-        TableName: POKER_TABLE,
-        Key: {
-            id: { S: id },
-        },
-        UpdateExpression: "SET #state = :state, members = :members",
-        ExpressionAttributeNames: {
-            "#state": "state",
-        },
-        ExpressionAttributeValues: {
-            ":state": { S: "HIDDEN" },
-            ":members": { L: resetMembers },
-        },
-    });
-
-    const result = await client.send(command);
-
-    if (result.$metadata.httpStatusCode !== 200) {
-        throw new Error(`Could not retrieve details for room: ${id}`);
-    }
 };
 
 const join = async (id: string, memberId: string, memberName: string): Promise<void> => {
@@ -185,4 +153,37 @@ const reveal = async (id: string): Promise<void> => {
     }
 };
 
-export { get, create, join, reset, submit, reveal };
+const reset = async (id: string): Promise<void> => {
+    const existingRoom = await get(id);
+
+    const resetMembers = existingRoom.members.map((member) => ({
+        M: {
+            id: { S: member.id },
+            displayName: { S: member.displayName },
+            choice: { S: "" },
+        },
+    }));
+
+    const command = new UpdateItemCommand({
+        TableName: POKER_TABLE,
+        Key: {
+            id: { S: id },
+        },
+        UpdateExpression: "SET #state = :state, members = :members",
+        ExpressionAttributeNames: {
+            "#state": "state",
+        },
+        ExpressionAttributeValues: {
+            ":state": { S: "HIDDEN" },
+            ":members": { L: resetMembers },
+        },
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not retrieve details for room: ${id}`);
+    }
+};
+
+export { create, get, join, submit, reveal, reset };
