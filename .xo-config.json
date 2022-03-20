@@ -13,6 +13,9 @@
   ],
   "envs": ["browser"],
   "rules": {
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-implicit-any-catch": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "capitalized-comments": "off",
     "indent": "off",
     "import/extensions": ["error", "always"],

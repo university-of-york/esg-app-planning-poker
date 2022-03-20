@@ -1,9 +1,11 @@
-import {APIGatewayEvent} from "aws-lambda";
-import type {LambdaResponse} from "../types/lambda";
-import {message} from "../utils/responses";
-import {reveal} from "../utils/database";
+import { APIGatewayEvent } from "aws-lambda";
+import type { LambdaResponse } from "../types/lambda";
+import { message } from "../utils/responses.js";
+import { reveal } from "../utils/database.js";
 
 const revealRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
+    console.debug(`Event: ${JSON.stringify(event)}`);
+
     const id = event.pathParameters?.id;
 
     if (!id) {
@@ -12,7 +14,7 @@ const revealRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     await reveal(id);
 
-    return message(200, 'OK');
+    return message(200, "OK");
 };
 
-module.exports = revealRoom;
+export default revealRoom;

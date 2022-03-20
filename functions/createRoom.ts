@@ -1,25 +1,31 @@
-import {v4 as uuid} from 'uuid';
-import {APIGatewayEvent} from "aws-lambda";
-import type {LambdaResponse} from "../types/lambda";
-import {message, result} from "../utils/responses";
-import {create} from "../utils/database";
+import { v4 as uuid } from "uuid";
+import { APIGatewayEvent } from "aws-lambda";
+import type { LambdaResponse } from "../types/lambda";
+import { message, result } from "../utils/responses.js";
+import { create } from "../utils/database.js";
 
 const createRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
+    console.debug(`Event: ${JSON.stringify(event)}`);
+
     const id = uuid();
 
     if (!event.body) {
         return message(400, "Request body not found");
     }
 
-    const {name, creatorId, creatorName} = JSON.parse(event.body);
+    const body = event.isBase64Encoded ? new Buffer(event.body, 'base64').toString() : event.body;
 
-    if (!name || !creatorId || !creatorName) {
+    const { name, hostId, hostName} = JSON.parse(body);
+
+    if (!name || !hostId || !hostName) {
         return message(400, "Name & creator parameters required");
     }
 
-    await create(id, name, creatorId, creatorName);
+    console.info(`Creating room ${id}:${name} for ${hostId}:${hostName}`);
 
-    return result({id});
+    await create(id, name, hostId, hostName);
+
+    return result({ id });
 };
 
-module.exports = createRoom;
+export default createRoom;

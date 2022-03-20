@@ -1,63 +1,75 @@
-import {DynamoDBClient, GetItemCommand, PutItemCommand, ScanCommand, UpdateItemCommand, DeleteItemCommand, AttributeValue} from '@aws-sdk/client-dynamodb';
-import {getEnvironmentVariable} from "./environment";
-import type {Room} from "../types/room";
+import {
+    DynamoDBClient,
+    GetItemCommand,
+    PutItemCommand,
+    UpdateItemCommand,
+    AttributeValue,
+} from "@aws-sdk/client-dynamodb";
+import type { Room } from "../types/room";
+import { getEnvironmentVariable } from "./environment.js";
 
 const POKER_TABLE = getEnvironmentVariable("POKER_TABLE");
 
 const client = new DynamoDBClient({
-    region: 'eu-west-1'
+    region: "eu-west-1",
 });
 
 const get = async (id: string): Promise<Room> => {
-  const command = new GetItemCommand({
-      TableName: POKER_TABLE,
-      ConsistentRead: true,
-      Key: {
-          id: { S: id }
-      },
-  });
+    const command = new GetItemCommand({
+        TableName: POKER_TABLE,
+        ConsistentRead: true,
+        Key: {
+            id: { S: id },
+        },
+    });
 
-  const result = await client.send(command);
+    const result = await client.send(command);
 
-  if (result.$metadata.httpStatusCode !== 200 || !result.Item) {
-      throw new Error(`Could not retrieve details for room: ${id}`);
-  }
+    if (result.$metadata.httpStatusCode !== 200 || !result.Item) {
+        throw new Error(`Could not retrieve details for room: ${id}`);
+    }
 
-  const room = result.Item;
+    const room = result.Item;
 
-  return {
-      id: room.id.S!,
-      name: room.name.S!,
-      // @ts-ignore
-      state: room.state.S!,
-      // @ts-ignore
-      members: room.members.L?.map((value: AttributeValue) => {
-          const member = value.M!;
+    return {
+        id: room.id.S!,
+        name: room.name.S!,
+        hostId: room.hostId.S!,
+        // @ts-ignore
+        state: room.state.S!,
+        // @ts-ignore
+        members: room.members.L?.map((value: AttributeValue) => {
+            const member = value.M!;
 
-          return {
-              id: member.id.S!,
-              displayName: member.displayName.S!,
-              choice: member.choice.S!
-          }
-      })
-  };
+            return {
+                id: member.id.S!,
+                displayName: member.displayName.S!,
+                choice: member.choice.S!,
+            };
+        }),
+    };
 };
 
-const create = async (id: string, name: string, creatorId: string, creatorName: string): Promise<void> => {
+const create = async (id: string, name: string, hostId: string, hostName: string): Promise<void> => {
     const command = new PutItemCommand({
         TableName: POKER_TABLE,
         Item: {
             id: { S: id },
             name: { S: name },
+            hostId: { S: hostId },
             state: { S: "HIDDEN" },
-            members: { L: [
-                { M: {
-                    id: { S: creatorId },
-                    displayName: { S: creatorName},
-                    choice: { S: "" },
-                }}
-            ]}
-        }
+            members: {
+                L: [
+                    {
+                        M: {
+                            id: { S: hostId },
+                            displayName: { S: hostName },
+                            choice: { S: "" },
+                        },
+                    },
+                ],
+            },
+        },
     });
 
     const result = await client.send(command);
@@ -70,27 +82,26 @@ const create = async (id: string, name: string, creatorId: string, creatorName: 
 const reset = async (id: string): Promise<void> => {
     const existingRoom = await get(id);
 
-    const resetMembers = existingRoom.members.map((member) => (
-        { M: {
-                id: { S: member.id },
-                choice: { S: "" },
-            }
-        }
-    ));
+    const resetMembers = existingRoom.members.map((member) => ({
+        M: {
+            id: { S: member.id },
+            choice: { S: "" },
+        },
+    }));
 
     const command = new UpdateItemCommand({
         TableName: POKER_TABLE,
         Key: {
-            id: { S: id }
+            id: { S: id },
         },
         UpdateExpression: "SET #state = :state, members = :members",
         ExpressionAttributeNames: {
-            '#state': 'state'
+            "#state": "state",
         },
         ExpressionAttributeValues: {
-            ':state': { S: 'HIDDEN' },
-            ':members': { L: resetMembers },
-        }
+            ":state": { S: "HIDDEN" },
+            ":members": { L: resetMembers },
+        },
     });
 
     const result = await client.send(command);
@@ -100,23 +111,26 @@ const reset = async (id: string): Promise<void> => {
     }
 };
 
-const join = async (id: string, member: string): Promise<void> => {
+const join = async (id: string, memberId: string, memberName: string): Promise<void> => {
     const command = new UpdateItemCommand({
         TableName: POKER_TABLE,
         Key: {
-            id: { S: id }
+            id: { S: id },
         },
         UpdateExpression: "SET members = list_append(members, :member)",
         ExpressionAttributeValues: {
-            ':member': {
+            ":member": {
                 L: [
-                    { M : {
-                        id: { S: member },
-                        choice: { S: "" },
-                    }}
-                ]
-            }
-        }
+                    {
+                        M: {
+                            id: { S: memberId },
+                            displayName: { S: memberName },
+                            choice: { S: "" },
+                        },
+                    },
+                ],
+            },
+        },
     });
 
     const result = await client.send(command);
@@ -134,12 +148,12 @@ const submit = async (id: string, memberId: string, choice: string): Promise<voi
     const command = new UpdateItemCommand({
         TableName: POKER_TABLE,
         Key: {
-            id: { S: id }
+            id: { S: id },
         },
         UpdateExpression: `SET members[${memberIndex}].choice = :choice`,
         ExpressionAttributeValues: {
-           ':choice': { S: choice },
-        }
+            ":choice": { S: choice },
+        },
     });
 
     const result = await client.send(command);
@@ -153,15 +167,15 @@ const reveal = async (id: string): Promise<void> => {
     const command = new UpdateItemCommand({
         TableName: POKER_TABLE,
         Key: {
-            id: { S: id }
+            id: { S: id },
         },
         UpdateExpression: "SET #state = :state",
         ExpressionAttributeNames: {
-            '#state': 'state',
+            "#state": "state",
         },
         ExpressionAttributeValues: {
-            ':state': { S: "REVEALED" },
-        }
+            ":state": { S: "REVEALED" },
+        },
     });
 
     const result = await client.send(command);
@@ -171,11 +185,4 @@ const reveal = async (id: string): Promise<void> => {
     }
 };
 
-export {
-    get,
-    create,
-    join,
-    reset,
-    submit,
-    reveal,
-};
+export { get, create, join, reset, submit, reveal };

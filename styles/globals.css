@@ -1,20 +1,60 @@
+:root { /* Colour palette, populated as per the UoY design patterns library: https://www.york.ac.uk/pattern-library/layout/colours.html */
+    --palette-grey-light: #CBCBCB;
+    --palette-grey-main: #868686;
+    --palette-grey-dark: #404040;
+    --palette-blue-light: #69D4F5;
+    --palette-blue-main: #00B3EB;
+    --palette-blue-dark: #0F3D4C;
+    --palette-green-light: #99D581;
+    --palette-green-main: #54b62d;
+    --palette-green-dark: #3B7F1F;
+    --palette-yellow-light: #EFD38B;
+    --palette-yellow-main: #E4B53C;
+    --palette-yellow-dark: #A48024;
+    --palette-red-light: #D58080;
+    --palette-red-main: #B62D2D;
+    --palette-red-dark: #892121;
+}
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+        Helvetica Neue, sans-serif;
+    overflow: hidden;
 }
 
 #__next {
-  height: 100vh;
+    height: 100vh;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+label {
+
+}
+
+input {
+    border: solid 1pt #404040;
+    border-radius: 0.4em;
+    outline: solid 0 #404040;
+    transition: outline-color 0.2s, outline-width 0.2s;
+}
+
+input:focus,
+input:focus-within,
+input:focus-visible {
+    outline: solid 2pt var(--palette-blue-light);
+}
+
+select {
+
 }

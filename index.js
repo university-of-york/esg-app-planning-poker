@@ -1,33 +1,26 @@
-const sls = require("serverless-http");
+import sls from "serverless-http";
+import binaryMimeTypes from "./binaryMimeTypes.js";
 
-const binaryMimeTypes = require("./binaryMimeTypes.js");
-
-const server = require("./server.js");
-const getRoom = require('./functions/getRoom.js');
-const createRoom = require('./functions/createRoom.js');
-const joinRoom = require('./functions/joinRoom.js');
-const resetRoom = require('./functions/resetRoom.js');
-const revealRoom = require('./functions/revealRoom.js');
-const submitChoice = require('./functions/submitChoice.js');
+import server from "./server.js";
+import getRoom from "./functions/getRoom.js";
+import createRoom from "./functions/createRoom.js";
+import joinRoom from "./functions/joinRoom.js";
+import resetRoom from "./functions/resetRoom.js";
+import revealRoom from "./functions/revealRoom.js";
+import submitChoice from "./functions/submitChoice.js";
 
 const handler = sls(server, {
     binary: binaryMimeTypes,
 });
 
-module.exports = {
-    server: async (event, context) => {
-        console.debug(`Event: ${JSON.stringify(event)}`);
+const serverHandler = async (event, context) => {
+    console.debug(`Event: ${JSON.stringify(event)}`);
 
-        const response = await handler(event, context);
+    const response = await handler(event, context);
 
-        console.debug(`Response: ${JSON.stringify(response)}`);
+    console.debug(`Response: ${JSON.stringify(response)}`);
 
-        return response;
-    },
-    getRoom,
-    createRoom,
-    joinRoom,
-    resetRoom,
-    revealRoom,
-    submitChoice,
+    return response;
 };
+
+export { serverHandler as server, getRoom, createRoom, joinRoom, resetRoom, revealRoom, submitChoice };

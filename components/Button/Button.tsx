@@ -5,15 +5,12 @@ declare type ButtonProps = {
     className?: string;
     children: any;
     link?: string;
-    onClick?: (() => {}) | (() => void);
-}
+    onClick?: () => void;
+};
 
-const Button = ({className, children, link, onClick}: ButtonProps) => {
+const Button = ({ className, children, link, onClick }: ButtonProps) => {
     const button = (
-        <button
-            className={`${styles.button} ${className ? className : ''}`}
-            onClick={onClick}
-        >
+        <button className={`${styles.button} ${className ? className : ""}`} onClick={onClick}>
             {children}
         </button>
     );

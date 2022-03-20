@@ -13,3 +13,8 @@ node_modules
 
 # Ignore the C4 model publisher yaml
 publish-c4-model.yml
+
+# Typescript
+*.js
+*.jsx
+*.d.ts

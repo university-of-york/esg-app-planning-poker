@@ -3,6 +3,7 @@
   "author": "University of York",
   "description": "An app to allow teams to estimate and refine tasks using a planning poker activity",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "npm run compile && next dev",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.54.1",
+    "@babel/eslint-parser": "^7.17.0",
     "@types/jest": "^27.4.1",
     "@types/node": "17.0.21",
     "@types/react": "17.0.40",

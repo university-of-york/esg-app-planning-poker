@@ -1,7 +1,7 @@
 const getEnvironmentVariable = (key: string): string => {
-    let value = process.env[key];
+    const value = process.env[key];
 
-    if (!value || value === '') {
+    if (!value || value === "") {
         throw new Error(`Environment variable ${key} has not been initialised`);
     }
 

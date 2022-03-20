@@ -1,4 +1,4 @@
-module.exports = [
+const BINARY_MINE_TYPES = [
     "application/javascript",
     "application/json",
     "application/octet-stream",
@@ -17,3 +17,5 @@ module.exports = [
     "text/text",
     "text/xml",
 ];
+
+export default BINARY_MINE_TYPES;

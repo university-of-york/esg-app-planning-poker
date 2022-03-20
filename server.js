@@ -1,13 +1,13 @@
-const path = require("path");
-const next = require("next");
+import path from "path";
+import next from "next";
+import express from "express";
+
 const app = next({});
 const handle = app.getRequestHandler();
-const express = require("express");
-
 const server = express();
 
 // serve static assets directly from the build-time-generated ".next" folder and specify how long to cache
-server.use(`/_next`, express.static(path.join(__dirname, ".next"), { maxAge: "1d", immutable: true }));
+server.use(`/_next`, express.static(path.join(path.resolve(path.dirname('')), ".next"), { maxAge: "1d", immutable: true }));
 
 // serve requests with Next by default
 server.get("*", (req, res) => {
@@ -15,4 +15,4 @@ server.get("*", (req, res) => {
     handle(req, res);
 });
 
-module.exports = server;
+export default server;

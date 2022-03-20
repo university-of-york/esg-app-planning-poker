@@ -1,3 +1,3 @@
-import { describe } from 'jest-circus';
+import { describe } from "jest-circus";
 
-describe('', () => {});
+describe("", () => {});

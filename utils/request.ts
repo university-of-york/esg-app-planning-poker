@@ -1,29 +1,27 @@
-export declare type Response = {
+import {Message} from "../types/responses";
+
+export declare type Response<T extends Message> = {
     success: boolean;
     status: number;
-    body: any;
+    body: T;
 };
 
-const request = async (
-    method: "GET" | "POST" | "PUT" | "DELETE",
-    url: string,
-    body?: any
-): Promise<Response> => {
+const request = async <T extends Message>(method: "GET" | "POST" | "PUT" | "DELETE", url: string, body?: any): Promise<Response<T>> => {
     console.debug(`${method}: ${url}`);
     try {
         const headers = new Headers({
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         });
 
         const response = await fetch(url, {
-            method: method,
+            method,
             body: body ? JSON.stringify(body) : null,
-            headers: headers,
+            headers,
         });
 
         console.debug(`Response ${response.status}`);
 
-        const json = response.status !== 204 ? await response.json() : {};
+        const json = response.status === 204 ? {} : await response.json();
 
         return {
             success: response.ok,
@@ -35,7 +33,11 @@ const request = async (
         return {
             success: false,
             status: 500,
-            body: JSON.stringify(error),
+            // @ts-ignore
+            body: {
+                status: 500,
+                message: JSON.stringify(error)
+            },
         };
     }
 };

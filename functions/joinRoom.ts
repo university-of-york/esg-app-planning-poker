@@ -1,9 +1,11 @@
-import {APIGatewayEvent} from "aws-lambda";
-import type {LambdaResponse} from "../types/lambda";
-import {message} from "../utils/responses";
-import {join} from "../utils/database";
+import { APIGatewayEvent } from "aws-lambda";
+import type { LambdaResponse } from "../types/lambda";
+import { message } from "../utils/responses.js";
+import { join } from "../utils/database.js";
 
 const joinRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
+    console.debug(`Event: ${JSON.stringify(event)}`);
+
     const id = event.pathParameters?.id;
 
     if (!id) {
@@ -14,15 +16,19 @@ const joinRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
         return message(400, "Request body not found");
     }
 
-    const {member} = JSON.parse(event.body);
+    const body = event.isBase64Encoded ? new Buffer(event.body, 'base64').toString() : event.body;
 
-    if (!member) {
-        return message(400, "Member ID required");
+    const { memberId, memberName } = JSON.parse(body);
+
+    if (!memberId || !memberName) {
+        return message(400, "Member ID & name required");
     }
 
-    await join(id, member);
+    console.info(`${memberId}:${memberName} is joining room ${id}`);
 
-    return message(200, 'OK');
+    await join(id, memberId, memberName);
+
+    return message(200, "OK");
 };
 
-module.exports = joinRoom;
+export default joinRoom;

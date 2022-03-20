@@ -1,9 +1,11 @@
-import {APIGatewayEvent} from "aws-lambda";
-import type {LambdaResponse} from "../types/lambda";
-import {message} from "../utils/responses";
-import {submit} from "../utils/database";
+import { APIGatewayEvent } from "aws-lambda";
+import type { LambdaResponse } from "../types/lambda";
+import { message } from "../utils/responses.js";
+import { submit } from "../utils/database.js";
 
 const submitChoice = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
+    console.debug(`Event: ${JSON.stringify(event)}`);
+
     const id = event.pathParameters?.id;
 
     if (!id) {
@@ -14,15 +16,19 @@ const submitChoice = async (event: APIGatewayEvent): Promise<LambdaResponse> => 
         return message(400, "Request body not found");
     }
 
-    const {member, choice} = JSON.parse(event.body);
+    const body = event.isBase64Encoded ? Buffer.from(event.body, 'base64').toString() : event.body;
 
-    if (!member || !choice) {
+    const {memberId, choice } = JSON.parse(body);
+
+    if (!memberId || !choice) {
         return message(400, "Member & choice parameters required");
     }
 
-    await submit(id, member, choice);
+    console.info(`Submitting choice ${choice} for ${memberId}`);
 
-    return message(200, 'OK');
+    await submit(id, memberId, choice);
+
+    return message(200, "OK");
 };
 
-module.exports = submitChoice;
+export default submitChoice;
