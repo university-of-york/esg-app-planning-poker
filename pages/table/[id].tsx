@@ -90,7 +90,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             <div className={styles.content}>
                 <h1 className={styles.name}>{room.name}</h1>
 
-                <PokerTable room={room} currentPlayer={currentPlayer} />
+                <PokerTable room={room} currentPlayer={currentPlayer} refresh={async () => setRoom(await getRoom(props.id) as Room)} />
             </div>
         </div>
     );

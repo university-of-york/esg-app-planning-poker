@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
 import {Room, Member} from "../../types/room";
+import {submitChoice} from "../../utils/api";
+import {Button} from "../Button/Button";
+import {BASE_URL} from "../../utils/environment";
 // @ts-ignore
 import styles from "./PokerTable.module.css";
-import {submitChoice} from "../../utils/api";
 
 const options = ["XS", "S", "M", "L", "XL"];
 
-const PokerTable = ({room, currentPlayer}: {room: Room, currentPlayer?: Member}) => {
+const PokerTable = ({room, currentPlayer, refresh}: {room: Room, currentPlayer?: Member, refresh: () => Promise<void>}) => {
 
     const handleChoice = (choice: string) => {
         if (!currentPlayer) {
@@ -16,6 +18,7 @@ const PokerTable = ({room, currentPlayer}: {room: Room, currentPlayer?: Member})
 
         const submit = async () => {
             await submitChoice(room.id, currentPlayer.id, choice);
+            await refresh();
         }
 
         submit();
@@ -26,6 +29,13 @@ const PokerTable = ({room, currentPlayer}: {room: Room, currentPlayer?: Member})
             <div className={styles.table}>
                 <span className={styles.memberCount}>{room.members.length} people</span>
             </div>
+
+            <Button
+                className={styles.invite}
+                onClick={() => {navigator.clipboard.writeText(`https://${window.location.host}/table/${room.id}`)}}
+            >
+                Copy invite link
+            </Button>
 
             <div className={styles.players}>
                 {room.members?.map((member) => {

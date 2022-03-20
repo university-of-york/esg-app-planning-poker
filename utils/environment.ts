@@ -8,4 +8,6 @@ const getEnvironmentVariable = (key: string): string => {
     return value;
 };
 
-export { getEnvironmentVariable };
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL : "";
+
+export { getEnvironmentVariable, BASE_URL };

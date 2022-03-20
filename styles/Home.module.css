@@ -8,10 +8,12 @@
     height: calc(100vh - 200px);
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .intro {
+    margin-top: 4vw;
+    margin-bottom: 2vw;
     text-align: center;
 }
 

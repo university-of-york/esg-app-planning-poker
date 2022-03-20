@@ -1,8 +1,8 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import type { NextPage } from "next";
 import { Button, Header, Modal } from "../components";
 import { createRoom } from "../utils/api";
-import { updateDisplayName } from "../utils/session";
+import {updateDisplayName, withSession} from "../utils/session";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -10,6 +10,12 @@ const Home: NextPage = () => {
         roomName: "",
         displayName: "",
     });
+
+    useEffect(() => {
+        const session = withSession();
+
+        setForm({...form, displayName: session.displayName});
+    }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const field = event.target.name;

@@ -43,7 +43,7 @@ label {
 }
 
 input {
-    border: solid 1pt #404040;
+    border: solid 2pt #404040;
     border-radius: 0.4em;
     outline: solid 0 #404040;
     transition: outline-color 0.2s, outline-width 0.2s;
@@ -52,7 +52,12 @@ input {
 input:focus,
 input:focus-within,
 input:focus-visible {
-    outline: solid 2pt var(--palette-blue-light);
+    /*outline: solid 2pt var(--palette-blue-main);*/
+    box-shadow:
+            var(--palette-blue-main) 1px 1px 1pt 1pt,
+            var(--palette-blue-main) -1px 1px 1pt 1pt,
+            var(--palette-blue-main) 1px -1px 1pt 1pt,
+            var(--palette-blue-main) -1px -1px 1pt 1pt;
 }
 
 select {

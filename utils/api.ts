@@ -2,8 +2,7 @@ import type { Room } from "../types/room.js";
 import { request } from "./request.js";
 import { withSession } from "./session.js";
 import {Result} from "../types/responses";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL : "";
+import {BASE_URL} from "./environment";
 
 const createRoom = async (name: string) => {
     const session = withSession();
