@@ -5,6 +5,7 @@ import server from "./server.js";
 import getRoom from "./functions/getRoom.js";
 import createRoom from "./functions/createRoom.js";
 import joinRoom from "./functions/joinRoom.js";
+import leaveRoom from "./functions/leaveRoom.js";
 import resetRoom from "./functions/resetRoom.js";
 import revealRoom from "./functions/revealRoom.js";
 import submitChoice from "./functions/submitChoice.js";
@@ -23,4 +24,4 @@ const serverHandler = async (event, context) => {
     return response;
 };
 
-export { serverHandler as server, getRoom, createRoom, joinRoom, resetRoom, revealRoom, submitChoice };
+export { serverHandler as server, getRoom, createRoom, joinRoom, leaveRoom, resetRoom, revealRoom, submitChoice };

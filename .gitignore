@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# serverless
+.serverless/
+
 # production
 /build
 

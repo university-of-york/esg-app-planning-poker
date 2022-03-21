@@ -23,14 +23,15 @@ const Header = () => {
                 />
             </Head>
             <div className={styles.content}>
+                <img
+                    className={styles.logo}
+                    src="https://www.york.ac.uk/static/stable/img/logo.svg"
+                    alt="University of York Logo"
+                />
+
                 <Link href="/" passHref>
-                    <img
-                        className={styles.logo}
-                        src="https://www.york.ac.uk/static/stable/img/logo.svg"
-                        alt="University of York Logo"
-                    />
+                    <h1 className={styles.title}>Planning Poker</h1>
                 </Link>
-                <h1 className={styles.title}>Planning Poker</h1>
             </div>
         </header>
     );

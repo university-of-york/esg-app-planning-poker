@@ -1,5 +1,5 @@
 import type { Room } from "../types/room.js";
-import { request } from "./request.js";
+import {request} from "./request.js";
 import { withSession } from "./session.js";
 import {Result} from "../types/responses";
 import {BASE_URL} from "./environment";
@@ -40,6 +40,14 @@ const joinRoom = async (roomId: string, memberId: string, memberName: string): P
     }
 };
 
+const leaveRoom = (roomId: string, memberId: string): void => {
+    // See https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon for info
+    // This is a reliable/safe way of asynchronously sending a web request as the page unloads
+    // Fetch is not safe/reliable, as it may be unloaded before the request is actually made
+    // Essentially, we cannot "await fetch" during a page unload
+    navigator.sendBeacon(`${BASE_URL}/room/${roomId}/leave`, JSON.stringify({memberId}));
+};
+
 const submitChoice = async (roomId: string, memberId: string, choice: string): Promise<void> => {
     const response = await request("PUT", `${BASE_URL}/room/${roomId}/choice`, {
         memberId,
@@ -67,4 +75,4 @@ const resetRoom = async (roomId: string): Promise<void> => {
     }
 };
 
-export { createRoom, getRoom, joinRoom, submitChoice, revealRoom, resetRoom };
+export { createRoom, getRoom, joinRoom, leaveRoom, submitChoice, revealRoom, resetRoom };

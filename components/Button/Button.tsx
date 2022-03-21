@@ -6,11 +6,15 @@ declare type ButtonProps = {
     children: any;
     link?: string;
     onClick?: () => void;
+    isSubmitting?: boolean;
 };
 
-const Button = ({ className, children, link, onClick }: ButtonProps) => {
+const Button = ({ className, children, link, onClick, isSubmitting = false }: ButtonProps) => {
     const button = (
-        <button className={`${styles.button} ${className ? className : ""}`} onClick={onClick}>
+        <button
+            className={`${styles.button} ${className ? className : ""} ${isSubmitting ? styles.submitting : ""}`}
+            onClick={!isSubmitting ? onClick : undefined}
+        >
             {children}
         </button>
     );

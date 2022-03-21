@@ -22,7 +22,7 @@
     border-radius: 1vw;
     font-size: 1em;
     padding: 1vw;
-    width: 40vw;
+    width: 400px;
     height: fit-content;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation: frombottom 0.35s;
@@ -42,17 +42,13 @@
     margin-top: 1vw;
 }
 
+.controls.single {
+    justify-content: center;
+}
+
 .control {
     width: fit-content;
     font-size: 1.2em;
-}
-
-.control.left {
-    justify-content: flex-end;
-}
-
-.control.right {
-    justify-content: flex-start;
 }
 
 .icon {
@@ -77,121 +73,3 @@
         top: 50%;
     }
 }
-
-/*@media only screen and (max-width: 4000px) {*/
-/*    .content {*/
-/*        width: 40vw;*/
-/*        border-radius: 1.2vw;*/
-/*        border-left-width: 0.6vw;*/
-/*        border-right-width: 0.6vw;*/
-/*        font-size: 1.4em;*/
-/*        padding: 1vw 2vw;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 3000px) {*/
-/*    .content {*/
-/*        width: 45vw;*/
-/*        border-radius: 1.2vw;*/
-/*        border-left-width: 0.6vw;*/
-/*        border-right-width: 0.6vw;*/
-/*        font-size: 1.4em;*/
-/*        padding: 1vw 2vw;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 2500px) {*/
-/*    .content {*/
-/*        width: 50vw;*/
-/*        border-radius: 1.2vw;*/
-/*        border-left-width: 0.6vw;*/
-/*        border-right-width: 0.6vw;*/
-/*        font-size: 1.2em;*/
-/*        padding: 1vw 2vw;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 2000px) {*/
-/*    .content {*/
-/*        width: 60vw;*/
-/*        border-radius: 1.6vw;*/
-/*        border-left-width: 0.8vw;*/
-/*        border-right-width: 0.8vw;*/
-/*        font-size: 1em;*/
-/*        padding: 1vw 2vw;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 1500px) {*/
-/*    .content {*/
-/*        width: 70vw;*/
-/*        border-radius: 2vw;*/
-/*        border-left-width: 1.2vw;*/
-/*        border-right-width: 1.2vw;*/
-/*        font-size: 1.2em;*/
-/*        padding: 2vw;*/
-/*    }*/
-
-/*    .control {*/
-/*        font-size: 1.4em;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 1000px) {*/
-/*    .content {*/
-/*        width: 75vw;*/
-/*        border-radius: 2.25vw;*/
-/*        border-left-width: 1.4vw;*/
-/*        border-right-width: 1.4vw;*/
-/*        font-size: 1em;*/
-/*        padding: 2vw;*/
-/*    }*/
-
-/*    .control {*/
-/*        font-size: 1.2em;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 800px) {*/
-/*    .content {*/
-/*        width: 80vw;*/
-/*        border-radius: 2.5vw;*/
-/*        border-left-width: 1.6vw;*/
-/*        border-right-width: 1.6vw;*/
-/*        font-size: 0.9em;*/
-/*        padding: 3vw 2vw;*/
-/*    }*/
-
-/*    .control {*/
-/*        font-size: 1.4em;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 600px) {*/
-/*    .content {*/
-/*        width: 85vw;*/
-/*        border-radius: 3vw;*/
-/*        border-left-width: 1.8vw;*/
-/*        border-right-width: 1.8vw;*/
-/*        font-size: 0.9em;*/
-/*        padding: 3vw 2vw;*/
-/*    }*/
-
-/*    .control {*/
-/*        font-size: 1.5em;*/
-/*    }*/
-/*}*/
-
-/*@media only screen and (max-width: 400px) {*/
-/*    .content {*/
-/*        width: 90vw;*/
-/*        border-radius: 3vw;*/
-/*        border-left-width: 2vw;*/
-/*        border-right-width: 2vw;*/
-/*        font-size: 0.8em;*/
-/*        padding: 2vw;*/
-/*    }*/
-/*    .control {*/
-/*        font-size: 1.6em;*/
-/*    }*/
-/*}*/

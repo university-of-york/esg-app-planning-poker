@@ -37,9 +37,12 @@ const Home: NextPage = () => {
                 <div className={styles.intro}>
                     <span>Welcome to planning poker!</span>
                     <p>Click the button below to create a new room</p>
+                    <p>Creating the room automatically makes you the host</p>
+                    <p>Only the host has the ability to reveal & reset the table</p>
                 </div>
+
                 <Modal trigger={<Button className={styles.create}>Create a new room</Button>} callback={handleSubmit}>
-                    <div className={styles.form}>
+                    <div className={styles.create}>
                         <label htmlFor="room-name">Room name:</label>
                         <input
                             type="text"

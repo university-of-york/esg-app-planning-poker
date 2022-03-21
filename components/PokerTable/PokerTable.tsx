@@ -1,3 +1,4 @@
+import {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
 import {Room, Member} from "../../types/room";
@@ -9,6 +10,14 @@ import styles from "./PokerTable.module.css";
 const options = ["XS", "S", "M", "L", "XL"];
 
 const PokerTable = ({room, currentPlayer, refresh}: {room: Room, currentPlayer?: Member, refresh: () => Promise<void>}) => {
+    const [linkCopied, setLinkCopied] = useState<boolean>(false);
+
+    const handleInvite = () => {
+        navigator.clipboard.writeText(window.location.href);
+        setLinkCopied(true);
+
+        setTimeout(() => setLinkCopied(false), 5000);
+    }
 
     const handleChoice = (choice: string) => {
         if (!currentPlayer) {
@@ -54,16 +63,16 @@ const PokerTable = ({room, currentPlayer, refresh}: {room: Room, currentPlayer?:
 
     return (
         <div className={styles.container}>
-            <div className={styles.table}>
-                <span className={styles.memberCount}>{room.members.length} people</span>
-            </div>
-
             <Button
                 className={styles.invite}
-                onClick={() => {navigator.clipboard.writeText(`https://${window.location.host}/table/${room.id}`)}}
+                onClick={handleInvite}
             >
-                Copy invite link
+                {linkCopied ? "Link copied!" : "Copy invite link"}
             </Button>
+
+            <div className={styles.table}>
+                <span className={styles.count}>{room.members.length} {room.members.length === 1 ? 'person' : 'people'} present</span>
+            </div>
 
             {allChoicesMade && currentPlayerIsHost ? room.state === "HIDDEN" ? (
                 <Button

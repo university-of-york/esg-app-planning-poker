@@ -17,18 +17,7 @@
     text-align: center;
 }
 
-.form {
+.create {
     display: flex;
     flex-direction: column;
-}
-
-.form label {
-    font-size: 1.4em;
-    margin-bottom: 0.4em;
-}
-
-.form input {
-    font-size: 1.2em;
-    margin-bottom: 0.4em;
-    padding: 0.4em;
 }

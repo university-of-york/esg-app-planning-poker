@@ -11,6 +11,14 @@
     height: calc(100vh - 200px);
 }
 
+.modal {
+
+}
+
+.join {
+    display: flex;
+    flex-direction: column;
+}
+
 .name {
-    font-size: 2.4em;
 }

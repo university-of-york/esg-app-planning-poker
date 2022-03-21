@@ -1,10 +1,10 @@
-import { ParsedUrlQuery } from "querystring";
-import { getRoom, joinRoom } from "../../utils/api";
-import { Room } from "../../types/room";
-import { useEffect, useState } from "react";
+import {ParsedUrlQuery} from "querystring";
+import {getRoom, joinRoom, leaveRoom} from "../../utils/api";
+import {Room} from "../../types/room";
+import {useCallback, useEffect, useState} from "react";
 import {Header, Modal, PokerTable} from "../../components";
-import { Session } from "../../types/session";
-import { updateDisplayName, withSession } from "../../utils/session";
+import {Session} from "../../types/session";
+import {updateDisplayName, withSession} from "../../utils/session";
 // @ts-ignore
 import styles from "../../styles/Room.module.css";
 
@@ -35,45 +35,44 @@ declare type PlanningRoomProps = {
 const PlanningRoom = (props: PlanningRoomProps) => {
     const [room, setRoom] = useState<Room>(props.room);
     const [session, setSession] = useState<Session>();
-    const [_displayName, setDisplayname] = useState<string>("");
+    const [displayName, setDisplayName] = useState<string>("");
 
     const hasJoinedRoom = room.members.find((member) => member.id === session?.id);
 
-    const refresh = async () => setRoom(await getRoom(props.id) as Room);
+    const refresh = useCallback(async () => {
+        setRoom((await getRoom(props.id))!)
+    }, [props.id]);
+
+    useEffect(() => {
+        const session = withSession();
+
+        setSession(session);
+        setDisplayName(session.displayName);
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(refresh, 2000);
 
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+        return () => clearInterval(interval);
+    }, [refresh]);
 
     useEffect(() => {
-        const getSession = async () => {
-            setSession(await withSession());
+        window.onbeforeunload = () => {
+            if (session?.id && hasJoinedRoom) {
+                leaveRoom(room.id, session.id);
+            }
+            return null;
         };
-
-        getSession();
-    }, [room]);
-
-    useEffect(() => {
-        if (session?.displayName && !hasJoinedRoom) {
-            const join = async () => {
-                await joinRoom(room.id, session.id, session.displayName);
-                await refresh();
-            };
-
-            join();
-        }
-    }, [session]);
+    }, [room.id, session?.id, hasJoinedRoom]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDisplayname(event.target.value);
+        setDisplayName(event.target.value);
     };
 
     const handleConfirmation = async () => {
-        await updateDisplayName(_displayName);
+        await updateDisplayName(displayName);
+        await joinRoom(room.id, session!.id, displayName);
+        await refresh();
     }
 
     const currentPlayer = room.members.find((member) => member.id === session?.id);
@@ -82,12 +81,14 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         <div className={styles.container}>
             <Header />
             <Modal
-                className={styles.sessionModal}
-                open={session?.displayName === ""}
+                mandatory
+                open={!hasJoinedRoom}
                 callback={handleConfirmation}
             >
-                <label className={styles.name}>Your name</label>
-                <input type="text" value={_displayName} onChange={handleChange} />
+                <div className={styles.join}>
+                    <label className={styles.name}>Your name</label>
+                    <input type="text" value={displayName} onChange={handleChange} />
+                </div>
             </Modal>
 
             <div className={styles.content}>

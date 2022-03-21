@@ -6,22 +6,21 @@
 
 }
 
+.invite {
+    margin-top: -0.2em;
+}
+
 .table {
-    font-size: 1em;
+    height: fit-content;
+    margin: 1em;
+}
+
+.count {
+    font-size: 1.4em;
     color: white;
     background-color: var(--palette-grey-main);
     border-radius: 4em;
-    padding: 1em;
-}
-
-.invite,
-.reveal,
-.reset {
-    margin-top: 1vw;
-}
-
-.invite {
-
+    padding: 0.5em 1em;
 }
 
 .reveal {
@@ -37,19 +36,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 60vw;
-    padding: 1vw;
+    width: fit-content;
+    max-width: 80vw;
+    padding: 1em;
 }
 
 .player {
-    width: 20%;
-    /*height: 100px;*/
-    margin: 1vw;
-    padding: 1vw;
+    width: 8em;
+    height: fit-content;
+    margin: 0.5em;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: 0.5vw;
+    border-radius: 0.6em;
     background: var(--palette-blue-main);
     color: white;
     text-align: center;
@@ -66,6 +66,7 @@
 }
 
 .display {
+    font-size: 1.4em;
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;

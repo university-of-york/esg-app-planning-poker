@@ -39,10 +39,14 @@ a {
 }
 
 label {
-
+    font-size: 1.4em;
+    margin-bottom: 0.4em;
 }
 
 input {
+    font-size: 1.2em;
+    margin-bottom: 0.4em;
+    padding: 0.4em;
     border: solid 2pt #404040;
     border-radius: 0.4em;
     outline: solid 0 #404040;
@@ -52,7 +56,6 @@ input {
 input:focus,
 input:focus-within,
 input:focus-visible {
-    /*outline: solid 2pt var(--palette-blue-main);*/
     box-shadow:
             var(--palette-blue-main) 1px 1px 1pt 1pt,
             var(--palette-blue-main) -1px 1px 1pt 1pt,

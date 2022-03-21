@@ -74,6 +74,16 @@ functions:
           method: POST
           cors:
             origin: "*"
+  leaveRoom:
+    handler: index.leaveRoom
+    environment:
+      POKER_TABLE: planning-poker-${self:provider.stage}
+    events:
+      - http:
+          path: /room/{id}/leave
+          method: POST
+          cors:
+            origin: "*"
   submitChoice:
     handler: index.submitChoice
     environment:

@@ -104,7 +104,38 @@ const join = async (id: string, memberId: string, memberName: string): Promise<v
     const result = await client.send(command);
 
     if (result.$metadata.httpStatusCode !== 200) {
-        throw new Error(`Could not retrieve details for room: ${id}`);
+        throw new Error(`Could not join room: ${id} for member ${memberId}:${memberName}`);
+    }
+};
+
+const leave = async (id: string, memberId: string): Promise<void> => {
+    const existingRoom = await get(id);
+
+    const remainingMembers = existingRoom.members.filter((member) => member.id !== memberId);
+
+    const mappedMembers = remainingMembers.map((member) => ({
+        M: {
+            id: { S: member.id },
+            displayName: { S: member.displayName },
+            choice: { S: member.choice },
+        },
+    }));
+
+    const command = new UpdateItemCommand({
+        TableName: POKER_TABLE,
+        Key: {
+            id: { S: id },
+        },
+        UpdateExpression: "SET members = :members",
+        ExpressionAttributeValues: {
+            ":members": { L: mappedMembers },
+        },
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not leave room: ${id} for member ${memberId}`);
     }
 };
 
@@ -182,8 +213,8 @@ const reset = async (id: string): Promise<void> => {
     const result = await client.send(command);
 
     if (result.$metadata.httpStatusCode !== 200) {
-        throw new Error(`Could not retrieve details for room: ${id}`);
+        throw new Error(`Could not reset room: ${id}`);
     }
 };
 
-export { create, get, join, submit, reveal, reset };
+export { create, get, join, leave, submit, reveal, reset };
