@@ -1,0 +1,19 @@
+.container {
+
+}
+
+.reveal {
+    background-color: var(--palette-green-main);
+}
+
+.reveal:hover {
+    background-color: var(--palette-green-light);
+}
+
+.reset {
+    background-color: var(--palette-yellow-main);
+}
+
+.reset:hover {
+    background-color: var(--palette-yellow-light);
+}

@@ -2,7 +2,7 @@ import {ParsedUrlQuery} from "querystring";
 import {getRoom, joinRoom, leaveRoom} from "../../utils/api";
 import {Room} from "../../types/room";
 import {useCallback, useEffect, useState} from "react";
-import {Header, Modal, PokerTable} from "../../components";
+import {Button, Header, Modal, PokerTable} from "../../components";
 import {Session} from "../../types/session";
 import {addRoomToHistory, updateDisplayName, withSession} from "../../utils/session";
 // @ts-ignore
@@ -36,6 +36,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     const [room, setRoom] = useState<Room>(props.room);
     const [session, setSession] = useState<Session>();
     const [displayName, setDisplayName] = useState<string>("");
+    const [linkCopied, setLinkCopied] = useState<boolean>(false);
 
     const hasJoinedRoom = room.members.find((member) => member.id === session?.id);
 
@@ -65,7 +66,14 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         };
     }, [room.id, session?.id, hasJoinedRoom]);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInvite = () => {
+        navigator.clipboard.writeText(window.location.href);
+        setLinkCopied(true);
+
+        setTimeout(() => setLinkCopied(false), 5000);
+    }
+
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDisplayName(event.target.value);
     };
 
@@ -79,8 +87,6 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         await refresh();
     }
 
-    const currentPlayer = room.members.find((member) => member.id === session?.id);
-
     return (
         <div className={styles.container}>
             <Header />
@@ -91,14 +97,31 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             >
                 <div className={styles.join}>
                     <label className={styles.name}>Your name</label>
-                    <input type="text" value={displayName} onChange={handleChange} />
+                    <input type="text" value={displayName} onChange={handleNameChange} />
                 </div>
             </Modal>
 
             <div className={styles.content}>
                 <h1 className={styles.name}>{room.name}</h1>
 
-                <PokerTable room={room} currentPlayer={currentPlayer} refresh={refresh} />
+                <Button
+                    className={styles.invite}
+                    onClick={handleInvite}
+                >
+                    {linkCopied ? "Link copied!" : "Copy invite link"}
+                </Button>
+
+                <span className={styles.count}>
+                    {room.members.length} {room.members.length === 1 ? 'person' : 'people'} present
+                </span>
+
+                {hasJoinedRoom ? (
+                    <PokerTable
+                        room={room}
+                        session={session!}
+                        refresh={refresh}
+                    />
+                ) : undefined}
             </div>
         </div>
     );

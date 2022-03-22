@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1em;
+    border-radius: 1em;
+    color: white;
+    background-color: var(--palette-grey-main);
+    text-align: center;
+}
+
+.container strong {
+    color: var(--palette-green-main);
+    font-size: 1.2em;
+}
+
+.container.tied strong {
+    color: var(--palette-yellow-main);
+    font-size: 1.2em;
+}
+
+.title {
+    margin: 0;
+}
+
+.result {
+    color: var(--palette-green-main);
+    font-size: 4em;
+}
+
+.container.tied .result {
+    color: var(--palette-yellow-main);
+}
+
+.votes {
+
+}

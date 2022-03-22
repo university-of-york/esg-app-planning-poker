@@ -9,5 +9,5 @@ export declare type Room = {
 export declare type Member = {
     id: string;
     displayName: string;
-    choice: "XS" | "S" | "M" | "L" | "XL" | "";
+    choice: "" | "XS" | "S" | "M" | "L" | "XL";
 };

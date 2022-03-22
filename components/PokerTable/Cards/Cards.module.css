@@ -1,0 +1,32 @@
+.container {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+    height: 14em;
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    font-size: 4em;
+    width: 3ch;
+    color: white;
+    margin: 1vw;
+    padding: 1vw;
+    height: 10em;
+    border-radius: 0.5vw;
+    background: var(--palette-grey-main);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.25s, height 0.25s;
+}
+
+.card:hover {
+    background: var(--palette-grey-dark);
+    height: 14em;
+    transform: translateY(-5%);
+}
+
+.card.selected {
+    color: var(--palette-green-main);
+}
