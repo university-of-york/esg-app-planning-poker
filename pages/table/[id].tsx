@@ -4,7 +4,7 @@ import {Room} from "../../types/room";
 import {useCallback, useEffect, useState} from "react";
 import {Header, Modal, PokerTable} from "../../components";
 import {Session} from "../../types/session";
-import {updateDisplayName, withSession} from "../../utils/session";
+import {addRoomToHistory, updateDisplayName, withSession} from "../../utils/session";
 // @ts-ignore
 import styles from "../../styles/Room.module.css";
 
@@ -70,8 +70,12 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     };
 
     const handleConfirmation = async () => {
-        await updateDisplayName(displayName);
+        updateDisplayName(displayName);
+
         await joinRoom(room.id, session!.id, displayName);
+
+        addRoomToHistory(room.id, room.name);
+
         await refresh();
     }
 

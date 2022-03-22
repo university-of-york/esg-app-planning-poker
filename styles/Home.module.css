@@ -12,12 +12,62 @@
 }
 
 .intro {
-    margin-top: 4vw;
-    margin-bottom: 2vw;
+    margin-top: 2em;
     text-align: center;
 }
 
 .create {
     display: flex;
     flex-direction: column;
+}
+
+.context {
+    margin-top: 0.2em;
+    text-align: center;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    text-align: center;
+}
+
+.history table {
+    border-collapse: collapse;
+}
+
+.room {
+    height: fit-content;
+    width: fit-content;
+    border-bottom: solid 0.5pt var(--palette-grey-main);
+    background-color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: background-color 0.25s, opacity 0.25s;
+}
+
+.room td {
+    padding: 1em;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.room:last-child {
+    border-bottom: none ;
+}
+
+.room:hover {
+    background-color: var(--palette-blue-light);
+    opacity: 1;
+}
+
+.name {
+    margin-right: 1em;
+    font-weight: bold;
+    color: var(--palette-blue-main);
+}
+
+.timestamp {
+
 }

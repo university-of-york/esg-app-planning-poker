@@ -11,7 +11,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid 2pt gray;
+    border-bottom: solid 2pt var(--palette-grey-main);
 }
 
 .logo {
@@ -22,7 +22,7 @@
 .title {
     position: absolute;
     margin: 0;
-    padding: 2vw;
+    padding: 1.6em;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -32,4 +32,16 @@
 
 .title:hover {
     color: var(--palette-blue-main);
+}
+
+.github {
+    height: 80%;
+    padding: 2em;
+    color: var(--palette-grey-main);
+    cursor: pointer;
+    transition: color 0.25s;
+}
+
+.github:hover {
+    color: var(--palette-grey-dark);
 }

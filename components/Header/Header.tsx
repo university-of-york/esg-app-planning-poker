@@ -1,6 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faGithubSquare} from "@fortawesome/free-brands-svg-icons";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -31,6 +33,14 @@ const Header = () => {
 
                 <Link href="/" passHref>
                     <h1 className={styles.title}>Planning Poker</h1>
+                </Link>
+
+                <Link href="https://github.com/university-of-york/esg-app-planning-poker" passHref>
+                    <FontAwesomeIcon
+                        className={styles.github}
+                        icon={faGithubSquare}
+                        title="View the source code for this application on Github"
+                    />
                 </Link>
             </div>
         </header>

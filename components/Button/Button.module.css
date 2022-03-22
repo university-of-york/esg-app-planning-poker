@@ -30,9 +30,17 @@
     padding: 0 0.5em;
 }
 
+.button.disabled,
 .button.submitting {
-    cursor: wait;
     background-color: var(--palette-grey-main);
     filter: brightness(80%);
     box-shadow: none;
+}
+
+.button.submitting {
+    cursor: wait;
+}
+
+.button.disabled {
+    cursor: not-allowed;
 }

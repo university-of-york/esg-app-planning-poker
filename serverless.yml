@@ -151,7 +151,7 @@ resources:
         TableName: ${self:custom.pokerTableName}
         BillingMode: PROVISIONED
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
+          ReadCapacityUnits: 5
           WriteCapacityUnits: 1
         AttributeDefinitions:
           - AttributeName: id
@@ -194,6 +194,7 @@ resources:
 # Exclude files and next.js dependencies that are not needed at runtime
 package:
   include:
+    - .next/**
     - .env.dev
     - .env.prod
   exclude:

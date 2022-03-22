@@ -4,7 +4,7 @@ import { withSession } from "./session";
 import {Result} from "../types/responses";
 import {BASE_URL} from "./environment";
 
-const createRoom = async (name: string) => {
+const createRoom = async (name: string): Promise<{success: boolean, id: string}> => {
     const session = withSession();
 
     const response = await request<Result>("POST", `${BASE_URL}/room`, {
@@ -13,9 +13,9 @@ const createRoom = async (name: string) => {
         hostName: session.displayName,
     });
 
-    if (response.success) {
-        console.log(`Response: ${JSON.stringify(response.body)}`);
-        window.location.replace(`/table/${response.body.result.id}`);
+    return {
+        success: response.success,
+        id: response.body.result.id
     }
 };
 
