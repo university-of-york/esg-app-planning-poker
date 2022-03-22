@@ -1,4 +1,4 @@
-import type { LambdaResponse } from "../types/lambda.js";
+import type { LambdaResponse } from "../types/lambda";
 
 const message = (status: number, message: string): LambdaResponse => ({
     statusCode: status,

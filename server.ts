@@ -10,7 +10,7 @@ const server = express();
 server.use(`/_next`, express.static(path.join(path.resolve(path.dirname('')), ".next"), { maxAge: "1d", immutable: true }));
 
 // serve requests with Next by default
-server.get("*", (req, res) => {
+server.get("*", (req: any, res: any) => {
     // res.setHeader("Cache-Control", "public, max-age=86400");
     handle(req, res);
 });

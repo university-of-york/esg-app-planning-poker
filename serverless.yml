@@ -38,16 +38,38 @@ provider:
           Resource: !GetAtt PokerTable.Arn
           Action: dynamodb:UpdateItem
 
+plugins:
+  - serverless-apigw-binary
+  - serverless-plugin-typescript
+
+custom:
+  apigwBinary:
+    types:
+      - "*/*"
+  domainName: ${env:DOMAIN_NAME, ''}
+  pokerTableName: planning-poker-${self:provider.stage}
+  sslCertificateArn: ${env:SSL_CERTIFICATE_ARN, ''}
+
 functions:
   server:
     handler: index.server
+    environment:
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
-      - http: ANY /
-      - http: ANY /{proxy+}
+      - http:
+          path: /
+          method: ANY
+          cors:
+            origin: "*"
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors:
+            origin: "*"
   getRoom:
     handler: index.getRoom
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room/{id}
@@ -57,7 +79,7 @@ functions:
   createRoom:
     handler: index.createRoom
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room
@@ -67,7 +89,7 @@ functions:
   joinRoom:
     handler: index.joinRoom
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room/{id}/join
@@ -77,7 +99,7 @@ functions:
   leaveRoom:
     handler: index.leaveRoom
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room/{id}/leave
@@ -87,7 +109,7 @@ functions:
   submitChoice:
     handler: index.submitChoice
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room/{id}/choice
@@ -97,7 +119,7 @@ functions:
   revealRoom:
     handler: index.revealRoom
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room/{id}/reveal
@@ -107,7 +129,7 @@ functions:
   resetRoom:
     handler: index.resetRoom
     environment:
-      POKER_TABLE: planning-poker-${self:provider.stage}
+      POKER_TABLE: ${self:custom.pokerTableName}
     events:
       - http:
           path: /room/{id}/reset
@@ -115,37 +137,76 @@ functions:
           cors:
             origin: "*"
 
-plugins:
-  - serverless-apigw-binary
+resources:
+  Conditions:
+    UseCustomDomainName: !Not
+      - !Equals
+        - ${self:custom.domainName}
+        - ""
 
-custom:
-  apigwBinary:
-    types:
-      - "*/*"
-  domainName: ${env:DOMAIN_NAME, ''}
-  sslCertificateArn: ${env:SSL_CERTIFICATE_ARN, ''}
+  Resources:
+    PokerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.pokerTableName}
+        BillingMode: PROVISIONED
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+    # Setup the application's domain name as a custom domain name for API Gateway, then map it to the application's API
+    ApiGatewayCustomDomainName:
+      Type: AWS::ApiGateway::DomainName
+      Condition: UseCustomDomainName
+      Properties:
+        RegionalCertificateArn: ${self:custom.sslCertificateArn}
+        DomainName: ${self:custom.domainName}
+        EndpointConfiguration:
+          Types:
+            - REGIONAL
+
+    BasePathMapping:
+      Type: AWS::ApiGateway::BasePathMapping
+      Condition: UseCustomDomainName
+      DependsOn: ApiGatewayDeployment${sls:instanceId}
+      Properties:
+        BasePath: ""
+        DomainName: !Ref ApiGatewayCustomDomainName
+        RestApiId: !Ref ApiGatewayRestApi
+        Stage: ${self:provider.stage}
+
+    # DNS CNAME mapping the application's domain name to the behind-the-scenes domain name for the API
+    # See https://wiki.york.ac.uk/display/AWS/AWS%3A+Application+DNS+Records
+    AppCNAME:
+      Type: Custom::CNAME
+      Condition: UseCustomDomainName
+      Properties:
+        ServiceToken: arn:aws:sns:eu-west-1:230504789214:RequestRecordSet
+        Source: ${self:custom.domainName}.
+        Target: !Join [ "", [ !GetAtt ApiGatewayCustomDomainName.RegionalDomainName, "." ] ]
 
 # Exclude files and next.js dependencies that are not needed at runtime
 package:
   include:
-    - .env
-    - .env.local
-    - node_modules/@babel/runtime/**
+    - .env.dev
+    - .env.prod
   exclude:
     - .*
     - .gradle/**
     - .github/**
     - .idea/**
-    - docs/**
-    - src/**
     - package-lock.json
     - README.md
     - tsconfig.tsbuildinfo
-    - tsconfig.json
     - .next/cache/webpack/client-development/**
     - .next/cache/webpack/client-development-fallback/**
     - .next/cache/webpack/server-development/**
-    - node_modules/smartify-lib/node_modules/**
     - node_modules/@babel/**
     - node_modules/ally.js/**
     - node_modules/caniuse-lite/**
@@ -204,26 +265,3 @@ package:
     - node_modules/@next/swc-win32-ia32-msvc/**
     - node_modules/next/dist/compiled/babel/**
     - node_modules/next/dist/compiled/babel-packages/**
-
-resources:
-  Conditions:
-    UseCustomDomainName: !Not
-      - !Equals
-        - ${self:custom.domainName}
-        - ""
-
-  Resources:
-    PokerTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: planning-poker-${self:provider.stage}
-        BillingMode: PROVISIONED
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH

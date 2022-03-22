@@ -13,8 +13,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "functions"],
-  "exclude": ["node_modules", "**/*.tsx"]
+  "include": ["next-env.d.ts"],
+  "exclude": [".build", "node_modules", "components", "functions", "pages", "types", "utils", "index.ts", "binaryMimeTypes.ts", "server.ts"]
 }

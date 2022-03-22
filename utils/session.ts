@@ -1,4 +1,4 @@
-import type { Session } from "../types/session.js";
+import type { Session } from "../types/session";
 
 const BROWSER_SESSION = "planning-poker-session";
 

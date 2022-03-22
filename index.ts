@@ -14,7 +14,7 @@ const handler = sls(server, {
     binary: binaryMimeTypes,
 });
 
-const serverHandler = async (event, context) => {
+const serverHandler = async (event: any, context: any) => {
     console.debug(`Event: ${JSON.stringify(event)}`);
 
     const response = await handler(event, context);

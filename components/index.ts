@@ -1,4 +1,4 @@
-export { Button } from "./Button/Button.jsx";
-export { Header } from "./Header/Header.jsx";
-export { Modal } from "./Modal/Modal.jsx";
-export { PokerTable } from "./PokerTable/PokerTable.jsx";
+export { Button } from "./Button/Button";
+export { Header } from "./Header/Header";
+export { Modal } from "./Modal/Modal";
+export { PokerTable } from "./PokerTable/PokerTable";

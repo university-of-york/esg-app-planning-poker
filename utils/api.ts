@@ -1,6 +1,6 @@
-import type { Room } from "../types/room.js";
-import {request} from "./request.js";
-import { withSession } from "./session.js";
+import type { Room } from "../types/room";
+import {request} from "./request";
+import { withSession } from "./session";
 import {Result} from "../types/responses";
 import {BASE_URL} from "./environment";
 
