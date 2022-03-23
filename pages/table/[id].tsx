@@ -41,7 +41,10 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     const hasJoinedRoom = room.members.find((member) => member.id === session?.id);
 
     const refresh = useCallback(async () => {
-        setRoom((await getRoom(props.id))!)
+        const room = await getRoom(props.id);
+        if (room) {
+            setRoom(room);
+        }
     }, [props.id]);
 
     useEffect(() => {

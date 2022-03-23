@@ -1,0 +1,52 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the application's source code
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Install application dependencies
+        run: npm ci
+
+      - name: Check code is formatted correctly
+        run: npm run checkformat
+
+      - name: Check code conforms to linting rules
+        run: npm run lint
+
+      - name: Check tests run
+        run: npm run test
+
+      - name: Deploy - dev
+        if: github.ref == 'refs/heads/dev'
+        run: npm run deploy:dev
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCOUNT_ID: ${{ secrets.DEV_AWS_ACCOUNT_ID }}
+          SSL_CERTIFICATE_ARN: ${{ secrets.DEV_SSL_CERTIFICATE_ARN }}
+          DOMAIN_NAME: planning-poker.dev.app.york.ac.uk
+
+      - name: Deploy - production
+        if: github.ref == 'refs/heads/main'
+        run: npm run deploy:prod
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCOUNT_ID: ${{ secrets.PROD_AWS_ACCOUNT_ID }}
+          SSL_CERTIFICATE_ARN: ${{ secrets.PROD_SSL_CERTIFICATE_ARN }}
+          DOMAIN_NAME: planning-poker.app.york.ac.uk

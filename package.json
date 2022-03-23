@@ -11,7 +11,7 @@
     "compile": "tsc",
     "build": "npm run compile && next build",
     "start": "npm run build && next start",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "format": "prettier --write .",
     "checkformat": "prettier --check .",
     "lint": "xo .",
@@ -20,10 +20,10 @@
     "fc": "npm run formatandcheck",
     "package": "npm run build && sls package",
     "package:dev": "cross-env STACK_ENV=dev npm run package",
-    "package:live": "cross-env STACK_ENV=prod npm run package",
+    "package:prod": "cross-env STACK_ENV=prod npm run package",
     "deploy": "npm run build && sls deploy",
     "deploy:dev": "cross-env STACK_ENV=dev npm run deploy",
-    "deploy:live": "cross-env STACK_ENV=prod npm run deploy"
+    "deploy:prod": "cross-env STACK_ENV=prod npm run deploy"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.54.1",
