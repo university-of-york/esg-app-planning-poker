@@ -7,26 +7,49 @@
     flex-direction: row;
 }
 
+.container.disabled {
+
+}
+
 .card {
     font-size: 4em;
     width: 3ch;
     color: white;
-    margin: 1vw;
-    padding: 1vw;
+    margin: 0.15em;
+    padding: 0.2em;
     height: 10em;
-    border-radius: 0.5vw;
+    border-radius: 0.2em;
     background: var(--palette-grey-main);
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.25s, height 0.25s;
+    transition-property: background-color, padding, transform;
+    transition-duration: 0.25s;
 }
 
 .card:hover {
     background: var(--palette-grey-dark);
-    height: 14em;
     transform: translateY(-5%);
+}
+
+.container.disabled .card {
+    padding: 0;
+    background: var(--palette-grey-light);
+    transform: translateY(4%);
+    cursor: not-allowed;
+}
+
+.container.disabled .card:hover {
+    transform: translateY(4%);
 }
 
 .card.selected {
     color: var(--palette-green-main);
+}
+
+.card.submitting {
+    cursor: wait;
+}
+
+.spinner {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(18%) saturate(5227%) hue-rotate(179deg) brightness(114%) contrast(100%);
 }

@@ -15,7 +15,8 @@
     border-radius: 0.4em;
     box-shadow: rgba(30, 30, 50, 0.25) 0 7px 29px 0;
     cursor: pointer;
-    transition: background-color 0.4s, font-weight 0.4s;
+    transition-property: background-color, font-weight, opacity, filter;
+    transition-duration: 0.4s;
 }
 
 .button:hover {
@@ -31,7 +32,9 @@
 }
 
 .button.disabled,
-.button.submitting {
+.button.submitting,
+.button.disabled:hover,
+.button.submitting:hover{
     background-color: var(--palette-grey-main);
     filter: brightness(80%);
     box-shadow: none;

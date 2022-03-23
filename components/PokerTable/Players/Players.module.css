@@ -9,7 +9,7 @@
 }
 
 .player {
-    width: 8em;
+    width: 18ch;
     height: fit-content;
     margin: 0.5em;
     padding: 1em;
@@ -24,12 +24,12 @@
 }
 
 .player.current {
-    color: var(--palette-green-main);
+    color: var(--palette-yellow-main);
     box-shadow:
-            var(--palette-green-light) 1px 1px 1.6pt 1.6pt,
-            var(--palette-green-light) -1px 1px 1.6pt 1.6pt,
-            var(--palette-green-light) 1px -1px 1.6pt 1.6pt,
-            var(--palette-green-light) -1px -1px 1.6pt 1.6pt;
+            var(--palette-yellow-light) 1px 1px 1.6pt 1.6pt,
+            var(--palette-yellow-light) -1px 1px 1.6pt 1.6pt,
+            var(--palette-yellow-light) 1px -1px 1.6pt 1.6pt,
+            var(--palette-yellow-light) -1px -1px 1.6pt 1.6pt;
 }
 
 .display {
@@ -61,5 +61,5 @@
 }
 
 .host {
-    background: var(--palette-yellow-light);
+    background: var(--palette-green-main);
 }

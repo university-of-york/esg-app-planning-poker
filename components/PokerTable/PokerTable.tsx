@@ -4,6 +4,7 @@ import {Controls} from "./Controls/Controls";
 import {Results} from "./Results/Results";
 import {Players} from "./Players/Players";
 import {Cards} from "./Cards/Cards";
+import {Spinner} from "../Spinner/Spinner";
 // @ts-ignore
 import styles from "./PokerTable.module.css";
 

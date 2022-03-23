@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithubSquare} from "@fortawesome/free-brands-svg-icons";
+// @ts-ignore
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -31,9 +32,9 @@ const Header = () => {
                     alt="University of York Logo"
                 />
 
-                <Link href="/" passHref>
+                <a href="/">
                     <h1 className={styles.title}>Planning Poker</h1>
-                </Link>
+                </a>
 
                 <Link href="https://github.com/university-of-york/esg-app-planning-poker" passHref>
                     <FontAwesomeIcon

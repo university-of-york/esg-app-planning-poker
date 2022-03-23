@@ -2,20 +2,23 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
+    margin-top: 0.6em;
     padding: 1em;
     border-radius: 1em;
     color: white;
-    background-color: var(--palette-grey-main);
+    background-color: var(--palette-green-main);
     text-align: center;
 }
 
+.container.tied {
+    background-color: var(--palette-yellow-main);
+}
+
 .container strong {
-    color: var(--palette-green-main);
     font-size: 1.2em;
 }
 
 .container.tied strong {
-    color: var(--palette-yellow-main);
     font-size: 1.2em;
 }
 
@@ -24,12 +27,7 @@
 }
 
 .result {
-    color: var(--palette-green-main);
     font-size: 4em;
-}
-
-.container.tied .result {
-    color: var(--palette-yellow-main);
 }
 
 .votes {

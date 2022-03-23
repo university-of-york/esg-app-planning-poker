@@ -47,7 +47,7 @@ const Results = ({room}: {room: Room}) => {
         <div className={`${styles.container} ${isTied ? styles.tied : ''}`}>
             <h2 className={styles.title}>{title}</h2>
             <span className={styles.result}>{result}</span>
-            <span className={styles.votes}>with <strong>{winningPercentage}%</strong> of the vote</span>
+            <span className={styles.votes}>with <strong>{winningPercentage}%</strong> of the vote{isTied ? " each": ""}</span>
         </div>
     );
 };

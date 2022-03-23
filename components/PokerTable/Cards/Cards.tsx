@@ -2,32 +2,39 @@ import {useState} from "react";
 import {Member, Room} from "../../../types/room";
 import {submitChoice} from "../../../utils/api";
 import {TSHIRT_SIZES} from "../../../constants/cards";
+import {Spinner} from "../../Spinner/Spinner";
 // @ts-ignore
 import styles from "./Cards.module.css";
 
 const Cards = ({room, player, refresh}: {room: Room; player: Member; refresh: () => Promise<void>;}) => {
-    const [isSubmittingChoice, setIsSubmittingChoice] = useState<boolean>(false);
+    const [submittingChoice, setSubmittingChoice] = useState<string>();
 
     const handleChoice = (choice: string) => {
         const submit = async () => {
-            setIsSubmittingChoice(true);
+            setSubmittingChoice(choice);
             await submitChoice(room.id, player.id, choice);
             await refresh();
-            setIsSubmittingChoice(false);
+            setSubmittingChoice(undefined);
         }
 
         submit();
-    }
+    };
+
+    const isDisabled = room.state === "REVEALED";
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${isDisabled ? styles.disabled : ''}`}>
             {TSHIRT_SIZES.map((option) =>
                 <div
-                    className={`${styles.card} ${option === player.choice ? styles.selected : ''}`}
+                    className={`${styles.card} ${option === player.choice ? styles.selected : ''} ${submittingChoice === option ? styles.submitting : ''}`}
                     key={option}
-                    onClick={() => handleChoice(option)}
+                    onClick={!isDisabled ? () => handleChoice(option) : undefined}
                 >
-                    <span>{option}</span>
+                    {submittingChoice === option ? (
+                        <Spinner className={styles.spinner}/>
+                    ) : (
+                        <span className={styles.option}>{option}</span>
+                    )}
                 </div>
             )}
         </div>
