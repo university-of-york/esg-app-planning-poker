@@ -55,13 +55,11 @@ const addRoomToHistory = (roomId: string, roomName: string): void => {
 
     const existingHistory = session.history.findIndex((history) => history.roomId === roomId);
 
-    console.log(`History: ${existingHistory}`);
-
-    if (existingHistory < 0) {
-        session.history.unshift({ roomId, roomName, lastVisited: timestamp });
-    } else {
-        session.history[existingHistory].lastVisited = timestamp;
+    if (existingHistory >= 0) {
+        session.history.splice(existingHistory, 1);
     }
+
+    session.history.unshift({ roomId, roomName, lastVisited: timestamp });
 
     localStorage.setItem(BROWSER_STORAGE_KEY, JSON.stringify(session));
 };
