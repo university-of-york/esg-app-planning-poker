@@ -21,6 +21,7 @@
     background: var(--palette-grey-main);
     text-align: center;
     cursor: pointer;
+    user-select: none;
     transition-property: background-color, padding, transform;
     transition-duration: 0.25s;
 }
