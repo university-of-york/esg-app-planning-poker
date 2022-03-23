@@ -26,8 +26,6 @@ const Results = ({ room }: { room: Room }) => {
     votes = votes.filter((it) => it.votes > 0);
     votes.sort((a, b) => b.votes - a.votes);
 
-    console.log(votes);
-
     const winningVote = votes[0];
     const winningPercentage = Math.floor((winningVote.votes / membersWithChoicesMade.length) * 100);
 
