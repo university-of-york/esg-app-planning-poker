@@ -36,6 +36,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     const [session, setSession] = useState<Session>();
     const [displayName, setDisplayName] = useState<string>("");
     const [linkCopied, setLinkCopied] = useState<boolean>(false);
+    const [isLeaving, setIsLeaving] = useState<boolean>(false);
 
     const hasJoinedRoom = room.members.find((member) => member.id === session?.id);
 
@@ -62,6 +63,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     useEffect(() => {
         window.onbeforeunload = () => {
             if (session?.id && hasJoinedRoom) {
+                setIsLeaving(true);
                 leaveRoom(room.id, session.id);
             }
 
@@ -93,7 +95,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     return (
         <div className={styles.container}>
             <Header />
-            <Modal mandatory open={!hasJoinedRoom} callback={handleConfirmation}>
+            <Modal mandatory open={!hasJoinedRoom && !isLeaving} callback={handleConfirmation}>
                 <div className={styles.join}>
                     <label className={styles.name}>Your name</label>
                     <input type="text" value={displayName} onChange={handleNameChange} />
