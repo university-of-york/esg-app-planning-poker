@@ -10,6 +10,10 @@ const Results = ({ room }: { room: Room }) => {
 
     const membersWithChoicesMade = room.members.filter((member) => member.choice !== "");
 
+    if (!membersWithChoicesMade || membersWithChoicesMade.length === 0) {
+        return <></>;
+    }
+
     let votes = TSHIRT_SIZES.map((option) => {
         const numberVotes = membersWithChoicesMade.filter((member) => member.choice === option).length;
 
