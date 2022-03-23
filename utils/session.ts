@@ -1,4 +1,4 @@
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 import type { Session } from "../types/session";
 
 const BROWSER_STORAGE_KEY = "planning-poker-session";
@@ -58,7 +58,7 @@ const addRoomToHistory = (roomId: string, roomName: string): void => {
     console.log(`History: ${existingHistory}`);
 
     if (existingHistory < 0) {
-        session.history.unshift({roomId, roomName, lastVisited: timestamp});
+        session.history.unshift({ roomId, roomName, lastVisited: timestamp });
     } else {
         session.history[existingHistory].lastVisited = timestamp;
     }

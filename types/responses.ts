@@ -1,4 +1,4 @@
-import {Room} from "./room";
+import type { Room } from "./room";
 
 export declare type Message = {
     status: number;
@@ -9,5 +9,5 @@ export declare type Result = Message & {
     result: {
         id: string;
         room: Room;
-    }
+    };
 };

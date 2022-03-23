@@ -1,4 +1,4 @@
-import {Message} from "../types/responses";
+import { Message } from "../types/responses";
 
 export declare type Response<T extends Message> = {
     success: boolean;
@@ -6,7 +6,11 @@ export declare type Response<T extends Message> = {
     body: T;
 };
 
-const request = async <T extends Message>(method: "GET" | "POST" | "PUT" | "DELETE", url: string, body?: any): Promise<Response<T>> => {
+const request = async <T extends Message>(
+    method: "GET" | "POST" | "PUT" | "DELETE",
+    url: string,
+    body?: any
+): Promise<Response<T>> => {
     console.debug(`${method}: ${url}`);
     try {
         const headers = new Headers({
@@ -36,7 +40,7 @@ const request = async <T extends Message>(method: "GET" | "POST" | "PUT" | "DELE
             // @ts-ignore
             body: {
                 status: 500,
-                message: JSON.stringify(error)
+                message: JSON.stringify(error),
             },
         };
     }

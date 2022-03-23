@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
-import {Session} from "../types/session";
+import { DateTime } from "luxon";
+import type { Session } from "../types/session";
 import { Button, Header, Modal } from "../components";
 import { createRoom } from "../utils/api";
-import {addRoomToHistory, updateDisplayName, withSession} from "../utils/session";
+import { addRoomToHistory, updateDisplayName, withSession } from "../utils/session";
 import styles from "../styles/Home.module.css";
-import {DateTime} from "luxon";
 
 const Home: NextPage = () => {
     const [roomCreated, setRoomCreated] = useState<boolean>(false);
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         const session = withSession();
 
         setSession(session);
-        setForm({...form, displayName: session.displayName});
+        setForm({ ...form, displayName: session.displayName });
     }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +87,10 @@ const Home: NextPage = () => {
                 </Modal>
 
                 <div className={styles.context}>
-                    <p>This application is based on and designed for the estimation & refinement practices of the Digital Services Teaching & Learning team</p>
+                    <p>
+                        This application is based on and designed for the estimation & refinement practices of the
+                        Digital Services Teaching & Learning team
+                    </p>
                     <p>Use this app during planning sessions to determine blind/unbiased estimates for tasks</p>
                     <p>This app currently only supports estimation in T-shirt sizes</p>
                 </div>
@@ -97,14 +100,16 @@ const Home: NextPage = () => {
                         <h2>Recent rooms:</h2>
                         <table>
                             <tbody>
-                            {session!.history.map((room) => (
-                                <Link href={`/table/${room.roomId}`} passHref key={room.roomId}>
-                                    <tr className={styles.room}>
-                                        <td className={styles.name}>{room.roomName}</td>
-                                        <td className={styles.timestamp}>{DateTime.fromISO(room.lastVisited).toRelative()}</td>
-                                    </tr>
-                                </Link>
-                            ))}
+                                {session!.history.map((room) => (
+                                    <Link href={`/table/${room.roomId}`} passHref key={room.roomId}>
+                                        <tr className={styles.room}>
+                                            <td className={styles.name}>{room.roomName}</td>
+                                            <td className={styles.timestamp}>
+                                                {DateTime.fromISO(room.lastVisited).toRelative()}
+                                            </td>
+                                        </tr>
+                                    </Link>
+                                ))}
                             </tbody>
                         </table>
                     </div>

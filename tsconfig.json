@@ -17,5 +17,16 @@
     "tsBuildInfoFile": "tsconfig.tsbuildinfo"
   },
   "include": ["next-env.d.ts"],
-  "exclude": [".build", "node_modules", "components", "functions", "pages", "types", "utils", "index.ts", "binaryMimeTypes.ts", "server.ts"]
+  "exclude": [
+    ".build",
+    "node_modules",
+    "components",
+    "functions",
+    "pages",
+    "types",
+    "utils",
+    "index.ts",
+    "binaryMimeTypes.ts",
+    "server.ts"
+  ]
 }

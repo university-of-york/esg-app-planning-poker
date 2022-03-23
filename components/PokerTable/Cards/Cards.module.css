@@ -8,7 +8,6 @@
 }
 
 .container.disabled {
-
 }
 
 .card {
@@ -51,5 +50,6 @@
 }
 
 .spinner {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(18%) saturate(5227%) hue-rotate(179deg) brightness(114%) contrast(100%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(18%) saturate(5227%) hue-rotate(179deg) brightness(114%)
+        contrast(100%);
 }

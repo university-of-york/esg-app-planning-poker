@@ -1,9 +1,9 @@
-import {Member, Room} from "../../../types/room";
-import {TSHIRT_SIZES} from "../../../constants/cards";
+import type { Room } from "../../../types/room";
+import { TSHIRT_SIZES } from "../../../constants/cards";
 // @ts-ignore
 import styles from "./Results.module.css";
 
-const Results = ({room}: {room: Room}) => {
+const Results = ({ room }: { room: Room }) => {
     if (room.state === "HIDDEN") {
         return <></>;
     }
@@ -15,8 +15,8 @@ const Results = ({room}: {room: Room}) => {
 
         return {
             option,
-            votes: numberVotes
-        }
+            votes: numberVotes,
+        };
     });
 
     votes = votes.filter((it) => it.votes > 0);
@@ -29,7 +29,7 @@ const Results = ({room}: {room: Room}) => {
 
     const otherVotes = votes.filter((it) => it.option !== winningVote.option);
     const tiedVotes = otherVotes.filter((it) => it.votes === winningVote.votes);
-    const isTied = tiedVotes.length !== 0;
+    const isTied = tiedVotes.length > 0;
 
     let title, result;
 
@@ -37,17 +37,19 @@ const Results = ({room}: {room: Room}) => {
         const tiedOptions = tiedVotes.map((vote) => vote.option);
 
         title = "It's a draw!";
-        result = `${winningVote.option} ${tiedOptions.join(' ')}`
+        result = `${winningVote.option} ${tiedOptions.join(" ")}`;
     } else {
         title = "We have a winner!";
         result = winningVote.option;
     }
 
     return (
-        <div className={`${styles.container} ${isTied ? styles.tied : ''}`}>
+        <div className={`${styles.container} ${isTied ? styles.tied : ""}`}>
             <h2 className={styles.title}>{title}</h2>
             <span className={styles.result}>{result}</span>
-            <span className={styles.votes}>with <strong>{winningPercentage}%</strong> of the vote{isTied ? " each": ""}</span>
+            <span className={styles.votes}>
+                with <strong>{winningPercentage}%</strong> of the vote{isTied ? " each" : ""}
+            </span>
         </div>
     );
 };

@@ -13,8 +13,10 @@ declare type ButtonProps = {
 const Button = ({ className, children, link, onClick, isSubmitting = false, isDisabled = false }: ButtonProps) => {
     const button = (
         <button
-            className={`${styles.button} ${className ? className : ""} ${isSubmitting ? styles.submitting : ""} ${isDisabled ? styles.disabled : ""}`}
-            onClick={!isDisabled ? onClick : undefined}
+            className={`${styles.button} ${className ? className : ""} ${isSubmitting ? styles.submitting : ""} ${
+                isDisabled ? styles.disabled : ""
+            }`}
+            onClick={isDisabled ? undefined : onClick}
         >
             {children}
         </button>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../Button/Button";
+// @ts-ignore
 import styles from "./Modal.module.css";
 
 const Modal = ({
@@ -24,25 +25,30 @@ const Modal = ({
     const [_open, setIsOpen] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const _trigger = trigger
-        ? React.cloneElement(trigger, {
-              className: className,
-              onClick: () => setIsOpen(true),
-          })
-        : "";
+    let _trigger;
+
+    if (trigger) {
+        _trigger = React.cloneElement(trigger, {
+            className,
+            onClick: () => setIsOpen(true),
+        });
+    }
 
     const close = async () => {
         if (onClose) {
             await onClose();
         }
+
         setIsOpen(false);
     };
 
     const confirm = async () => {
         setIsSubmitting(true);
+
         if (callback) {
             await callback();
         }
+
         setIsSubmitting(false);
         await close();
     };
@@ -66,7 +72,17 @@ const Modal = ({
     );
 };
 
-const ModalControls = ({ confirm, close, isMandatory, isSubmitting }: { confirm: () => void; close: () => void; isMandatory: boolean; isSubmitting: boolean }) => {
+const ModalControls = ({
+    confirm,
+    close,
+    isMandatory,
+    isSubmitting,
+}: {
+    confirm: () => void;
+    close: () => void;
+    isMandatory: boolean;
+    isSubmitting: boolean;
+}) => {
     return isMandatory ? (
         <div className={`${styles.controls} ${styles.single}`}>
             <Button className={styles.control} isSubmitting={isSubmitting} onClick={confirm}>

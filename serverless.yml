@@ -186,7 +186,7 @@ resources:
       Properties:
         ServiceToken: arn:aws:sns:eu-west-1:230504789214:RequestRecordSet
         Source: ${self:custom.domainName}.
-        Target: !Join [ "", [ !GetAtt ApiGatewayCustomDomainName.RegionalDomainName, "." ] ]
+        Target: !Join ["", [!GetAtt ApiGatewayCustomDomainName.RegionalDomainName, "."]]
 
 # Exclude files and next.js dependencies that are not needed at runtime
 package:

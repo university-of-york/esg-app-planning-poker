@@ -54,7 +54,7 @@
 }
 
 .room:last-child {
-    border-bottom: none ;
+    border-bottom: none;
 }
 
 .room:hover {
@@ -69,5 +69,4 @@
 }
 
 .timestamp {
-
 }

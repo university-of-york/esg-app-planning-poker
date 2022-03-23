@@ -1,28 +1,27 @@
-import {ParsedUrlQuery} from "querystring";
-import {getRoom, joinRoom, leaveRoom} from "../../utils/api";
-import {Room} from "../../types/room";
-import {useCallback, useEffect, useState} from "react";
-import {Button, Header, Modal, PokerTable} from "../../components";
-import {Session} from "../../types/session";
-import {addRoomToHistory, updateDisplayName, withSession} from "../../utils/session";
+import React, { useCallback, useEffect, useState } from "react";
+import type { Room } from "../../types/room";
+import type { Session } from "../../types/session";
+import { Button, Header, Modal, PokerTable } from "../../components";
+import { getRoom, joinRoom, leaveRoom } from "../../utils/api";
+import { addRoomToHistory, updateDisplayName, withSession } from "../../utils/session";
 // @ts-ignore
 import styles from "../../styles/Room.module.css";
 
-const getServerSideProps = async ({ params }: { params: ParsedUrlQuery }) => {
+const getServerSideProps = async ({ params }: { params: any }) => {
     const id = params.id! as string;
 
     const room = await getRoom(id);
 
-    if (!room) {
+    if (room) {
+        return {
+            props: { id, room },
+        };
+    } else {
         return {
             redirect: {
                 destination: "/",
                 permanent: false,
             },
-        };
-    } else {
-        return {
-            props: { id, room },
         };
     }
 };
@@ -65,6 +64,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             if (session?.id && hasJoinedRoom) {
                 leaveRoom(room.id, session.id);
             }
+
             return null;
         };
     }, [room.id, session?.id, hasJoinedRoom]);
@@ -74,7 +74,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         setLinkCopied(true);
 
         setTimeout(() => setLinkCopied(false), 5000);
-    }
+    };
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDisplayName(event.target.value);
@@ -88,16 +88,12 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         addRoomToHistory(room.id, room.name);
 
         await refresh();
-    }
+    };
 
     return (
         <div className={styles.container}>
             <Header />
-            <Modal
-                mandatory
-                open={!hasJoinedRoom}
-                callback={handleConfirmation}
-            >
+            <Modal mandatory open={!hasJoinedRoom} callback={handleConfirmation}>
                 <div className={styles.join}>
                     <label className={styles.name}>Your name</label>
                     <input type="text" value={displayName} onChange={handleNameChange} />
@@ -107,24 +103,15 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             <div className={styles.content}>
                 <h1 className={styles.name}>{room.name}</h1>
 
-                <Button
-                    className={styles.invite}
-                    onClick={handleInvite}
-                >
+                <Button className={styles.invite} onClick={handleInvite}>
                     {linkCopied ? "Link copied!" : "Copy invite link"}
                 </Button>
 
                 <span className={styles.count}>
-                    {room.members.length} {room.members.length === 1 ? 'person' : 'people'} present
+                    {room.members.length} {room.members.length === 1 ? "person" : "people"} present
                 </span>
 
-                {hasJoinedRoom ? (
-                    <PokerTable
-                        room={room}
-                        session={session!}
-                        refresh={refresh}
-                    />
-                ) : undefined}
+                {hasJoinedRoom ? <PokerTable room={room} session={session!} refresh={refresh} /> : undefined}
             </div>
         </div>
     );

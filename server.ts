@@ -7,7 +7,10 @@ const handle = app.getRequestHandler();
 const server = express();
 
 // serve static assets directly from the build-time-generated ".next" folder and specify how long to cache
-server.use(`/_next`, express.static(path.join(path.resolve(path.dirname('')), ".next"), { maxAge: "1d", immutable: true }));
+server.use(
+    `/_next`,
+    express.static(path.join(path.resolve(path.dirname("")), ".next"), { maxAge: "1d", immutable: true })
+);
 
 // serve requests with Next by default
 server.get("*", (req: any, res: any) => {

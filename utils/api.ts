@@ -1,10 +1,10 @@
 import type { Room } from "../types/room";
-import {request} from "./request";
+import type { Result } from "../types/responses";
+import { request } from "./request";
 import { withSession } from "./session";
-import {Result} from "../types/responses";
-import {BASE_URL} from "./environment";
+import { BASE_URL } from "./environment";
 
-const createRoom = async (name: string): Promise<{success: boolean, id: string}> => {
+const createRoom = async (name: string): Promise<{ success: boolean; id: string }> => {
     const session = withSession();
 
     const response = await request<Result>("POST", `${BASE_URL}/room`, {
@@ -15,8 +15,8 @@ const createRoom = async (name: string): Promise<{success: boolean, id: string}>
 
     return {
         success: response.success,
-        id: response.body.result.id
-    }
+        id: response.body.result.id,
+    };
 };
 
 const getRoom = async (roomId: string): Promise<Room | undefined> => {
@@ -45,7 +45,7 @@ const leaveRoom = (roomId: string, memberId: string): void => {
     // This is a reliable/safe way of asynchronously sending a web request as the page unloads
     // Fetch is not safe/reliable, as it may be unloaded before the request is actually made
     // Essentially, we cannot "await fetch" during a page unload
-    navigator.sendBeacon(`${BASE_URL}/room/${roomId}/leave`, JSON.stringify({memberId}));
+    navigator.sendBeacon(`${BASE_URL}/room/${roomId}/leave`, JSON.stringify({ memberId }));
 };
 
 const submitChoice = async (roomId: string, memberId: string, choice: string): Promise<void> => {

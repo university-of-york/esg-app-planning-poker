@@ -34,7 +34,7 @@
 .button.disabled,
 .button.submitting,
 .button.disabled:hover,
-.button.submitting:hover{
+.button.submitting:hover {
     background-color: var(--palette-grey-main);
     filter: brightness(80%);
     box-shadow: none;

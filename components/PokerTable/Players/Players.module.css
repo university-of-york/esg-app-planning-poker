@@ -25,11 +25,8 @@
 
 .player.current {
     color: var(--palette-yellow-main);
-    box-shadow:
-            var(--palette-yellow-light) 1px 1px 1.6pt 1.6pt,
-            var(--palette-yellow-light) -1px 1px 1.6pt 1.6pt,
-            var(--palette-yellow-light) 1px -1px 1.6pt 1.6pt,
-            var(--palette-yellow-light) -1px -1px 1.6pt 1.6pt;
+    box-shadow: var(--palette-yellow-light) 1px 1px 1.6pt 1.6pt, var(--palette-yellow-light) -1px 1px 1.6pt 1.6pt,
+        var(--palette-yellow-light) 1px -1px 1.6pt 1.6pt, var(--palette-yellow-light) -1px -1px 1.6pt 1.6pt;
 }
 
 .display {

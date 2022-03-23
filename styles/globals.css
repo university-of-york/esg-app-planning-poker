@@ -1,18 +1,19 @@
-:root { /* Colour palette, populated as per the UoY design patterns library: https://www.york.ac.uk/pattern-library/layout/colours.html */
-    --palette-grey-light: #CBCBCB;
+:root {
+    /* Colour palette, populated as per the UoY design patterns library: https://www.york.ac.uk/pattern-library/layout/colours.html */
+    --palette-grey-light: #cbcbcb;
     --palette-grey-main: #868686;
     --palette-grey-dark: #404040;
-    --palette-blue-light: #69D4F5;
-    --palette-blue-main: #00B3EB;
-    --palette-blue-dark: #0F3D4C;
-    --palette-green-light: #99D581;
+    --palette-blue-light: #69d4f5;
+    --palette-blue-main: #00b3eb;
+    --palette-blue-dark: #0f3d4c;
+    --palette-green-light: #99d581;
     --palette-green-main: #54b62d;
-    --palette-green-dark: #3B7F1F;
-    --palette-yellow-light: #EFD38B;
-    --palette-yellow-main: #E4B53C;
-    --palette-yellow-dark: #A48024;
-    --palette-red-light: #D58080;
-    --palette-red-main: #B62D2D;
+    --palette-green-dark: #3b7f1f;
+    --palette-yellow-light: #efd38b;
+    --palette-yellow-main: #e4b53c;
+    --palette-yellow-dark: #a48024;
+    --palette-red-light: #d58080;
+    --palette-red-main: #b62d2d;
     --palette-red-dark: #892121;
 }
 
@@ -56,13 +57,9 @@ input {
 input:focus,
 input:focus-within,
 input:focus-visible {
-    box-shadow:
-            var(--palette-blue-main) 1px 1px 1pt 1pt,
-            var(--palette-blue-main) -1px 1px 1pt 1pt,
-            var(--palette-blue-main) 1px -1px 1pt 1pt,
-            var(--palette-blue-main) -1px -1px 1pt 1pt;
+    box-shadow: var(--palette-blue-main) 1px 1px 1pt 1pt, var(--palette-blue-main) -1px 1px 1pt 1pt,
+        var(--palette-blue-main) 1px -1px 1pt 1pt, var(--palette-blue-main) -1px -1px 1pt 1pt;
 }
 
 select {
-
 }

@@ -1,3 +1,4 @@
+import { Buffer } from "buffer";
 import { APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
@@ -16,7 +17,7 @@ const leaveRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
         return message(400, "Request body not found");
     }
 
-    const body = event.isBase64Encoded ? new Buffer(event.body, 'base64').toString() : event.body;
+    const body = event.isBase64Encoded ? Buffer.from(event.body, "base64").toString() : event.body;
 
     const { memberId } = JSON.parse(body);
 
