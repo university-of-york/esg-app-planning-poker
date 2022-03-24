@@ -1,36 +1,71 @@
 # Planning Poker
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![format](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/code-formatting.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml)
+[![lint](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/linting.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml)
+[![test](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml)
+[![build](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml)
 
-## Getting Started
+[![dev deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml)
+[![prod deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml/badge.svg?branch=main)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml)
 
-First, run the development server:
+Based on the estimation & refinement practices of the Digital Services Teaching & Learning team, Planning Poker is designed to facilitate blind, unbiased estimating of tasks in T-shirt sizes.
+Anyone can access this application, create a new planning session, and send invite links for their teammates to join.
+Team members then vote on the estimate for a task, and when all members have voted the host can reveal the result.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Planning Poker is a [Next.js](https://nextjs.org/) application built with [Typescript](https://www.typescriptlang.org/) and deployed to [AWS](https://aws.amazon.com/) using [Serverless](https://www.serverless.com/).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![diagram](.github/images/diagram.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Getting started
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project contains several npm scripts for checking code quality as changes are developed. 
+You can run these tasks individually with the commands:
+ - `npm run checkformat` or `npm run cf` to check formatting
+ - `npm run format` to apply formatting
+ - `npm run lint` to check for code smells
+ - `npm run test` to run test suites
+ - `npm run check` to run all checks
+ - `npm run formatandcheck` or `npm run fc` to format the code and then run all checks
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+You can check the build of the application with:
+ - `npm run build` to build the Next.js application
+ - `npm run package:dev` to package the application with serverless
 
-## Learn More
+You can run the application locally with:
+ - `npm run dev` for a development build
+ - `npm run start` for a production build
+ 
+Note that the front-end web client requires a deployed version of the backend API in order to function properly.
+This is configured by default (`.env.dev`) to be `planning-poker.dev.app.york.ac.uk`.  
+To use a separately deployed backend, such as a sandbox deployment, create a `.env.local` file and define your backend's URL:  
+`NEXT_PUBLIC_BASE_URL=https://mxx204duf4.execute-api.eu-west-1.amazonaws.com/dev`
 
-To learn more about Next.js, take a look at the following resources:
+You can deploy the application with:
+ - `npm run deploy:dev` to deploy to development
+ - `npm run deploy:prod` to deploy to production
+ 
+Note that to run a local deployment using the above scripts, you will need to have the following system variables populated with your aws credentials:
+ - `AWS_ACCOUNT_ID`
+ - `AWS_ACCESS_KEY_ID`
+ - `AWS_SECRET_ACCESS_KEY`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project overview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The most relevant parts of this project are:
+ - `package.json` - Project definition, npm scripts & dependencies
+ - `serverless.yml` - Defines cloud deployment setup
+ - `server.ts` - Configures Next.js Node Express lambda web server
+ - `tsconfig.json` - Configures Typescript compilation
+ - `.xo-config.json` - Configures linting/code style checking
+ - `pages/` - Next.js web pages, similar to React routes
+ - `components/` - React components for use in Next.js pages
+ - `functions/` - Lambda functions for backend API
+   - `index.ts` - Exports all lambda functions for Serveless packaging
+ - `utils/` - Shared utility functions, some of which are specific to the front or back end
+   - `utils/api.ts` - Client-side methods for interacting with the API
+   - `utils/database.ts` - Back-end methods for interacting with the DynamoDB table
+   - `utils/session.ts` - Browser-only methods for managing user sessions
+ - `styles/` - Top-level CSS to be applied either globally or per-page
+   - Component-level CSS is stored within each component directory
+ - `types/` - Shared type definitions for models
+   - `types/room.ts` - Definition of Room & Member models used by both front & back end 

@@ -1,14 +1,13 @@
-name: deploy
+name: deploy to prod
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - dev
       - main
 
 jobs:
-  deploy:
+  deploy-prod:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the application's source code
@@ -30,16 +29,6 @@ jobs:
 
       - name: Check tests run
         run: npm run test
-
-      - name: Deploy - dev
-        if: github.ref == 'refs/heads/dev'
-        run: npm run deploy:dev
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
-          AWS_ACCOUNT_ID: ${{ secrets.DEV_AWS_ACCOUNT_ID }}
-          SSL_CERTIFICATE_ARN: ${{ secrets.DEV_SSL_CERTIFICATE_ARN }}
-          DOMAIN_NAME: planning-poker.dev.app.york.ac.uk
 
       - name: Deploy - production
         if: github.ref == 'refs/heads/main'
