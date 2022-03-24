@@ -4,6 +4,7 @@
 [![lint](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml)
 [![test](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml)
 [![build](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml)
+[![package](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/package.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/package.yml)
 
 [![dev deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml)
 [![prod deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml/badge.svg?branch=main)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml)
@@ -60,7 +61,7 @@ The most relevant parts of this project are:
  - `pages/` - Next.js web pages, similar to React routes
  - `components/` - React components for use in Next.js pages
  - `functions/` - Lambda functions for backend API
-   - `index.ts` - Exports all lambda functions for Serveless packaging
+   - `index.ts` - Exports all lambda functions for Serverless packaging
  - `utils/` - Shared utility functions, some of which are specific to the front or back end
    - `utils/api.ts` - Client-side methods for interacting with the API
    - `utils/database.ts` - Back-end methods for interacting with the DynamoDB table
