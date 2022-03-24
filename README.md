@@ -1,8 +1,8 @@
 # Planning Poker
 
-[![format](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/code-formatting.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml)
-[![lint](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/linting.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml)
-[![test](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml)
+[![format](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml)
+[![lint](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml)
+[![test](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml)
 [![build](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml)
 
 [![dev deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml)
