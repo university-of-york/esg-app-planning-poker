@@ -51,7 +51,8 @@ You can run the test suites with:
    - This is very helpful if you want to see the test visually, or if you want to re-run the tests as you develop changes
  - `npm run test` to run all test suites
  - `npm run check` to run all checks
- - `npm run formatandcheck` or `npm run fc` to format the code and then run all checks
+ - `npm run formatandcheck` or `npm run fc` to format the code and then run all checks  
+Note: You may need to [install system dependencies](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements) in order to run Cypress correctly
 
 You can run the application locally with:
  - `npm run dev` for a development build
