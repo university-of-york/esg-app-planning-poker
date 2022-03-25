@@ -80,17 +80,17 @@ The most relevant parts of this project are:
  - [`server.ts`](server.ts) - Configures Next.js Node Express lambda web server
  - [`tsconfig.json`](tsconfig.json) - Configures Typescript compilation
  - [`.xo-config.json`](.xo-config.json) - Configures linting/code style checking
- - [`pages/`](pages) - Next.js web pages, similar to React routes
- - [`components/`](components) - React components for use in Next.js pages
- - [`functions/`](functions) - Lambda functions for backend API
+ - [`pages`](pages) - Next.js web pages, similar to React routes
+ - [`components`](components) - React components for use in Next.js pages
+ - [`functions`](functions) - Lambda functions for backend API
    - [`index.ts`](index.ts) - Exports all lambda functions for Serverless packaging
- - [`utils/`](utils) - Shared utility functions, some of which are specific to the front or back end
+ - [`utils`](utils) - Shared utility functions, some of which are specific to the front or back end
    - [`utils/api.ts`](utils/api.ts) - Client-side methods for interacting with the API
    - [`utils/database.ts`](utils/database.ts) - Back-end methods for interacting with the DynamoDB table
    - [`utils/session.ts`](utils/session.ts) - Browser-only methods for managing user sessions
- - [`styles/`](styles) - Top-level CSS to be applied either globally or per-page
+ - [`styles`](styles) - Top-level CSS to be applied either globally or per-page
    - Component-level CSS is stored within each component directory
- - [`types/`](types) - Shared type definitions for models
+ - [`types`](types) - Shared type definitions for models
    - [`types/room.ts`](types/room.ts) - Definition of Room & Member models used by both front & back end
  - [`tests`](tests) - Test suites
    - [`tests/cypress`](tests/cypress) - Cypress test suites
