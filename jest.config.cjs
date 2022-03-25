@@ -1,9 +1,11 @@
-module.exports = {
+const config = {
     testEnvironment: "node",
     roots: ["<rootDir>/tests"],
+    modulePathIgnorePatterns: ["cypress"],
     testMatch: ["**/*.test.ts"],
     transform: {
         "^.+\\.tsx?$": "ts-jest",
     },
-    // setupFiles: ["<rootDir>/setup-dotenv.ts"],
 };
+
+module.exports = config;

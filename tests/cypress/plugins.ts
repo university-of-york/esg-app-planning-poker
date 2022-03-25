@@ -18,13 +18,13 @@
 
 // import injectDevServer from "@cypress/react/plugins/next";
 
-const plugins = (on: any, config: any) => {
+const plugins = (on: any, config: any): any => {
     // `on` is used to hook into various events Cypress emits
     // `config` is the resolved Cypress config
 
     // injectDevServer(on, config);
 
-    return config
+    return config;
 };
 
 export default plugins;
