@@ -9,8 +9,13 @@
 [![dev deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml)
 [![prod deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml/badge.svg?branch=main)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml)
 
+This application has post-deployment verification - following a successful deployment, 
+both the [Cypress](https://www.cypress.io/) functional test suite and a [Performance check](https://github.com/university-of-york/esg-action-performance-check) are run against the actual deployment.
+
 Production: [planning-poker.app.york.ac.uk](https://planning-poker.app.york.ac.uk/)  
 Development: [planning-poker.dev.app.york.ac.uk](https://planning-poker.dev.app.york.ac.uk/)
+
+## Introduction
 
 Based on the estimation & refinement practices of the Digital Services Teaching & Learning team, Planning Poker is designed to facilitate blind, unbiased estimating of tasks in T-shirt sizes.
 Anyone can access this application, create a new planning session, and send invite links for their teammates to join.
