@@ -30,7 +30,7 @@ This is achieved by using the following dependencies which are system-agnostic:
  - `npm-run-all`: Allows scripts to be run in parallel 
    - (using `&` instead of `&&` is a linux-only solution with other side-effects)
 
-You can run these tasks individually with the commands:
+You can check the code quality with the commands:
  - `npm run checkformat` or `npm run cf` to check formatting
  - `npm run format` to apply formatting
  - `npm run lint` to check for code smells
@@ -69,20 +69,22 @@ Note that to run a local deployment using the above scripts, you will need to ha
 ## Project overview
 
 The most relevant parts of this project are:
- - `package.json` - Project definition, npm scripts & dependencies
- - `serverless.yml` - Defines cloud deployment setup
- - `server.ts` - Configures Next.js Node Express lambda web server
- - `tsconfig.json` - Configures Typescript compilation
- - `.xo-config.json` - Configures linting/code style checking
- - `pages/` - Next.js web pages, similar to React routes
- - `components/` - React components for use in Next.js pages
- - `functions/` - Lambda functions for backend API
-   - `index.ts` - Exports all lambda functions for Serverless packaging
- - `utils/` - Shared utility functions, some of which are specific to the front or back end
-   - `utils/api.ts` - Client-side methods for interacting with the API
-   - `utils/database.ts` - Back-end methods for interacting with the DynamoDB table
-   - `utils/session.ts` - Browser-only methods for managing user sessions
- - `styles/` - Top-level CSS to be applied either globally or per-page
+ - [`package.json`](package.json) - Project definition, npm scripts & dependencies
+ - [`serverless.yml`](serverless.yml) - Defines cloud deployment setup
+ - [`server.ts`](server.ts) - Configures Next.js Node Express lambda web server
+ - [`tsconfig.json`](tsconfig.json) - Configures Typescript compilation
+ - [`.xo-config.json`](.xo-config.json) - Configures linting/code style checking
+ - [`pages/`](pages) - Next.js web pages, similar to React routes
+ - [`components/`](components) - React components for use in Next.js pages
+ - [`functions/`](functions) - Lambda functions for backend API
+   - [`index.ts`](index.ts) - Exports all lambda functions for Serverless packaging
+ - [`utils/`](utils) - Shared utility functions, some of which are specific to the front or back end
+   - [`utils/api.ts`](utils/api.ts) - Client-side methods for interacting with the API
+   - [`utils/database.ts`](utils/database.ts) - Back-end methods for interacting with the DynamoDB table
+   - [`utils/session.ts`](utils/session.ts) - Browser-only methods for managing user sessions
+ - [`styles/`](styles) - Top-level CSS to be applied either globally or per-page
    - Component-level CSS is stored within each component directory
- - `types/` - Shared type definitions for models
-   - `types/room.ts` - Definition of Room & Member models used by both front & back end 
+ - [`types/`](types) - Shared type definitions for models
+   - [`types/room.ts`](types/room.ts) - Definition of Room & Member models used by both front & back end
+ - [`tests`](tests) - Test suites
+   - [`tests/cypress`](tests/cypress) - Cypress test suites
