@@ -64,6 +64,7 @@
     "eslint-config-next": "12.1.0",
     "eslint-config-xo-nextjs": "^4.1.0",
     "eslint-config-xo-react": "^0.26.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "jest": "^27.5.1",
     "jest-fetch-mock": "^3.0.3",
     "prettier": "^2.6.0",

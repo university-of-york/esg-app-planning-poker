@@ -22,5 +22,8 @@ jobs:
       - name: Install application dependencies
         run: npm ci
 
-      - name: Check tests run
-        run: npm run test
+      - name: Run unit tests
+        run: npm run test:unit
+
+      - name: Run functional tests
+        run: npm run test:functional

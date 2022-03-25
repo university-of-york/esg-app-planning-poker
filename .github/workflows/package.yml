@@ -8,7 +8,7 @@ on:
       - dev
 
 jobs:
-  build:
+  package:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the application's source code
@@ -24,3 +24,7 @@ jobs:
 
       - name: Package application with serverless
         run: npm run package:dev
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.DEV_AWS_ACCOUNT_ID }}
+          SSL_CERTIFICATE_ARN: ${{ secrets.DEV_SSL_CERTIFICATE_ARN }}
+          DOMAIN_NAME: planning-poker.dev.app.york.ac.uk
