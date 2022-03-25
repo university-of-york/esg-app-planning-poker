@@ -12,13 +12,14 @@ provider:
   environment:
     NODE_ENV: production
   stackTags:
-    name: planning poker
+    name: Planning Poker App
     group: ESG
-    status: dev
-    pushed_by: github
-    defined_in: serverless
-    repo_name: esg-app-planning-poker
     team: ESG Teaching and Learning
+    project: esg-app-planning-poker
+    repo_name: esg-app-planning-poker
+    defined_in: serverless
+    pushed_by: github
+    status: dev
   apiGateway:
     minimumCompressionSize: 1000
   iam:
