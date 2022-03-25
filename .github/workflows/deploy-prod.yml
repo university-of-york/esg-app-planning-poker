@@ -58,3 +58,26 @@ jobs:
 
       - name: Verify production deployment
         run: npm run verify:prod
+
+  performance-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: deploy
+    steps:
+      - name: Check out the application's source code
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Check Lighthouse performance score for production environment
+        uses: university-of-york/esg-action-performance-check@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          iterations: 5
+          minimum-desktop-score: 80
+          minimum-mobile-score: 60
+          urls: |
+            https://planning-poker.app.york.ac.uk/
