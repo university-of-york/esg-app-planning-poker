@@ -21,6 +21,9 @@ jobs:
       - name: Install application dependencies
         run: npm ci
 
+      - name: Install cypress system dependencies
+        run: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
       - name: Check code is formatted correctly
         run: npm run checkformat
 
@@ -55,6 +58,9 @@ jobs:
 
       - name: Install application dependencies
         run: npm ci
+
+      - name: Install cypress system dependencies
+        run: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
       - name: Verify development deployment
         run: npm run verify:dev
