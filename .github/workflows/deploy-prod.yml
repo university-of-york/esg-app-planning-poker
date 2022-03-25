@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  deploy-prod:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the application's source code
@@ -39,3 +39,22 @@ jobs:
           AWS_ACCOUNT_ID: ${{ secrets.PROD_AWS_ACCOUNT_ID }}
           SSL_CERTIFICATE_ARN: ${{ secrets.PROD_SSL_CERTIFICATE_ARN }}
           DOMAIN_NAME: planning-poker.app.york.ac.uk
+
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: deploy
+    steps:
+      - name: Check out the application's source code
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Install application dependencies
+        run: npm ci
+
+      - name: Verify production deployment
+        run: npm run verify:prod

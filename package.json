@@ -33,7 +33,9 @@
     "package:prod": "cross-env STACK_ENV=prod npm run package",
     "deploy": "npm run build && sls deploy",
     "deploy:dev": "cross-env STACK_ENV=dev npm run deploy",
-    "deploy:prod": "cross-env STACK_ENV=prod npm run deploy"
+    "deploy:prod": "cross-env STACK_ENV=prod npm run deploy",
+    "verify:dev": "cypress run --config baseUrl=https://planning-poker.dev.app.york.ac.uk/",
+    "verify:prod": "cypress run --config baseUrl=https://planning-poker.app.york.ac.uk/"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.54.1",
