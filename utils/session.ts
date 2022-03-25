@@ -64,4 +64,4 @@ const addRoomToHistory = (roomId: string, roomName: string): void => {
     localStorage.setItem(BROWSER_STORAGE_KEY, JSON.stringify(session));
 };
 
-export { withSession, updateDisplayName, addRoomToHistory };
+export { BROWSER_STORAGE_KEY, withSession, updateDisplayName, addRoomToHistory };

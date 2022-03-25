@@ -1,45 +1,40 @@
 .container {
     position: absolute;
     bottom: 0;
-    transform: translateY(50%);
-    height: 14em;
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
 }
 
 .container.disabled {
 }
 
 .card {
-    font-size: 4em;
     width: 3ch;
-    color: white;
-    margin: 0.15em;
+    height: 1.6em;
+    margin: 0.15em 0.15em 0;
     padding: 0.2em;
-    height: 10em;
-    border-radius: 0.2em;
+    border-radius: 0.2em 0.2em 0 0;
+    font-size: 4em;
+    color: white;
     background: var(--palette-grey-main);
     text-align: center;
     cursor: pointer;
     user-select: none;
-    transition-property: background-color, padding, transform;
+    transition-property: background-color, height, padding;
     transition-duration: 0.25s;
 }
 
 .card:hover {
+    height: 2.2em;
     background: var(--palette-grey-dark);
-    transform: translateY(-5%);
 }
 
 .container.disabled .card {
+    height: 1.2em;
     padding: 0;
     background: var(--palette-grey-light);
-    transform: translateY(4%);
     cursor: not-allowed;
-}
-
-.container.disabled .card:hover {
-    transform: translateY(4%);
 }
 
 .card.selected {

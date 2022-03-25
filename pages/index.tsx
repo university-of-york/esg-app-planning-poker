@@ -9,7 +9,7 @@ import { addRoomToHistory, updateDisplayName, withSession } from "../utils/sessi
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-    const [roomCreated, setRoomCreated] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [session, setSession] = useState<Session>();
     const [form, setForm] = useState({
         roomName: "",
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         const session = withSession();
 
         setSession(session);
-        setForm({ ...form, displayName: session.displayName });
+        // setForm({ ...form, displayName: session.displayName });
     }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,12 +36,12 @@ const Home: NextPage = () => {
         const result = await createRoom(form.roomName);
 
         if (result.success) {
+            setIsLoading(true);
+
             addRoomToHistory(result.id, form.roomName);
 
             window.location.replace(`/table/${result.id}`);
         }
-
-        setRoomCreated(true);
     };
 
     const historyLength = session?.history ? session.history.length : 0;
@@ -59,8 +59,8 @@ const Home: NextPage = () => {
 
                 <Modal
                     trigger={
-                        <Button className={styles.create} isDisabled={roomCreated}>
-                            {roomCreated ? "Loading room..." : "Create a new room"}
+                        <Button className={styles.create} isDisabled={isLoading}>
+                            {isLoading ? "Loading room..." : "Create a new room"}
                         </Button>
                     }
                     callback={handleSubmit}
@@ -102,7 +102,7 @@ const Home: NextPage = () => {
                             <tbody>
                                 {session!.history.map((room) => (
                                     <Link href={`/table/${room.roomId}`} passHref key={room.roomId}>
-                                        <tr className={styles.room}>
+                                        <tr className={styles.room} onClick={() => setIsLoading(true)}>
                                             <td className={styles.name}>{room.roomName}</td>
                                             <td className={styles.timestamp}>
                                                 {DateTime.fromISO(room.lastVisited).toRelative()}
