@@ -21,9 +21,9 @@ html,
 body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-        Helvetica Neue, sans-serif;
     overflow: hidden;
+    font-family: Ubuntu, Droid Sans, Fira Sans, Oxygen, Cantarell, Roboto, Segoe UI, BlinkMacSystemFont, Helvetica Neue,
+        system-ui, -apple-system, sans-serif;
 }
 
 #__next {
@@ -59,7 +59,4 @@ input:focus-within,
 input:focus-visible {
     box-shadow: var(--palette-blue-main) 1px 1px 1pt 1pt, var(--palette-blue-main) -1px 1px 1pt 1pt,
         var(--palette-blue-main) 1px -1px 1pt 1pt, var(--palette-blue-main) -1px -1px 1pt 1pt;
-}
-
-select {
 }

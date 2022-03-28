@@ -15,6 +15,11 @@ const Header = () => {
                 <meta name="application-name" content="Planning Poker" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link
+                    rel="stylesheet"
+                    type="text/css"
+                    href="https://fonts.googleapis.com/css?family=Ubuntu:regular,medium,bold&subset=Latin"
+                />
+                <link
                     rel="icon"
                     type="image/png"
                     href="https://www.york.ac.uk/static/stable/img/favicons/favicon-64x64.png"
