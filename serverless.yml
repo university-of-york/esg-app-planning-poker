@@ -114,7 +114,7 @@ functions:
     events:
       - http:
           path: /room/{id}/choice
-          method: PUT
+          method: POST
           cors:
             origin: "*"
   revealRoom:

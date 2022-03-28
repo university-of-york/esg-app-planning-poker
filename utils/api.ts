@@ -49,7 +49,7 @@ const leaveRoom = (roomId: string, memberId: string): void => {
 };
 
 const submitChoice = async (roomId: string, memberId: string, choice: string): Promise<void> => {
-    const response = await request("PUT", `${BASE_URL}/room/${roomId}/choice`, {
+    const response = await request("POST", `${BASE_URL}/room/${roomId}/choice`, {
         memberId,
         choice,
     });
