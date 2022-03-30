@@ -10,4 +10,6 @@ const getEnvironmentVariable = (key: string): string => {
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL : "";
 
-export { getEnvironmentVariable, BASE_URL };
+const pokerTable = () => getEnvironmentVariable('POKER_TABLE');
+
+export { getEnvironmentVariable, BASE_URL, pokerTable };

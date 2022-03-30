@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2021",
     "lib": ["dom", "dom.iterable", "esnext", "es2021"],
-    "types": ["cypress"],
+    "types": ["jest", "cypress"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

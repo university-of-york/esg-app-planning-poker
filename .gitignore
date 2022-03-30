@@ -49,6 +49,9 @@ yarn-error.log*
 # IntelliJ
 .idea/
 
+# Compiled source code for jest unit testing
+tests/.build/
+
 # Cypress testing
 tests/cypress/downloads/
 tests/cypress/screenshots/

@@ -22,7 +22,7 @@ const submitChoice = async (event: APIGatewayEvent): Promise<LambdaResponse> => 
     const { memberId, choice } = JSON.parse(body);
 
     if (!memberId || !choice) {
-        return message(400, "Member & choice parameters required");
+        return message(400, "Member ID & choice parameters required");
     }
 
     console.info(`Submitting choice ${choice} for ${memberId}`);

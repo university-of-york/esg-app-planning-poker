@@ -35,14 +35,20 @@ This is achieved by using the following dependencies which are system-agnostic:
  - `npm-run-all`: Allows scripts to be run in parallel 
    - (using `&` instead of `&&` is a linux-only solution with other side-effects)
 
+### Code quality
+
 You can check the code quality with the commands:
  - `npm run checkformat` or `npm run cf` to check formatting
  - `npm run format` to apply formatting
  - `npm run lint` to check for code smells
+
+### Application build
  
 You can check the build of the application with:
  - `npm run build` to build the Next.js application
  - `npm run package:dev` to package the application with serverless
+
+### Test suites
 
 You can run the test suites with:
  - `npm run test:unit` or `npm run tu` to run jest unit tests
@@ -52,7 +58,14 @@ You can run the test suites with:
  - `npm run test` to run all test suites
  - `npm run check` to run all checks
  - `npm run formatandcheck` or `npm run fc` to format the code and then run all checks  
-Note: You may need to [install system dependencies](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements) in order to run Cypress correctly
+
+Caveats: 
+ 1. Due to the somewhat funky way that jest works, a separate compilation script has been added for source code run by tests.  
+The `compile:test` script needs to be run before any jest suite.  
+This happens as part of the `test:unit` task already, but if you want to run suites individually you will need to remember to add `compile:test` as a prerequisite task.
+ 2. You may need to [install system dependencies](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements) in order to run Cypress correctly
+
+### Running the application
 
 You can run the application locally with:
  - `npm run dev` for a development build
@@ -62,6 +75,8 @@ Note that the front-end web client requires a deployed version of the backend AP
 This is configured by default (`.env.dev`) to be `planning-poker.dev.app.york.ac.uk`.  
 To use a separately deployed backend, such as a sandbox deployment, create a `.env.local` file and define your backend's URL:  
 `NEXT_PUBLIC_BASE_URL=https://mxx204duf4.execute-api.eu-west-1.amazonaws.com/dev`
+
+### Deploying the application
 
 You can deploy the application with:
  - `npm run deploy:dev` to deploy to development

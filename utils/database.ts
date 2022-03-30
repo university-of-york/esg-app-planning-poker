@@ -6,9 +6,7 @@ import {
     AttributeValue,
 } from "@aws-sdk/client-dynamodb";
 import type { Room } from "../types/room";
-import { getEnvironmentVariable } from "./environment.js";
-
-const POKER_TABLE = getEnvironmentVariable("POKER_TABLE");
+import { pokerTable } from "./environment.js";
 
 const client = new DynamoDBClient({
     region: "eu-west-1",
@@ -16,7 +14,7 @@ const client = new DynamoDBClient({
 
 const create = async (id: string, name: string, hostId: string, hostName: string): Promise<void> => {
     const command = new PutItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         Item: {
             id: { S: id },
             name: { S: name },
@@ -45,7 +43,7 @@ const create = async (id: string, name: string, hostId: string, hostName: string
 
 const get = async (id: string): Promise<Room> => {
     const command = new GetItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         ConsistentRead: true,
         Key: {
             id: { S: id },
@@ -81,7 +79,7 @@ const get = async (id: string): Promise<Room> => {
 
 const join = async (id: string, memberId: string, memberName: string): Promise<void> => {
     const command = new UpdateItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         Key: {
             id: { S: id },
         },
@@ -122,7 +120,7 @@ const leave = async (id: string, memberId: string): Promise<void> => {
     }));
 
     const command = new UpdateItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         Key: {
             id: { S: id },
         },
@@ -145,7 +143,7 @@ const submit = async (id: string, memberId: string, choice: string): Promise<voi
     const memberIndex = room.members.findIndex((member) => member.id === memberId);
 
     const command = new UpdateItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         Key: {
             id: { S: id },
         },
@@ -164,7 +162,7 @@ const submit = async (id: string, memberId: string, choice: string): Promise<voi
 
 const reveal = async (id: string): Promise<void> => {
     const command = new UpdateItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         Key: {
             id: { S: id },
         },
@@ -196,7 +194,7 @@ const reset = async (id: string): Promise<void> => {
     }));
 
     const command = new UpdateItemCommand({
-        TableName: POKER_TABLE,
+        TableName: pokerTable(),
         Key: {
             id: { S: id },
         },

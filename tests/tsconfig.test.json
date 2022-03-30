@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["ES2015", "dom", "dom.iterable"],
+    "types": ["node", "jest", "cypress"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "incremental": true,
+    "outDir": ".build/",
+    "tsBuildInfoFile": "tsconfig.test.tsbuildinfo"
+  },
+  "include": [
+    "../functions",
+    "../utils",
+  ],
+  "exclude": [
+    "**.test.ts"
+  ]
+}
