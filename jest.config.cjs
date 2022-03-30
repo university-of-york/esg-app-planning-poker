@@ -6,16 +6,16 @@ const config = {
     modulePathIgnorePatterns: ["cypress"],
     moduleFileExtensions: ["js", "mjs", "ts"],
     testMatch: ["**/*.test.ts"],
-    extensionsToTreatAsEsm: ['.ts'],
+    extensionsToTreatAsEsm: [".ts"],
     transform: {
         "^.+\\.ts?$": "ts-jest",
         "^.+\\.tsx?$": "ts-jest",
     },
     globals: {
-        'ts-jest': {
-            useESM: true
-        }
-    }
+        "ts-jest": {
+            useESM: true,
+        },
+    },
 };
 
 module.exports = config;

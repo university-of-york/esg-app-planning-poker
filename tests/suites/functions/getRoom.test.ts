@@ -1,11 +1,11 @@
-import {expect} from "@jest/globals";
-import {mockedDynamoClient} from "../../helpers/mocks";
+import { expect } from "@jest/globals";
+import { mockedDynamoClient } from "../../helpers/mocks";
 // The below import is only valid following `npm run compile:test` - if you have IDE errors here, run that script first
 import getRoom from "../../.build/functions/getRoom.js";
 
 const client = mockedDynamoClient();
 
-describe("Get Room function",  () => {
+describe("Get Room function", () => {
     beforeEach(() => {
         client.send.mockClear();
     });
@@ -13,11 +13,11 @@ describe("Get Room function",  () => {
     it("Throws an error if the POKER_TABLE env variable has not been set", async () => {
         const event = {
             pathParameters: {
-                id: 'test-id'
-            }
+                id: "test-id",
+            },
         };
 
-        await expect(getRoom(event)).rejects.toThrow('Environment variable POKER_TABLE has not been initialised');
+        await expect(getRoom(event)).rejects.toThrow("Environment variable POKER_TABLE has not been initialised");
 
         expect(client.send).not.toHaveBeenCalled();
     });
@@ -29,19 +29,17 @@ describe("Get Room function",  () => {
 
         expect(client.send).not.toHaveBeenCalled();
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 400})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 400 }));
         expect(result.body).toContain("Room ID is required");
     });
 
     it("Valid event sends GET request to dynamodb and returns room details", async () => {
-        process.env.POKER_TABLE = 'poker-table';
+        process.env.POKER_TABLE = "poker-table";
 
         const event = {
             pathParameters: {
-                id: 'test-id'
-            }
+                id: "test-id",
+            },
         };
 
         const result = await getRoom(event);
@@ -53,14 +51,12 @@ describe("Get Room function",  () => {
                 TableName: "poker-table",
                 ConsistentRead: true,
                 Key: {
-                    id: { S: 'test-id'}
-                }
+                    id: { S: "test-id" },
+                },
             })
         );
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 200})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));
 
         expect(body.status).toEqual(200);
         expect(body.message).toEqual("OK");
@@ -75,10 +71,10 @@ describe("Get Room function",  () => {
                         {
                             id: "test-host-id",
                             displayName: "Host",
-                            choice: "M"
-                        }
-                    ]
-                }
+                            choice: "M",
+                        },
+                    ],
+                },
             })
         );
     });

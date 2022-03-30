@@ -1,11 +1,11 @@
-import {expect} from "@jest/globals";
-import {mockedDynamoClient} from "../../helpers/mocks";
+import { expect } from "@jest/globals";
+import { mockedDynamoClient } from "../../helpers/mocks";
 // The below import is only valid following `npm run compile:test` - if you have IDE errors here, run that script first
 import joinRoom from "../../.build/functions/joinRoom.js";
 
 const client = mockedDynamoClient();
 
-describe("Join Room function",  () => {
+describe("Join Room function", () => {
     beforeEach(() => {
         client.send.mockClear();
     });
@@ -13,15 +13,15 @@ describe("Join Room function",  () => {
     it("Throws an error if the POKER_TABLE env variable has not been set", async () => {
         const event = {
             pathParameters: {
-                id: 'test-id'
+                id: "test-id",
             },
             body: JSON.stringify({
                 memberId: "test-host-id",
-                memberName: "Member"
-            })
+                memberName: "Member",
+            }),
         };
 
-        await expect(joinRoom(event)).rejects.toThrow('Environment variable POKER_TABLE has not been initialised');
+        await expect(joinRoom(event)).rejects.toThrow("Environment variable POKER_TABLE has not been initialised");
 
         expect(client.send).not.toHaveBeenCalled();
     });
@@ -33,16 +33,14 @@ describe("Join Room function",  () => {
 
         expect(client.send).not.toHaveBeenCalled();
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 400})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 400 }));
         expect(result.body).toContain("Room ID is required");
     });
 
     it("Returns 400 if event body not provided", async () => {
         const event = {
             pathParameters: {
-                id: 'test-id'
+                id: "test-id",
             },
         };
 
@@ -50,63 +48,57 @@ describe("Join Room function",  () => {
 
         expect(client.send).not.toHaveBeenCalled();
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 400})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 400 }));
         expect(result.body).toContain("Request body not found");
     });
 
     it("Returns 400 if member ID not provided", async () => {
         const event = {
             pathParameters: {
-                id: 'test-id'
+                id: "test-id",
             },
             body: JSON.stringify({
-                memberName: "Member"
-            })
+                memberName: "Member",
+            }),
         };
 
         const result = await joinRoom(event);
 
         expect(client.send).not.toHaveBeenCalled();
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 400})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 400 }));
         expect(result.body).toContain("Member ID & name required");
     });
 
     it("Returns 400 if member name not provided", async () => {
         const event = {
             pathParameters: {
-                id: 'test-id'
+                id: "test-id",
             },
             body: JSON.stringify({
                 memberId: "test-host-id",
-            })
+            }),
         };
 
         const result = await joinRoom(event);
 
         expect(client.send).not.toHaveBeenCalled();
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 400})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 400 }));
         expect(result.body).toContain("Member ID & name required");
     });
 
     it("Valid event sends UPDATE request to dynamodb", async () => {
-        process.env.POKER_TABLE = 'poker-table';
+        process.env.POKER_TABLE = "poker-table";
 
         const event = {
             pathParameters: {
-                id: 'test-id'
+                id: "test-id",
             },
             body: JSON.stringify({
                 memberId: "test-host-id",
-                memberName: "Member"
-            })
+                memberName: "Member",
+            }),
         };
 
         const result = await joinRoom(event);
@@ -136,9 +128,7 @@ describe("Join Room function",  () => {
             })
         );
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 200})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));
 
         expect(body.status).toEqual(200);
         expect(body.message).toEqual("OK");

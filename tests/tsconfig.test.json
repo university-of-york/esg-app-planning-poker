@@ -16,11 +16,6 @@
     "outDir": ".build/",
     "tsBuildInfoFile": "tsconfig.test.tsbuildinfo"
   },
-  "include": [
-    "../functions",
-    "../utils",
-  ],
-  "exclude": [
-    "**.test.ts"
-  ]
+  "include": ["../functions", "../utils"],
+  "exclude": ["**.test.ts"]
 }

@@ -1,11 +1,11 @@
-import {expect} from "@jest/globals";
-import {mockedDynamoClient} from "../../helpers/mocks";
+import { expect } from "@jest/globals";
+import { mockedDynamoClient } from "../../helpers/mocks";
 // The below import is only valid following `npm run compile:test` - if you have IDE errors here, run that script first
 import resetRoom from "../../.build/functions/resetRoom.js";
 
 const client = mockedDynamoClient();
 
-describe("Reset Room function",  () => {
+describe("Reset Room function", () => {
     beforeEach(() => {
         client.send.mockClear();
     });
@@ -13,11 +13,11 @@ describe("Reset Room function",  () => {
     it("Throws an error if the POKER_TABLE env variable has not been set", async () => {
         const event = {
             pathParameters: {
-                id: 'test-id'
-            }
+                id: "test-id",
+            },
         };
 
-        await expect(resetRoom(event)).rejects.toThrow('Environment variable POKER_TABLE has not been initialised');
+        await expect(resetRoom(event)).rejects.toThrow("Environment variable POKER_TABLE has not been initialised");
 
         expect(client.send).not.toHaveBeenCalled();
     });
@@ -29,19 +29,17 @@ describe("Reset Room function",  () => {
 
         expect(client.send).not.toHaveBeenCalled();
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 400})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 400 }));
         expect(result.body).toContain("Room ID is required");
     });
 
     it("Valid event sends GET request & UPDATE request to dynamodb", async () => {
-        process.env.POKER_TABLE = 'poker-table';
+        process.env.POKER_TABLE = "poker-table";
 
         const event = {
             pathParameters: {
-                id: 'test-id'
-            }
+                id: "test-id",
+            },
         };
 
         const result = await resetRoom(event);
@@ -53,8 +51,8 @@ describe("Reset Room function",  () => {
                 TableName: "poker-table",
                 ConsistentRead: true,
                 Key: {
-                    id: { S: 'test-id'}
-                }
+                    id: { S: "test-id" },
+                },
             })
         );
 
@@ -63,7 +61,7 @@ describe("Reset Room function",  () => {
                 Type: "UPDATE",
                 TableName: "poker-table",
                 Key: {
-                    id: { S: 'test-id'}
+                    id: { S: "test-id" },
                 },
                 UpdateExpression: "SET #state = :state, members = :members",
                 ExpressionAttributeNames: {
@@ -71,20 +69,22 @@ describe("Reset Room function",  () => {
                 },
                 ExpressionAttributeValues: {
                     ":state": { S: "HIDDEN" },
-                    ":members": { L: [
-                            { M: {
-                                id: { S: "test-host-id" },
-                                displayName: { S: "Host" },
-                                choice: { S: "" }
-                            }}
-                    ] },
-                }
+                    ":members": {
+                        L: [
+                            {
+                                M: {
+                                    id: { S: "test-host-id" },
+                                    displayName: { S: "Host" },
+                                    choice: { S: "" },
+                                },
+                            },
+                        ],
+                    },
+                },
             })
         );
 
-        expect(result).toEqual(
-            expect.objectContaining({statusCode: 200})
-        );
+        expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));
 
         expect(body.status).toEqual(200);
         expect(body.message).toEqual("OK");
