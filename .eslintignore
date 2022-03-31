@@ -1,5 +1,4 @@
-next.config.js
+jest.config.cjs
+next.config.cjs
 next-env.d.ts
-jest.config.js
-setupTests.js
-public/js/analytics.js
+tests/setup.ts
