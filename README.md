@@ -23,7 +23,7 @@ Team members then vote on the estimate for a task, and when all members have vot
 
 Planning Poker is a [Next.js](https://nextjs.org/) application built with [Typescript](https://www.typescriptlang.org/) and deployed to [AWS](https://aws.amazon.com/) using [Serverless](https://www.serverless.com/).
 
-![diagram](.github/images/diagram_x160.png)
+[![diagram](.github/images/diagram_x160.png)](https://github.com/university-of-york/esg-app-planning-poker/raw/dev/.github/images/diagram.png)
 
 ## Getting started
 
