@@ -1,5 +1,5 @@
-import path from "path";
-import dotenv from "dotenv-webpack";
+const path = require("path");
+const dotenv = require("dotenv-webpack");
 
 const ENV = process.env.STACK_ENV ? process.env.STACK_ENV : "dev";
 
@@ -19,7 +19,7 @@ const nextConfig = {
 
             // Read the .env file
             new dotenv({
-                path: path.join(path.resolve(path.dirname("")), `.env.${ENV}`),
+                path: path.join(process.cwd(), `.env.${ENV}`),
                 systemvars: true,
             }),
         ];
@@ -28,4 +28,4 @@ const nextConfig = {
     },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

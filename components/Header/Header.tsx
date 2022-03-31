@@ -17,7 +17,7 @@ const Header = () => {
                 <link
                     rel="stylesheet"
                     type="text/css"
-                    href="https://fonts.googleapis.com/css?family=Ubuntu:regular,medium,bold&subset=Latin"
+                    href="https://fonts.googleapis.com/css?family=Ubuntu:regular,medium,bold&subset=Latin&display=swap"
                 />
                 <link
                     rel="icon"

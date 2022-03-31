@@ -1,4 +1,5 @@
 import Link from "next/link";
+// @ts-ignore
 import styles from "./Button.module.css";
 
 declare type ButtonProps = {

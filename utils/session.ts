@@ -15,7 +15,7 @@ const withSession = (): Session => {
         session = JSON.parse(json);
 
         if (!session.id) {
-            session.id = window.crypto.randomUUID!();
+            session.id = window.crypto.randomUUID();
         }
 
         if (!session.displayName) {
@@ -29,7 +29,7 @@ const withSession = (): Session => {
         localStorage.setItem(BROWSER_STORAGE_KEY, JSON.stringify(session));
     } else {
         session = {
-            id: window.crypto.randomUUID!(),
+            id: window.crypto.randomUUID(),
             displayName: "",
             history: [],
         };

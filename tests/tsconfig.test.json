@@ -12,10 +12,11 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "isolatedModules": true,
+    "jsx": "preserve",
     "incremental": true,
     "outDir": ".build/",
     "tsBuildInfoFile": "tsconfig.test.tsbuildinfo"
   },
-  "include": ["../functions", "../utils"],
+  "include": ["../components", "../pages", "../functions", "../utils"],
   "exclude": ["**.test.ts"]
 }

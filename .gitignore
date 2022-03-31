@@ -42,8 +42,6 @@ yarn-error.log*
 *.js
 *.jsx
 *.d.ts
-!jest.config.cjs
-!next.config.js
 !next-env.d.ts
 
 # IntelliJ
