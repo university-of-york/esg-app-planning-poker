@@ -8,7 +8,7 @@
   "main": "index.ts",
   "scripts": {
     "compile": "tsc",
-    "compile:test": "tsc -p tests/tsconfig.test.json",
+    "compile:test": "tsc -p tests/tsconfig.test.json && copyfiles styles/*.css tests/.build/ && copyfiles components/**/*.module.css tests/.build/",
     "dev": "npm run compile && next dev",
     "build": "npm run compile && next build",
     "start": "npm run build && next start",
@@ -69,6 +69,7 @@
     "@types/react": "^17.0.43",
     "@types/uuid": "^8.3.4",
     "@types/wait-on": "^5.3.1",
+    "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "cypress": "^9.5.3",
     "eslint": "^8.12.0",
