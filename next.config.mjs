@@ -1,9 +1,10 @@
-const path = require("path");
-const dotenv = require("dotenv-webpack");
+import path from "path";
+import dotenv from "dotenv-webpack";
 
 const ENV = process.env.STACK_ENV ? process.env.STACK_ENV : "dev";
 
-console.info(`Loading environmental config from .env.${ENV}`);
+// The following log has specific formatting that emulates the output of the Next build logger, so that it appears uniformly with the rest of the output
+console.info(`\u001b[36minfo\u001b[0m  - Loaded env from ${path.join(process.cwd(), `.env.${ENV}`)}`);
 
 const nextConfig = {
     extends: ["plugin:@next/next/recommended"],
@@ -24,8 +25,12 @@ const nextConfig = {
             }),
         ];
 
+        config.infrastructureLogging = {
+            level: "error",
+        };
+
         return config;
     },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

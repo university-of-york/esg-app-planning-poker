@@ -1,4 +1,4 @@
 jest.config.cjs
-next.config.cjs
+next.config.mjs
 next-env.d.ts
 tests/setup.ts
