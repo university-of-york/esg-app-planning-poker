@@ -34,8 +34,12 @@
     color: var(--palette-blue-main);
 }
 
-.github {
+.githubLink {
     height: 80%;
+}
+
+.github {
+    height: 100%;
     padding: 2em;
     color: var(--palette-grey-main);
     cursor: pointer;

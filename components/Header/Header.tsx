@@ -41,13 +41,13 @@ const Header = () => {
                     <h1 className={styles.title}>Planning Poker</h1>
                 </a>
 
-                <Link href="https://github.com/university-of-york/esg-app-planning-poker" passHref>
+                <a className={styles.githubLink} href="https://github.com/university-of-york/esg-app-planning-poker" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon
                         className={styles.github}
                         icon={faGithubSquare}
                         title="View the source code for this application on Github"
                     />
-                </Link>
+                </a>
             </div>
         </header>
     );
