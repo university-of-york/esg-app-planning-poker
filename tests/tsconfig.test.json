@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "lib": ["ES2015", "dom", "dom.iterable"],
-    "types": ["node", "jest", "cypress"],
+    "types": ["node", "jest", "cypress", "@testing-library/react", "@testing-library/cypress"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,5 +18,5 @@
     "tsBuildInfoFile": "tsconfig.test.tsbuildinfo"
   },
   "include": ["../components", "../pages", "../functions", "../utils"],
-  "exclude": ["**.test.ts"]
+  "exclude": ["../node_modules", "setup.ts", "helpers", "suites", "cypress"]
 }

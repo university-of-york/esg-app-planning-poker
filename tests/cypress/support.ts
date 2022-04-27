@@ -16,5 +16,16 @@
 // Import commands.ts using ES2015 syntax:
 import "./commands.ts";
 
+// Delay all web requests to backend by 500ms
+// This is helpful as the real backend can respond quite quickly once the lambda's have warmed up
+// The backend can sometimes respond quickly enough for assertions to fail
+beforeEach(() => {
+    cy.intercept(`https://**`, (req) => {
+        req.on('response', (res) => {
+            res.setDelay(500)
+        });
+    });
+});
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

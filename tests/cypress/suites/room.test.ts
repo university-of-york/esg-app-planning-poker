@@ -1,3 +1,6 @@
+// This import is here purely so that IntelliJ can figure out what definition of expect() we're using in this file - it's unneeded otherwise.
+import { cli } from "cypress";
+
 describe("Poker room", () => {
     beforeEach(() => {
         // @ts-ignore
@@ -25,7 +28,7 @@ describe("Poker room", () => {
                 cy.get(`#${id}`).type("John");
             });
         cy.contains("button", "Confirm").click();
-        cy.wait(2000);
+
         cy.url().should("include", "/table/");
         cy.contains("h1", "Backlog Refinement").should("be.visible");
         cy.contains("John").should("be.visible").invoke("attr", "class").should("include", "Players_display");
@@ -47,25 +50,26 @@ describe("Poker room", () => {
         // Player is shown as deciding
         cy.contains("John").should("be.visible").siblings("svg.fa-hourglass").should("be.visible");
 
-        // Find the desired option, click it, and check it is submitting
+        // Find the desired option, check it isn't submitting, click it, check that it is submitting
         cy.contains("M")
             .should("be.visible")
             .parent()
-            .then((card) => {
+            .should((card) => {
                 expect(card.attr("class")).to.include("Cards_card");
                 expect(card.attr("class")).not.to.include("Cards_submitting");
-                card.click();
+                // card.trigger('click');
+            }).click()
+            .should((card) => {
                 expect(card.attr("class")).to.include("Cards_submitting");
+                expect(card.children("img").attr('class')).to.include("Spinner_container");
+                expect(card.children("img").attr('class')).to.include("Cards_spinner");
             });
 
-        // Wait for submission to register
-        cy.wait(2000);
-
-        // Option is still present, not submitting, and marked as selected
+        // Option is no longer submitting, and marked as selected
         cy.contains("M")
             .should("be.visible")
             .parent()
-            .then((card) => {
+            .should((card) => {
                 expect(card.attr("class")).to.include("Cards_card");
                 expect(card.attr("class")).not.to.include("Cards_submitting");
                 expect(card.attr("class")).to.include("Cards_selected");
@@ -78,9 +82,6 @@ describe("Poker room", () => {
     it("Host can reveal table result", () => {
         // Press reveal
         cy.contains("button", "Reveal result").should("be.visible").click();
-
-        // Wait for reveal
-        cy.wait(2000);
 
         // Results are shown
         cy.contains("We have a winner").should("be.visible");
@@ -101,9 +102,6 @@ describe("Poker room", () => {
     it("Host can reset the table", () => {
         // Press reset
         cy.contains("button", "Reset table").should("be.visible").click();
-
-        // Wait for reveal
-        cy.wait(2000);
 
         // Results are not shown
         cy.get("div[class*=Results_container]").should("not.exist");

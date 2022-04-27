@@ -1,3 +1,6 @@
+// This import is here purely so that IntelliJ can figure out what definition of expect() we're using in this file - it's unneeded otherwise.
+import { cli } from "cypress";
+
 describe("Home screen", () => {
     beforeEach(() => {
         // @ts-ignore
@@ -58,8 +61,6 @@ describe("Home screen", () => {
 
         cy.contains("button", "Confirm").click();
 
-        cy.wait(2000);
-
         cy.url().should("include", "/table/");
         cy.contains("h1", "My new test room").should("be.visible");
         cy.contains("Jim").should("be.visible").invoke("attr", "class").should("include", "Players_display");
@@ -74,8 +75,6 @@ describe("Home screen", () => {
 
     it("Clicking a recently visited room takes the user back to that table", () => {
         cy.contains("My new test room").click();
-
-        cy.wait(2000);
 
         cy.url().should("include", "/table/");
         cy.contains("h1", "My new test room").should("be.visible");

@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom/extend-expect";
 import fetchMock from "jest-fetch-mock";
 import { TEST_DB_POKER_ROOM } from "./helpers/constants";
 

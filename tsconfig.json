@@ -24,6 +24,7 @@
     "components",
     "functions",
     "pages",
+    "tests",
     "types",
     "utils",
     "index.ts",
