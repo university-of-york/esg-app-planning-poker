@@ -21,8 +21,8 @@ import "./commands.ts";
 // The backend can sometimes respond quickly enough for assertions to fail
 beforeEach(() => {
     cy.intercept(`https://**`, (req) => {
-        req.on('response', (res) => {
-            res.setDelay(500)
+        req.on("response", (res) => {
+            res.setDelay(500);
         });
     });
 });

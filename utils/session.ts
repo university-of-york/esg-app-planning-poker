@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import type { Session } from "../types/session";
-import {Room} from "../types/room";
+import { Room } from "../types/room";
 
 const BROWSER_STORAGE_KEY = "planning-poker-session";
 
@@ -81,6 +81,5 @@ const userIsHost = (room: Room) => {
 
     return host!.id === user!.id;
 };
-
 
 export { BROWSER_STORAGE_KEY, withSession, updateDisplayName, addRoomToHistory, getUser, getHost, userIsHost };

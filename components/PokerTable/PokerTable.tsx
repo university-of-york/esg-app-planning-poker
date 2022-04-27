@@ -1,4 +1,4 @@
-import {userIsHost} from "../../utils/session";
+import { userIsHost } from "../../utils/session";
 import type { Room } from "../../types/room";
 import { Controls } from "./Controls/Controls";
 import { Results } from "./Results/Results";

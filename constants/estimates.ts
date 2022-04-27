@@ -2,22 +2,22 @@ declare type EstimationSchemes = {
     [key: string]: {
         display: string;
         options: string[];
-    }
+    };
 };
 
 const ESTIMATION_SCHEMES: EstimationSchemes = {
     "T-SHIRT": {
         display: "T-shirt sizes",
-        options: ["XS", "S", "M", "L", "XL", "XXL"]
+        options: ["XS", "S", "M", "L", "XL", "XXL"],
     },
-    "FIBONACCI": {
+    FIBONACCI: {
         display: "Fibonacci scale",
-        options: ["1", "2", "3", "5", "8", "13", "21"]
+        options: ["1", "2", "3", "5", "8", "13", "21"],
     },
-    "LINEAR": {
+    LINEAR: {
         display: "Linear scale",
-        options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-    }
+        options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    },
 };
 
-export {ESTIMATION_SCHEMES};
+export { ESTIMATION_SCHEMES };

@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
-import {getHost, getUser, userIsHost} from "../../../utils/session";
-import type {Member, Room} from "../../../types/room";
+import { getHost, getUser } from "../../../utils/session";
+import type { Room } from "../../../types/room";
 // @ts-ignore
 import styles from "./Players.module.css";
 
-const Players = ({room}: { room: Room }) => {
+const Players = ({ room }: { room: Room }) => {
     const user = getUser(room);
     const host = getHost(room);
 

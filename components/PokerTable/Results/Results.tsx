@@ -1,7 +1,7 @@
-import type {Room} from "../../../types/room";
+import type { Room } from "../../../types/room";
 // @ts-ignore
 import styles from "./Results.module.css";
-import {ESTIMATION_SCHEMES} from "../../../constants/estimates";
+import { ESTIMATION_SCHEMES } from "../../../constants/estimates";
 
 const Results = ({ room }: { room: Room }) => {
     if (room.state === "HIDDEN") {

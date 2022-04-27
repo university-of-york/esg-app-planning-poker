@@ -55,7 +55,7 @@ const Modal = ({
     const isOpen = open || _open;
 
     return (
-        <div className={`${styles.container} ${className ? className : ''}`}>
+        <div className={`${styles.container} ${className ? className : ""}`}>
             {_trigger}
 
             <div className={`${styles.overlay} ${isOpen ? "" : styles.hidden}`} onClick={close} />

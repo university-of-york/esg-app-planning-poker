@@ -26,4 +26,15 @@ const serverHandler = async (event: any, context: any) => {
     return response;
 };
 
-export { serverHandler as server, getRoom, createRoom, joinRoom, leaveRoom, resetRoom, revealRoom, submitChoice, setTicket, switchEstimation };
+export {
+    serverHandler as server,
+    getRoom,
+    createRoom,
+    joinRoom,
+    leaveRoom,
+    resetRoom,
+    revealRoom,
+    submitChoice,
+    setTicket,
+    switchEstimation,
+};

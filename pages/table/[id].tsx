@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import type { Room } from "../../types/room";
 import type { Session } from "../../types/session";
-import {Button, EstimationType, Header, Modal, NowEstimating, PokerTable} from "../../components";
+import { Button, EstimationType, Header, Modal, NowEstimating, PokerTable } from "../../components";
 import { getRoom, joinRoom, leaveRoom } from "../../utils/api";
 import { addRoomToHistory, updateDisplayName, withSession } from "../../utils/session";
 // @ts-ignore

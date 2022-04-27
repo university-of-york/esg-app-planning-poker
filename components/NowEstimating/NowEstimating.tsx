@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Modal} from "../Modal/Modal";
-import {setTicket} from "../../utils/api";
-import {userIsHost} from "../../utils/session";
-import type {Room} from "../../types/room";
+import React, { useState } from "react";
+import { Modal } from "../Modal/Modal";
+import { setTicket } from "../../utils/api";
+import { userIsHost } from "../../utils/session";
+import type { Room } from "../../types/room";
 // @ts-ignore
 import styles from "./NowEstimating.module.css";
 
@@ -21,26 +21,53 @@ const NowEstimating = ({ room }: { room: Room }) => {
     if (userIsHost(room)) {
         const text = room.ticketId ? `Now estimating: ${room.ticketId}` : "What are you estimating?";
         return (
-            <Modal className={styles.modal} trigger={<span className={`${styles.ticket} ${room.ticketId ? '' : styles.blank} ${styles.editable} ${room.jiraTicket ? styles.linked : ''}`}>{text}</span>} callback={handleSubmit}>
+            <Modal
+                className={styles.modal}
+                trigger={
+                    <span
+                        className={`${styles.ticket} ${room.ticketId ? "" : styles.blank} ${styles.editable} ${
+                            room.jiraTicket ? styles.linked : ""
+                        }`}
+                    >
+                        {text}
+                    </span>
+                }
+                callback={handleSubmit}
+            >
                 <div className={styles.id}>
                     <label>Ticket ID</label>
-                    <input type="text" value={ticketId} onChange={handleChange}/>
+                    <input type="text" value={ticketId} onChange={handleChange} />
                 </div>
-                <div className={`${styles.jira} ${isJira ? styles.checked : ''}`} onClick={() => setIsJira(!isJira)}>
-                    <input type="checkbox" checked={isJira}/>
+                <div className={`${styles.jira} ${isJira ? styles.checked : ""}`} onClick={() => setIsJira(!isJira)}>
+                    <input type="checkbox" checked={isJira} />
                     <label>This is a JIRA ticket</label>
                 </div>
             </Modal>
         );
     } else {
         if (room.ticketId) {
-            const display = <span className={`${styles.ticket} ${room.jiraTicket ? styles.linked : ''}`}>Now estimating: <strong>{room.ticketId}</strong></span>;
+            const display = (
+                <span className={`${styles.ticket} ${room.jiraTicket ? styles.linked : ""}`}>
+                    Now estimating: <strong>{room.ticketId}</strong>
+                </span>
+            );
 
-            return room.jiraTicket ? <a className={styles.link} href={`https://jira.york.ac.uk/browse/${room.ticketId}`} target="_blank" rel="noopener noreferrer">{display}</a> : display;
+            return room.jiraTicket ? (
+                <a
+                    className={styles.link}
+                    href={`https://jira.york.ac.uk/browse/${room.ticketId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {display}
+                </a>
+            ) : (
+                display
+            );
         } else {
             return <></>;
         }
     }
 };
 
-export {NowEstimating};
+export { NowEstimating };

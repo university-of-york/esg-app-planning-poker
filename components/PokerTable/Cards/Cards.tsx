@@ -1,9 +1,9 @@
-import {useState} from "react";
-import type {Room} from "../../../types/room";
-import {submitChoice} from "../../../utils/api";
-import {getUser} from "../../../utils/session";
-import {Spinner} from "../../Spinner/Spinner";
-import {ESTIMATION_SCHEMES} from "../../../constants/estimates";
+import { useState } from "react";
+import type { Room } from "../../../types/room";
+import { submitChoice } from "../../../utils/api";
+import { getUser } from "../../../utils/session";
+import { Spinner } from "../../Spinner/Spinner";
+import { ESTIMATION_SCHEMES } from "../../../constants/estimates";
 // @ts-ignore
 import styles from "./Cards.module.css";
 

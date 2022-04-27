@@ -59,7 +59,7 @@
 }
 
 .jira.checked {
-    color: var(--palette-grey-dark)
+    color: var(--palette-grey-dark);
 }
 
 .jira input,

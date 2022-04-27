@@ -9,28 +9,15 @@ describe("Button", () => {
         render(Button);
     });
 
-    it("Applies className styling if provided", () => {
+    it("Applies className styling if provided", () => {});
 
-    });
+    it("onClick callback is called when button is clicked", () => {});
 
-    it("onClick callback is called when button is clicked", () => {
+    it("Can be marked as submitting", () => {});
 
-    });
+    it("Can be marked as disabled", () => {});
 
-    it("Can be marked as submitting", () => {
+    it("onClick callback is not triggered when marked as submitting", () => {});
 
-    });
-
-    it("Can be marked as disabled", () => {
-
-    });
-
-    it("onClick callback is not triggered when marked as submitting", () => {
-
-    });
-
-    it("onClick callback is not triggered when marked as disabled", () => {
-
-    });
-
+    it("onClick callback is not triggered when marked as disabled", () => {});
 });
