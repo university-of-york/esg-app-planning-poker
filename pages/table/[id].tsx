@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import type { Room } from "../../types/room";
 import type { Session } from "../../types/session";
-import { Button, Header, Modal, PokerTable } from "../../components";
+import {Button, Header, Modal, NowEstimating, PokerTable} from "../../components";
 import { getRoom, joinRoom, leaveRoom } from "../../utils/api";
 import { addRoomToHistory, updateDisplayName, withSession } from "../../utils/session";
 // @ts-ignore
@@ -113,7 +113,13 @@ const PlanningRoom = (props: PlanningRoomProps) => {
                     {room.members.length} {room.members.length === 1 ? "person" : "people"} present
                 </span>
 
-                {hasJoinedRoom ? <PokerTable room={room} session={session!} refresh={refresh} /> : undefined}
+                {hasJoinedRoom ? (
+                    <>
+                        <NowEstimating room={room} session={session!} />
+
+                        <PokerTable room={room} session={session!} refresh={refresh} />
+                    </>
+                ) : undefined}
             </div>
         </div>
     );

@@ -20,6 +20,8 @@ const create = async (id: string, name: string, hostId: string, hostName: string
             name: { S: name },
             hostId: { S: hostId },
             state: { S: "HIDDEN" },
+            estimation: { S: "T-SHIRT" },
+            ticketId: { S: "" },
             members: {
                 L: [
                     {
@@ -56,25 +58,27 @@ const get = async (id: string): Promise<Room> => {
         throw new Error(`Could not retrieve details for room: ${id}`);
     }
 
-    const room = result.Item;
+    const item = result.Item;
 
-    return {
-        id: room.id.S!,
-        name: room.name.S!,
-        hostId: room.hostId.S!,
-        // @ts-ignore
-        state: room.state.S!,
-        // @ts-ignore
-        members: room.members.L?.map((value: AttributeValue) => {
+    const room = {
+        id: item.id?.S,
+        name: item.name?.S,
+        hostId: item.hostId?.S,
+        state: item.state?.S,
+        estimation: item.estimation?.S,
+        ticketId: item.ticketId?.S,
+        members: item.members?.L?.map((value: AttributeValue) => {
             const member = value.M!;
 
             return {
-                id: member.id.S!,
-                displayName: member.displayName.S!,
-                choice: member.choice.S!,
+                id: member.id?.S,
+                displayName: member.displayName?.S,
+                choice: member.choice?.S,
             };
         }),
     };
+
+    return room as Room;
 };
 
 const join = async (id: string, memberId: string, memberName: string): Promise<void> => {
@@ -215,4 +219,53 @@ const reset = async (id: string): Promise<void> => {
     }
 };
 
-export { create, get, join, leave, submit, reveal, reset };
+const estimation = async (id: string, type: string): Promise<void> => {
+    const existingRoom = await get(id);
+
+    const resetMembers = existingRoom.members.map((member) => ({
+        M: {
+            id: { S: member.id },
+            displayName: { S: member.displayName },
+            choice: { S: "" },
+        },
+    }));
+
+    const command = new UpdateItemCommand({
+        TableName: pokerTable(),
+        Key: {
+            id: { S: id },
+        },
+        UpdateExpression: "SET estimation = :estimation, members = :members",
+        ExpressionAttributeValues: {
+            ":estimation": { S: type },
+            ":members": { L: resetMembers },
+        },
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not set estimation type: ${type} for room: ${id}`);
+    }
+};
+
+const ticket = async (id: string, ticketId: string): Promise<void> => {
+    const command = new UpdateItemCommand({
+        TableName: pokerTable(),
+        Key: {
+            id: { S: id },
+        },
+        UpdateExpression: "SET ticketId = :ticket",
+        ExpressionAttributeValues: {
+            ":ticket": { S: ticketId },
+        },
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not set ticket: ${ticketId} for room: ${id}`);
+    }
+};
+
+export { create, get, join, leave, submit, reveal, reset, estimation, ticket };

@@ -3,6 +3,8 @@ export declare type Room = {
     name: string;
     hostId: string;
     state: "HIDDEN" | "REVEALED";
+    estimation: "LINEAR" | "FIBONACCI" | "T-SHIRT";
+    ticketId: string;
     members: Member[];
 };
 

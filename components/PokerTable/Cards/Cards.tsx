@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Member, Room } from "../../../types/room";
 import { submitChoice } from "../../../utils/api";
-import { TSHIRT_SIZES } from "../../../constants/cards";
+import { TSHIRT_SIZES } from "../../../constants/estimates";
 import { Spinner } from "../../Spinner/Spinner";
 // @ts-ignore
 import styles from "./Cards.module.css";

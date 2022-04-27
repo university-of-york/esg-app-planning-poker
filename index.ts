@@ -9,6 +9,8 @@ import leaveRoom from "./functions/leaveRoom.js";
 import resetRoom from "./functions/resetRoom.js";
 import revealRoom from "./functions/revealRoom.js";
 import submitChoice from "./functions/submitChoice.js";
+import setTicket from "./functions/setTicket.js";
+import switchEstimation from "./functions/switchEstimation.js";
 
 const handler = sls(server, {
     binary: binaryMimeTypes,
@@ -24,4 +26,4 @@ const serverHandler = async (event: any, context: any) => {
     return response;
 };
 
-export { serverHandler as server, getRoom, createRoom, joinRoom, leaveRoom, resetRoom, revealRoom, submitChoice };
+export { serverHandler as server, getRoom, createRoom, joinRoom, leaveRoom, resetRoom, revealRoom, submitChoice, setTicket, switchEstimation };

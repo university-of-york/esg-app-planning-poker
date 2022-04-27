@@ -1,5 +1,5 @@
 import type { Room } from "../../../types/room";
-import { TSHIRT_SIZES } from "../../../constants/cards";
+import { TSHIRT_SIZES } from "../../../constants/estimates";
 // @ts-ignore
 import styles from "./Results.module.css";
 

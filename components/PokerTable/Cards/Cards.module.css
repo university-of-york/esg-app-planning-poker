@@ -10,7 +10,7 @@
 }
 
 .card {
-    width: 3ch;
+    width: 4ch;
     height: 1.6em;
     margin: 0.15em 0.15em 0;
     padding: 0.2em;
@@ -23,6 +23,10 @@
     user-select: none;
     transition-property: background-color, height, padding;
     transition-duration: 0.25s;
+}
+
+.card.numerical {
+    width: 3ch;
 }
 
 .card:hover {

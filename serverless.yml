@@ -138,6 +138,26 @@ functions:
           method: POST
           cors:
             origin: "*"
+  setTicket:
+    handler: index.setTicket
+    environment:
+      POKER_TABLE: ${self:custom.pokerTableName}
+    events:
+      - http:
+          path: /room/{id}/ticket
+          method: POST
+          cors:
+            origin: "*"
+  switchEstimation:
+    handler: index.switchEstimation
+    environment:
+      POKER_TABLE: ${self:custom.pokerTableName}
+    events:
+      - http:
+          path: /room/{id}/estimation
+          method: POST
+          cors:
+            origin: "*"
 
 resources:
   Conditions:

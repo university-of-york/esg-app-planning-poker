@@ -75,4 +75,24 @@ const resetRoom = async (roomId: string): Promise<void> => {
     }
 };
 
-export { createRoom, getRoom, joinRoom, leaveRoom, submitChoice, revealRoom, resetRoom };
+const switchEstimation = async (roomId: string, estimationType: string): Promise<void> => {
+    const response = await request("POST", `${BASE_URL}/room/${roomId}/estimation`, {
+        estimationType,
+    });
+
+    if (!response.success) {
+        throw new Error(`Could not switch estimation type`);
+    }
+};
+
+const setTicket = async (roomId: string, ticketId: string): Promise<void> => {
+    const response = await request("POST", `${BASE_URL}/room/${roomId}/ticket`, {
+        ticketId,
+    });
+
+    if (!response.success) {
+        throw new Error(`Could not set ticket`);
+    }
+};
+
+export { createRoom, getRoom, joinRoom, leaveRoom, submitChoice, revealRoom, resetRoom, switchEstimation, setTicket };
