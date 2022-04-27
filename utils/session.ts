@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import type { Session } from "../types/session";
+import {Room} from "../types/room";
 
 const BROWSER_STORAGE_KEY = "planning-poker-session";
 
@@ -64,4 +65,22 @@ const addRoomToHistory = (roomId: string, roomName: string): void => {
     localStorage.setItem(BROWSER_STORAGE_KEY, JSON.stringify(session));
 };
 
-export { BROWSER_STORAGE_KEY, withSession, updateDisplayName, addRoomToHistory };
+const getUser = (room: Room) => {
+    const session = withSession();
+
+    return room.members.find((member) => member.id === session.id);
+};
+
+const getHost = (room: Room) => {
+    return room.members.find((member) => member.id === room.hostId);
+};
+
+const userIsHost = (room: Room) => {
+    const user = getUser(room);
+    const host = getHost(room);
+
+    return host!.id === user!.id;
+};
+
+
+export { BROWSER_STORAGE_KEY, withSession, updateDisplayName, addRoomToHistory, getUser, getHost, userIsHost };

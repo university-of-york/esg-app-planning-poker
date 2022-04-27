@@ -22,6 +22,7 @@ const create = async (id: string, name: string, hostId: string, hostName: string
             state: { S: "HIDDEN" },
             estimation: { S: "T-SHIRT" },
             ticketId: { S: "" },
+            jiraTicket: { BOOL: true },
             members: {
                 L: [
                     {
@@ -67,6 +68,7 @@ const get = async (id: string): Promise<Room> => {
         state: item.state?.S,
         estimation: item.estimation?.S,
         ticketId: item.ticketId?.S,
+        jiraTicket: item.jiraTicket?.BOOL,
         members: item.members?.L?.map((value: AttributeValue) => {
             const member = value.M!;
 
@@ -249,15 +251,16 @@ const estimation = async (id: string, type: string): Promise<void> => {
     }
 };
 
-const ticket = async (id: string, ticketId: string): Promise<void> => {
+const ticket = async (id: string, ticketId: string, jiraTicket: boolean): Promise<void> => {
     const command = new UpdateItemCommand({
         TableName: pokerTable(),
         Key: {
             id: { S: id },
         },
-        UpdateExpression: "SET ticketId = :ticket",
+        UpdateExpression: "SET ticketId = :ticket, jiraTicket = :jira",
         ExpressionAttributeValues: {
             ":ticket": { S: ticketId },
+            ":jira": { BOOL: jiraTicket },
         },
     });
 

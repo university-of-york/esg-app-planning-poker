@@ -1,18 +1,21 @@
-import { useState } from "react";
-import type { Member, Room } from "../../../types/room";
-import { submitChoice } from "../../../utils/api";
-import { TSHIRT_SIZES } from "../../../constants/estimates";
-import { Spinner } from "../../Spinner/Spinner";
+import {useState} from "react";
+import type {Room} from "../../../types/room";
+import {submitChoice} from "../../../utils/api";
+import {getUser} from "../../../utils/session";
+import {Spinner} from "../../Spinner/Spinner";
+import {ESTIMATION_SCHEMES} from "../../../constants/estimates";
 // @ts-ignore
 import styles from "./Cards.module.css";
 
-const Cards = ({ room, player, refresh }: { room: Room; player: Member; refresh: () => Promise<void> }) => {
+const Cards = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
     const [submittingChoice, setSubmittingChoice] = useState<string>();
+
+    const user = getUser(room);
 
     const handleChoice = (choice: string) => {
         const submit = async () => {
             setSubmittingChoice(choice);
-            await submitChoice(room.id, player.id, choice);
+            await submitChoice(room.id, user!.id, choice);
             await refresh();
             setSubmittingChoice(undefined);
         };
@@ -20,15 +23,18 @@ const Cards = ({ room, player, refresh }: { room: Room; player: Member; refresh:
         submit();
     };
 
+    const options = ESTIMATION_SCHEMES[room.estimation].options;
+
     const isDisabled = room.state === "REVEALED";
+    const isNumerical = room.estimation !== "T-SHIRT";
 
     return (
         <div className={`${styles.container} ${isDisabled ? styles.disabled : ""}`}>
-            {TSHIRT_SIZES.map((option) => (
+            {options.map((option) => (
                 <div
-                    className={`${styles.card} ${option === player.choice ? styles.selected : ""} ${
+                    className={`${styles.card} ${option === user!.choice ? styles.selected : ""} ${
                         submittingChoice === option ? styles.submitting : ""
-                    }`}
+                    } ${isNumerical ? styles.numerical : ""}`}
                     key={option}
                     onClick={isDisabled ? undefined : () => handleChoice(option)}
                 >

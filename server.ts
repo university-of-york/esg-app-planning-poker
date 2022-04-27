@@ -9,7 +9,7 @@ const server = express();
 // serve static assets directly from the build-time-generated ".next" folder and specify how long to cache
 server.use(
     `/_next`,
-    express.static(path.join(path.resolve(path.dirname("")), ".next"), { maxAge: "1d", immutable: true })
+    express.static(path.join(path.resolve(path.dirname("")), ".next"), { maxAge: "7d", immutable: true })
 );
 
 // serve requests with Next by default

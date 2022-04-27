@@ -1,5 +1,6 @@
 :root {
     /* Colour palette, populated as per the UoY design patterns library: https://www.york.ac.uk/pattern-library/layout/colours.html */
+    --palette-white: white;
     --palette-grey-light: #cbcbcb;
     --palette-grey-main: #868686;
     --palette-grey-dark: #404040;

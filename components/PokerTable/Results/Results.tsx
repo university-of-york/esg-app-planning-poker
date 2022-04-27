@@ -1,7 +1,7 @@
-import type { Room } from "../../../types/room";
-import { TSHIRT_SIZES } from "../../../constants/estimates";
+import type {Room} from "../../../types/room";
 // @ts-ignore
 import styles from "./Results.module.css";
+import {ESTIMATION_SCHEMES} from "../../../constants/estimates";
 
 const Results = ({ room }: { room: Room }) => {
     if (room.state === "HIDDEN") {
@@ -14,7 +14,9 @@ const Results = ({ room }: { room: Room }) => {
         return <></>;
     }
 
-    let votes = TSHIRT_SIZES.map((option) => {
+    const options = ESTIMATION_SCHEMES[room.estimation].options;
+
+    let votes = options.map((option) => {
         const numberVotes = membersWithChoicesMade.filter((member) => member.choice === option).length;
 
         return {

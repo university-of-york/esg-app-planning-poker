@@ -19,15 +19,15 @@ const setTicket = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const body = event.isBase64Encoded ? Buffer.from(event.body, "base64").toString() : event.body;
 
-    const { ticketId } = JSON.parse(body);
+    const { ticketId, jiraTicket } = JSON.parse(body);
 
-    if (!ticketId) {
-        return message(400, "Ticket ID required");
+    if (ticketId === undefined || jiraTicket === undefined) {
+        return message(400, "Ticket ID & Jira flag required");
     }
 
     console.info(`Setting ticket to ${ticketId}`);
 
-    await ticket(id, ticketId);
+    await ticket(id, ticketId, jiraTicket);
 
     return message(200, "OK");
 };

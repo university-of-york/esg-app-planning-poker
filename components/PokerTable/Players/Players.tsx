@@ -1,24 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
-import type { Member } from "../../../types/room";
+import {getHost, getUser, userIsHost} from "../../../utils/session";
+import type {Member, Room} from "../../../types/room";
 // @ts-ignore
 import styles from "./Players.module.css";
 
-const Players = ({
-    state,
-    host,
-    player,
-    members,
-}: {
-    state: "HIDDEN" | "REVEALED";
-    host?: Member;
-    player?: Member;
-    members: Member[];
-}) => {
-    const players = members?.map((member) => {
+const Players = ({room}: { room: Room }) => {
+    const user = getUser(room);
+    const host = getHost(room);
+
+    const players = room.members?.map((member) => {
         let choice;
 
-        if (state === "REVEALED") {
+        if (room.state === "REVEALED") {
             choice = (
                 <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ? member.choice : "??"}</span>
             );
@@ -33,7 +27,7 @@ const Players = ({
         return (
             <div
                 className={`${styles.player} ${host?.id === member.id ? styles.host : ""} ${
-                    player?.id === member.id ? styles.current : ""
+                    user?.id === member.id ? styles.current : ""
                 }`}
                 key={member.id}
             >

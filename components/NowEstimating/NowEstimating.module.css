@@ -3,22 +3,42 @@
     margin-bottom: 0.5em;
 }
 
+.link {
+    padding: 0.6em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
 .ticket {
     color: white;
     font-weight: bold;
-    background: var(--palette-blue-main);
-    margin: 2em 2em;
-    padding: 0.5em;
+    background: var(--palette-grey-main);
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    padding: 0.6em;
     border-radius: 4em;
+    user-select: none;
     transition: background-color 0.2s;
+}
+
+.ticket strong {
+    user-select: text;
 }
 
 .ticket.blank {
     background: var(--palette-yellow-main);
 }
 
-.ticket:hover {
+.ticket.linked {
+    background: var(--palette-blue-main);
+}
+
+.ticket.editable:hover,
+.ticket.linked:hover {
     cursor: pointer;
+}
+
+.ticket.linked:hover {
     background: var(--palette-blue-light);
 }
 
@@ -34,4 +54,23 @@
 .jira {
     font-size: 0.8em;
     color: var(--palette-grey-main);
+    user-select: none;
+    transition: color 0.25s;
+}
+
+.jira.checked {
+    color: var(--palette-grey-dark)
+}
+
+.jira input,
+.jira label {
+    cursor: pointer;
+}
+
+.jira input {
+    transform: scale(1.4);
+    accent-color: var(--palette-blue-main);
+    caret-color: var(--palette-white);
+    margin-right: 0.5em;
+    box-shadow: none;
 }

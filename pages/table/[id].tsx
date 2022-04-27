@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import type { Room } from "../../types/room";
 import type { Session } from "../../types/session";
-import {Button, Header, Modal, NowEstimating, PokerTable} from "../../components";
+import {Button, EstimationType, Header, Modal, NowEstimating, PokerTable} from "../../components";
 import { getRoom, joinRoom, leaveRoom } from "../../utils/api";
 import { addRoomToHistory, updateDisplayName, withSession } from "../../utils/session";
 // @ts-ignore
@@ -115,9 +115,11 @@ const PlanningRoom = (props: PlanningRoomProps) => {
 
                 {hasJoinedRoom ? (
                     <>
-                        <NowEstimating room={room} session={session!} />
+                        <EstimationType room={room} refresh={refresh} />
 
-                        <PokerTable room={room} session={session!} refresh={refresh} />
+                        <NowEstimating room={room} />
+
+                        <PokerTable room={room} refresh={refresh} />
                     </>
                 ) : undefined}
             </div>

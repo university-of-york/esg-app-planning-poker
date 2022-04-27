@@ -85,9 +85,10 @@ const switchEstimation = async (roomId: string, estimationType: string): Promise
     }
 };
 
-const setTicket = async (roomId: string, ticketId: string): Promise<void> => {
+const setTicket = async (roomId: string, ticketId: string, jiraTicket: boolean): Promise<void> => {
     const response = await request("POST", `${BASE_URL}/room/${roomId}/ticket`, {
         ticketId,
+        jiraTicket,
     });
 
     if (!response.success) {

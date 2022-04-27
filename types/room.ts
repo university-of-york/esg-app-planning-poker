@@ -3,8 +3,9 @@ export declare type Room = {
     name: string;
     hostId: string;
     state: "HIDDEN" | "REVEALED";
-    estimation: "LINEAR" | "FIBONACCI" | "T-SHIRT";
+    estimation: "T-SHIRT" | "FIBONACCI" | "LINEAR";
     ticketId: string;
+    jiraTicket: boolean;
     members: Member[];
 };
 
