@@ -8,6 +8,7 @@ import styles from "./Modal.module.css";
 const Modal = ({
     open,
     mandatory = false,
+    valid = true,
     trigger,
     children,
     className,
@@ -16,6 +17,7 @@ const Modal = ({
 }: {
     open?: boolean;
     mandatory?: boolean;
+    valid?: boolean;
     trigger?: any;
     children: any;
     className?: string;
@@ -65,7 +67,7 @@ const Modal = ({
                 onClick={(event) => event.preventDefault()}
             >
                 {children}
-                <ModalControls confirm={confirm} close={close} isMandatory={mandatory} isSubmitting={isSubmitting} />
+                <ModalControls confirm={confirm} close={close} isMandatory={mandatory} isValid={valid} isSubmitting={isSubmitting} />
             </div>
         </div>
     );
@@ -75,23 +77,25 @@ const ModalControls = ({
     confirm,
     close,
     isMandatory,
+    isValid,
     isSubmitting,
 }: {
     confirm: () => void;
     close: () => void;
     isMandatory: boolean;
+    isValid: boolean;
     isSubmitting: boolean;
 }) => {
     return isMandatory ? (
         <div className={`${styles.controls} ${styles.single}`}>
-            <Button className={styles.control} isSubmitting={isSubmitting} onClick={confirm}>
+            <Button className={styles.control} isSubmitting={isSubmitting} isDisabled={!isValid} onClick={confirm}>
                 <FontAwesomeIcon className={styles.icon} icon={faCheck} />
                 Confirm
             </Button>
         </div>
     ) : (
         <div className={styles.controls}>
-            <Button className={styles.control} isSubmitting={isSubmitting} onClick={confirm}>
+            <Button className={styles.control} isSubmitting={isSubmitting} isDisabled={!isValid} onClick={confirm}>
                 <FontAwesomeIcon className={styles.icon} icon={faCheck} />
                 Confirm
             </Button>
