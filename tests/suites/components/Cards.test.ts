@@ -1,46 +1,23 @@
-import { useState } from "react";
-import type { Member, Room } from "../../../types/room";
-import { submitChoice } from "../../../utils/api";
-import { TSHIRT_SIZES } from "../../../constants/cards";
-import { Spinner } from "../../Spinner/Spinner";
-// @ts-ignore
-import styles from "./Cards.module.css";
+import React from "react";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const Cards = ({ room, player, refresh }: { room: Room; player: Member; refresh: () => Promise<void> }) => {
-    const [submittingChoice, setSubmittingChoice] = useState<string>();
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
+    });
 
-    const handleChoice = (choice: string) => {
-        const submit = async () => {
-            setSubmittingChoice(choice);
-            await submitChoice(room.id, player.id, choice);
-            await refresh();
-            setSubmittingChoice(undefined);
-        };
+    it("Applies className styling if provided", () => {});
 
-        submit();
-    };
+    it("onClick callback is called when button is clicked", () => {});
 
-    const isDisabled = room.state === "REVEALED";
+    it("Can be marked as submitting", () => {});
 
-    return (
-        <div className={`${styles.container} ${isDisabled ? styles.disabled : ""}`}>
-            {TSHIRT_SIZES.map((option) => (
-                <div
-                    className={`${styles.card} ${option === player.choice ? styles.selected : ""} ${
-                        submittingChoice === option ? styles.submitting : ""
-                    }`}
-                    key={option}
-                    onClick={isDisabled ? undefined : () => handleChoice(option)}
-                >
-                    {submittingChoice === option ? (
-                        <Spinner className={styles.spinner} />
-                    ) : (
-                        <span className={styles.option}>{option}</span>
-                    )}
-                </div>
-            ))}
-        </div>
-    );
-};
+    it("Can be marked as disabled", () => {});
 
-export { Cards };
+    it("onClick callback is not triggered when marked as submitting", () => {});
+
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});

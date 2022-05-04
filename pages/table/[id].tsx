@@ -95,7 +95,12 @@ const PlanningRoom = (props: PlanningRoomProps) => {
     return (
         <div className={styles.container}>
             <Header />
-            <Modal mandatory open={!hasJoinedRoom && !isLeaving} valid={displayName !== ""} callback={handleConfirmation}>
+            <Modal
+                mandatory
+                open={!hasJoinedRoom && !isLeaving}
+                valid={displayName !== ""}
+                callback={handleConfirmation}
+            >
                 <div className={styles.join}>
                     <label className={styles.name}>Your name</label>
                     <input type="text" value={displayName} onChange={handleNameChange} />

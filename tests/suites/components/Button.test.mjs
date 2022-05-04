@@ -1,12 +1,14 @@
 import React from "react";
-import { expect } from "@jest/globals";
 import { render, screen, within } from "@testing-library/react";
-import { Button } from "../../../components";
+import { expect } from "@jest/globals";
+import { Button } from "../../.build/components";
 // import { Button } from "../../.build/components/Button/Button";
 
 describe("Button", () => {
     it("Renders a button with provided children", () => {
-        render(Button);
+        const button = render(<Button />);
+
+        console.log(button);
     });
 
     it("Applies className styling if provided", () => {});

@@ -1,25 +1,23 @@
-import type { Room } from "../../types/room";
-import type { Session } from "../../types/session";
-import { Controls } from "./Controls/Controls";
-import { Results } from "./Results/Results";
-import { Players } from "./Players/Players";
-import { Cards } from "./Cards/Cards";
-// @ts-ignore
-import styles from "./PokerTable.module.css";
+import React from "react";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const PokerTable = ({ room, session, refresh }: { room: Room; session: Session; refresh: () => Promise<void> }) => {
-    const host = room.members.find((member) => member.id === room.hostId);
-    const player = room.members.find((member) => member.id === session.id);
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
+    });
 
-    return (
-        <div className={styles.container}>
-            {player!.id === host?.id ? <Controls room={room} refresh={refresh} /> : undefined}
+    it("Applies className styling if provided", () => {});
 
-            <Results room={room} />
-            <Players state={room.state} host={host} player={player} members={room.members} />
-            <Cards room={room} player={player!} refresh={refresh} />
-        </div>
-    );
-};
+    it("onClick callback is called when button is clicked", () => {});
 
-export { PokerTable };
+    it("Can be marked as submitting", () => {});
+
+    it("Can be marked as disabled", () => {});
+
+    it("onClick callback is not triggered when marked as submitting", () => {});
+
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});

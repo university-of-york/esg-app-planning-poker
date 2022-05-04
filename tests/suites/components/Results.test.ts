@@ -1,59 +1,23 @@
-import type { Room } from "../../../types/room";
-import { TSHIRT_SIZES } from "../../../constants/cards";
-// @ts-ignore
-import styles from "./Results.module.css";
+import React from "react";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const Results = ({ room }: { room: Room }) => {
-    if (room.state === "HIDDEN") {
-        return <></>;
-    }
-
-    const membersWithChoicesMade = room.members.filter((member) => member.choice !== "");
-
-    if (!membersWithChoicesMade || membersWithChoicesMade.length === 0) {
-        return <></>;
-    }
-
-    let votes = TSHIRT_SIZES.map((option) => {
-        const numberVotes = membersWithChoicesMade.filter((member) => member.choice === option).length;
-
-        return {
-            option,
-            votes: numberVotes,
-        };
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
     });
 
-    votes = votes.filter((it) => it.votes > 0);
-    votes.sort((a, b) => b.votes - a.votes);
+    it("Applies className styling if provided", () => {});
 
-    const winningVote = votes[0];
-    const winningPercentage = Math.floor((winningVote.votes / membersWithChoicesMade.length) * 100);
+    it("onClick callback is called when button is clicked", () => {});
 
-    const otherVotes = votes.filter((it) => it.option !== winningVote.option);
-    const tiedVotes = otherVotes.filter((it) => it.votes === winningVote.votes);
-    const isTied = tiedVotes.length > 0;
+    it("Can be marked as submitting", () => {});
 
-    let title, result;
+    it("Can be marked as disabled", () => {});
 
-    if (isTied) {
-        const tiedOptions = tiedVotes.map((vote) => vote.option);
+    it("onClick callback is not triggered when marked as submitting", () => {});
 
-        title = "It's a draw!";
-        result = `${winningVote.option} ${tiedOptions.join(" ")}`;
-    } else {
-        title = "We have a winner!";
-        result = winningVote.option;
-    }
-
-    return (
-        <div className={`${styles.container} ${isTied ? styles.tied : ""}`}>
-            <h2 className={styles.title}>{title}</h2>
-            <span className={styles.result}>{result}</span>
-            <span className={styles.votes}>
-                with <strong>{winningPercentage}%</strong> of the vote{isTied ? " each" : ""}
-            </span>
-        </div>
-    );
-};
-
-export { Results };
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});

@@ -67,7 +67,13 @@ const Modal = ({
                 onClick={(event) => event.preventDefault()}
             >
                 {children}
-                <ModalControls confirm={confirm} close={close} isMandatory={mandatory} isValid={valid} isSubmitting={isSubmitting} />
+                <ModalControls
+                    confirm={confirm}
+                    close={close}
+                    isMandatory={mandatory}
+                    isValid={valid}
+                    isSubmitting={isSubmitting}
+                />
             </div>
         </div>
     );

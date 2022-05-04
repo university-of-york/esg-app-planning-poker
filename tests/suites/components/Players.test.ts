@@ -1,50 +1,23 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
-import type { Member } from "../../../types/room";
-// @ts-ignore
-import styles from "./Players.module.css";
+import React from "react";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const Players = ({
-    state,
-    host,
-    player,
-    members,
-}: {
-    state: "HIDDEN" | "REVEALED";
-    host?: Member;
-    player?: Member;
-    members: Member[];
-}) => {
-    const players = members?.map((member) => {
-        let choice;
-
-        if (state === "REVEALED") {
-            choice = (
-                <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ? member.choice : "??"}</span>
-            );
-        } else {
-            if (member.choice === "") {
-                choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass} />;
-            } else {
-                choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faCheck} />;
-            }
-        }
-
-        return (
-            <div
-                className={`${styles.player} ${host?.id === member.id ? styles.host : ""} ${
-                    player?.id === member.id ? styles.current : ""
-                }`}
-                key={member.id}
-            >
-                <span className={styles.display}>{member.displayName}</span>
-
-                {choice}
-            </div>
-        );
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
     });
 
-    return <div className={styles.container}>{players}</div>;
-};
+    it("Applies className styling if provided", () => {});
 
-export { Players };
+    it("onClick callback is called when button is clicked", () => {});
+
+    it("Can be marked as submitting", () => {});
+
+    it("Can be marked as disabled", () => {});
+
+    it("onClick callback is not triggered when marked as submitting", () => {});
+
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});

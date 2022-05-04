@@ -1,56 +1,23 @@
 import React from "react";
-import Head from "next/head";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
-// @ts-ignore
-import styles from "./Header.module.css";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const Header = () => {
-    return (
-        <header className={styles.container}>
-            <Head>
-                <title>Planning Poker</title>
-                <meta name="author" content="University of York" />
-                <meta name="application-name" content="Planning Poker" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link
-                    rel="stylesheet"
-                    type="text/css"
-                    href="https://fonts.googleapis.com/css?family=Ubuntu:regular,medium,bold&subset=Latin&display=swap"
-                />
-                <link
-                    rel="icon"
-                    type="image/png"
-                    href="https://www.york.ac.uk/static/stable/img/favicons/favicon-64x64.png"
-                />
-                <link
-                    rel="favicon"
-                    type="image/png"
-                    href="https://www.york.ac.uk/static/stable/img/favicons/favicon-64x64.png"
-                />
-            </Head>
-            <div className={styles.content}>
-                <img
-                    className={styles.logo}
-                    src="https://www.york.ac.uk/static/stable/img/logo.svg"
-                    alt="University of York Logo"
-                />
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
+    });
 
-                <a href="/">
-                    <h1 className={styles.title}>Planning Poker</h1>
-                </a>
+    it("Applies className styling if provided", () => {});
 
-                <Link href="https://github.com/university-of-york/esg-app-planning-poker" passHref>
-                    <FontAwesomeIcon
-                        className={styles.github}
-                        icon={faGithubSquare}
-                        title="View the source code for this application on Github"
-                    />
-                </Link>
-            </div>
-        </header>
-    );
-};
+    it("onClick callback is called when button is clicked", () => {});
 
-export { Header };
+    it("Can be marked as submitting", () => {});
+
+    it("Can be marked as disabled", () => {});
+
+    it("onClick callback is not triggered when marked as submitting", () => {});
+
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});

@@ -8,7 +8,7 @@
   "main": "index.ts",
   "scripts": {
     "compile": "tsc",
-    "compile:test": "tsc -p tests/tsconfig.test.json && copyfiles styles/*.css tests/.build/ && copyfiles components/**/*.module.css tests/.build/",
+    "compile:test": "tsc -p tests/tsconfig.test.json && copyfiles styles/*.css tests/.build/ && copyfiles public/static/assets/* tests/.build/ && copyfiles components/**/*.module.css tests/.build/",
     "dev": "npm run compile && next dev",
     "build": "npm run compile && next build",
     "start": "npm run build && next start",
@@ -57,6 +57,8 @@
   "devDependencies": {
     "@aws-sdk/types": "^3.55.0",
     "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
     "@jest/globals": "^27.5.1",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.12.0",
@@ -70,6 +72,7 @@
     "@types/react": "^17.0.43",
     "@types/uuid": "^8.3.4",
     "@types/wait-on": "^5.3.1",
+    "babel-jest": "^28.0.3",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "cypress": "^9.5.3",
@@ -78,6 +81,7 @@
     "eslint-config-xo-nextjs": "^4.1.0",
     "eslint-config-xo-react": "^0.27.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "jest-fetch-mock": "^3.0.3",
     "npm-run-all": "^4.1.5",

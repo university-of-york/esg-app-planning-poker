@@ -1,107 +1,23 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "./Button.test";
-// @ts-ignore
-import styles from "./Modal.module.css";
+import React from "react";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const Modal = ({
-    open,
-    mandatory = false,
-    trigger,
-    children,
-    className,
-    callback,
-    onClose,
-}: {
-    open?: boolean;
-    mandatory?: boolean;
-    trigger?: any;
-    children: any;
-    className?: string;
-    callback?: () => void | Promise<void>;
-    onClose?: () => void | Promise<void>;
-}) => {
-    const [_open, setIsOpen] = useState<boolean>(false);
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
+    });
 
-    let _trigger;
+    it("Applies className styling if provided", () => {});
 
-    if (trigger) {
-        _trigger = React.cloneElement(trigger, {
-            className,
-            onClick: () => setIsOpen(true),
-        });
-    }
+    it("onClick callback is called when button is clicked", () => {});
 
-    const close = async () => {
-        if (onClose) {
-            await onClose();
-        }
+    it("Can be marked as submitting", () => {});
 
-        setIsOpen(false);
-    };
+    it("Can be marked as disabled", () => {});
 
-    const confirm = async () => {
-        setIsSubmitting(true);
+    it("onClick callback is not triggered when marked as submitting", () => {});
 
-        if (callback) {
-            await callback();
-        }
-
-        setIsSubmitting(false);
-        await close();
-    };
-
-    const isOpen = open || _open;
-
-    return (
-        <div className={styles.container}>
-            {_trigger}
-
-            <div className={`${styles.overlay} ${isOpen ? "" : styles.hidden}`} onClick={close} />
-
-            <div
-                className={`${styles.content} ${isOpen ? "" : styles.hidden}`}
-                onClick={(event) => event.preventDefault()}
-            >
-                {children}
-                <ModalControls confirm={confirm} close={close} isMandatory={mandatory} isSubmitting={isSubmitting} />
-            </div>
-        </div>
-    );
-};
-
-const ModalControls = ({
-    confirm,
-    close,
-    isMandatory,
-    isSubmitting,
-}: {
-    confirm: () => void;
-    close: () => void;
-    isMandatory: boolean;
-    isSubmitting: boolean;
-}) => {
-    return isMandatory ? (
-        <div className={`${styles.controls} ${styles.single}`}>
-            <Button className={styles.control} isSubmitting={isSubmitting} onClick={confirm}>
-                <FontAwesomeIcon className={styles.icon} icon={faCheck} />
-                Confirm
-            </Button>
-        </div>
-    ) : (
-        <div className={styles.controls}>
-            <Button className={styles.control} isSubmitting={isSubmitting} onClick={confirm}>
-                <FontAwesomeIcon className={styles.icon} icon={faCheck} />
-                Confirm
-            </Button>
-            <Button className={styles.control} onClick={close}>
-                <FontAwesomeIcon className={styles.icon} icon={faXmark} />
-                Cancel
-            </Button>
-        </div>
-    );
-};
-
-export { Modal };
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});

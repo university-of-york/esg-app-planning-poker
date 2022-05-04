@@ -1,54 +1,23 @@
-import { useState } from "react";
-import type { Room } from "../../../types/room";
-import { Button } from "./Button.test";
-import { resetRoom, revealRoom } from "../../../utils/api";
-// @ts-ignore
-import styles from "./Controls.module.css";
+import React from "react";
+import { expect } from "@jest/globals";
+import { render, screen, within } from "@testing-library/react";
+import { Button } from "../../../components";
+// import { Button } from "../../.build/components/Button/Button";
 
-const Controls = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+describe("Button", () => {
+    it("Renders a button with provided children", () => {
+        render(Button);
+    });
 
-    const allChoicesMade = !room.members.find((member) => member.choice === "");
+    it("Applies className styling if provided", () => {});
 
-    if (!allChoicesMade && room.state === "HIDDEN") {
-        return <></>;
-    }
+    it("onClick callback is called when button is clicked", () => {});
 
-    const handleReveal = () => {
-        const reveal = async () => {
-            await revealRoom(room.id);
-            await refresh();
-            setIsSubmitting(false);
-        };
+    it("Can be marked as submitting", () => {});
 
-        setIsSubmitting(true);
-        reveal();
-    };
+    it("Can be marked as disabled", () => {});
 
-    const handleReset = () => {
-        const reset = async () => {
-            await resetRoom(room.id);
-            await refresh();
-            setIsSubmitting(false);
-        };
+    it("onClick callback is not triggered when marked as submitting", () => {});
 
-        setIsSubmitting(true);
-        reset();
-    };
-
-    return (
-        <div className={styles.container}>
-            {room.state === "HIDDEN" ? (
-                <Button className={styles.reveal} isSubmitting={isSubmitting} onClick={handleReveal}>
-                    Reveal result
-                </Button>
-            ) : (
-                <Button className={styles.reset} isSubmitting={isSubmitting} onClick={handleReset}>
-                    Reset table
-                </Button>
-            )}
-        </div>
-    );
-};
-
-export { Controls };
+    it("onClick callback is not triggered when marked as disabled", () => {});
+});
