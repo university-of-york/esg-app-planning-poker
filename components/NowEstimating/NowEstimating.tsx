@@ -55,7 +55,7 @@ const NowEstimating = ({ room }: { room: Room }) => {
             return room.jiraTicket ? (
                 <a
                     className={styles.link}
-                    href={`https://jira.york.ac.uk/browse/${room.ticketId}`}
+                    href={`https://uoy.atlassian.net/browse/${room.ticketId}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
