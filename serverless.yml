@@ -88,6 +88,16 @@ functions:
           method: POST
           cors:
             origin: "*"
+  renameRoom:
+    handler: index.renameRoom
+    environment:
+      POKER_TABLE: ${self:custom.pokerTableName}
+    events:
+      - http:
+          path: /room/{id}/rename
+          method: POST
+          cors:
+            origin: "*"
   joinRoom:
     handler: index.joinRoom
     environment:

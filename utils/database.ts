@@ -44,6 +44,28 @@ const create = async (id: string, name: string, hostId: string, hostName: string
     }
 };
 
+const rename = async (id: string, name: string): Promise<void> => {
+    const command = new UpdateItemCommand({
+        TableName: pokerTable(),
+        Key: {
+            id: { S: id },
+        },
+        UpdateExpression: "SET #name = :name",
+        ExpressionAttributeNames: {
+            "#name": "name",
+        },
+        ExpressionAttributeValues: {
+            ":name": { S: name },
+        }
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not rename room: ${id} to: "${name}"`);
+    }
+};
+
 const get = async (id: string): Promise<Room> => {
     const command = new GetItemCommand({
         TableName: pokerTable(),
@@ -271,4 +293,4 @@ const ticket = async (id: string, ticketId: string, jiraTicket: boolean): Promis
     }
 };
 
-export { create, get, join, leave, submit, reveal, reset, estimation, ticket };
+export { create, rename, get, join, leave, submit, reveal, reset, estimation, ticket };

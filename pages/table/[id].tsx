@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
-import type { Room } from "../../types/room";
-import type { Session } from "../../types/session";
-import { Button, EstimationType, Header, Modal, NowEstimating, PokerTable } from "../../components";
-import { getRoom, joinRoom, leaveRoom } from "../../utils/api";
-import { addRoomToHistory, updateDisplayName, withSession } from "../../utils/session";
+import React, {useCallback, useEffect, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUsers} from "@fortawesome/free-solid-svg-icons";
+import type {Room} from "../../types/room";
+import type {Session} from "../../types/session";
+import {Button, EstimationType, Header, Modal, NowEstimating, PokerTable} from "../../components";
+import {getRoom, joinRoom, leaveRoom, renameRoom} from "../../utils/api";
+import {addRoomToHistory, updateDisplayName, userIsHost, withSession} from "../../utils/session";
 // @ts-ignore
 import styles from "../../styles/Room.module.css";
 
@@ -34,7 +36,9 @@ declare type PlanningRoomProps = {
 const PlanningRoom = (props: PlanningRoomProps) => {
     const [room, setRoom] = useState<Room>(props.room);
     const [session, setSession] = useState<Session>();
+    const [roomName, setRoomName] = useState<string>(room.name);
     const [displayName, setDisplayName] = useState<string>("");
+    const [renameModelOpen, setRenameModalOpen] = useState<boolean>(false);
     const [linkCopied, setLinkCopied] = useState<boolean>(false);
     const [isLeaving, setIsLeaving] = useState<boolean>(false);
 
@@ -78,11 +82,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         setTimeout(() => setLinkCopied(false), 5000);
     };
 
-    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDisplayName(event.target.value);
-    };
-
-    const handleConfirmation = async () => {
+    const handleJoinRoom = async () => {
         updateDisplayName(displayName);
 
         await joinRoom(room.id, session!.id, displayName);
@@ -92,6 +92,14 @@ const PlanningRoom = (props: PlanningRoomProps) => {
         await refresh();
     };
 
+    const handleRenameRoom = async () => {
+        await renameRoom(room.id, roomName);
+
+        await refresh();
+
+        setRenameModalOpen(false);
+    };
+
     return (
         <div className={styles.container}>
             <Header />
@@ -99,24 +107,41 @@ const PlanningRoom = (props: PlanningRoomProps) => {
                 mandatory
                 open={!hasJoinedRoom && !isLeaving}
                 valid={displayName !== ""}
-                callback={handleConfirmation}
+                callback={handleJoinRoom}
             >
                 <div className={styles.join}>
                     <label className={styles.name}>Your name</label>
-                    <input type="text" value={displayName} onChange={handleNameChange} />
+                    <input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+                </div>
+            </Modal>
+
+            <Modal
+                open={renameModelOpen}
+                callback={handleRenameRoom}
+                onClose={() => setRenameModalOpen(false)}
+            >
+                <div className={styles.rename}>
+                    <label className={styles.name}>Room name</label>
+                    <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
                 </div>
             </Modal>
 
             <div className={styles.content}>
-                <h1 className={styles.name}>{room.name}</h1>
+                <div className={styles.info}>
+                    <h1
+                        className={`${styles.name} ${userIsHost(room) ? styles.editable : ''}`}
+                        onClick={userIsHost(room) ? (() => setRenameModalOpen(true)) : undefined}
+                    >{room.name}</h1>
+
+                    <span className={styles.count}>
+                        {room.members.length}
+                        <FontAwesomeIcon icon={faUsers} className={styles.icon} />
+                    </span>
+                </div>
 
                 <Button className={styles.invite} onClick={handleInvite}>
                     {linkCopied ? "Link copied!" : "Copy invite link"}
                 </Button>
-
-                <span className={styles.count}>
-                    {room.members.length} {room.members.length === 1 ? "person" : "people"} present
-                </span>
 
                 {hasJoinedRoom ? (
                     <>

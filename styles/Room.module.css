@@ -11,27 +11,53 @@
     height: calc(100vh - 200px);
 }
 
-.modal {
-}
-
 .join {
     display: flex;
     flex-direction: column;
 }
 
-.name {
+.rename {
+    display: flex;
+    flex-direction: column;
 }
 
-.invite {
-    margin-top: -0.2em;
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.name {
+    padding: 0.2em;
+    border-radius: 0.4em;
+}
+
+.editable {
+    transition: background-color 0.25s;
+}
+
+.editable:hover {
+    background: var(--palette-grey-light);
 }
 
 .count {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     height: fit-content;
     margin: 0.2em;
-    padding: 0.5em 1em;
+    padding: 0.6em;
     border-radius: 4em;
     color: white;
     font-size: 1.4em;
     background-color: var(--palette-grey-main);
+}
+
+.icon {
+    height: 0.9em;
+    margin-left: 0.25em;
+}
+
+.invite {
+    margin-top: -0.2em;
 }

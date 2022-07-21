@@ -4,6 +4,7 @@ import binaryMimeTypes from "./binaryMimeTypes.js";
 import server from "./server.js";
 import getRoom from "./functions/getRoom.js";
 import createRoom from "./functions/createRoom.js";
+import renameRoom from "./functions/renameRoom.js";
 import joinRoom from "./functions/joinRoom.js";
 import leaveRoom from "./functions/leaveRoom.js";
 import resetRoom from "./functions/resetRoom.js";
@@ -30,6 +31,7 @@ export {
     serverHandler as server,
     getRoom,
     createRoom,
+    renameRoom,
     joinRoom,
     leaveRoom,
     resetRoom,

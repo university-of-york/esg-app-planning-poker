@@ -29,6 +29,16 @@ const getRoom = async (roomId: string): Promise<Room | undefined> => {
     return response.body.result.room;
 };
 
+const renameRoom = async (roomId: string, name: string): Promise<void> => {
+    const response = await request("POST", `${BASE_URL}/room/${roomId}/rename`, {
+        name,
+    });
+
+    if (!response.success) {
+        throw new Error(`Could not rename room`);
+    }
+};
+
 const joinRoom = async (roomId: string, memberId: string, memberName: string): Promise<void> => {
     const response = await request("POST", `${BASE_URL}/room/${roomId}/join`, {
         memberId,
@@ -96,4 +106,15 @@ const setTicket = async (roomId: string, ticketId: string, jiraTicket: boolean):
     }
 };
 
-export { createRoom, getRoom, joinRoom, leaveRoom, submitChoice, revealRoom, resetRoom, switchEstimation, setTicket };
+export {
+    createRoom,
+    getRoom,
+    renameRoom,
+    joinRoom,
+    leaveRoom,
+    submitChoice,
+    revealRoom,
+    resetRoom,
+    switchEstimation,
+    setTicket
+};
