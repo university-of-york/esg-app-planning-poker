@@ -15,7 +15,12 @@
     cursor: pointer;
     background: var(--palette-grey-dark);
     border-bottom-right-radius: 0.8em;
-    transition: background-color 0.2s;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+.selected.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .open .selected {
@@ -24,6 +29,10 @@
 
 .selected:hover {
     background: var(--palette-grey-main);
+}
+
+.selected.disabled:hover {
+    background: var(--palette-grey-dark);
 }
 
 .display {

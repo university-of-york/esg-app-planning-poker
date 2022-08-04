@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import type { Room } from "../../types/room";
@@ -11,6 +11,14 @@ import styles from "./EstimationType.module.css";
 const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+    useEffect(() => {
+        return () => {
+            if (room.state === "REVEALED") {
+                setIsOpen(false);
+            }
+        };
+    }, [room]);
 
     if (!userIsHost(room)) {
         return <></>;
@@ -38,9 +46,11 @@ const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<
         </div>
     ));
 
+    const roomRevealed = room.state === "REVEALED";
+
     return (
         <div className={`${styles.container} ${isOpen ? styles.open : ""} ${isSubmitting ? styles.submitting : ""}`}>
-            <div className={styles.selected} onClick={() => setIsOpen(!isOpen)}>
+            <div className={`${styles.selected} ${roomRevealed ? styles.disabled : ''}`} onClick={roomRevealed ? undefined : () => setIsOpen(!isOpen)}>
                 <div className={styles.display}>{ESTIMATION_SCHEMES[room.estimation].display}</div>
                 <FontAwesomeIcon className={styles.caret} icon={faCaretDown} />
             </div>
