@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import type { Room } from "../../types/room";
@@ -50,7 +50,10 @@ const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<
 
     return (
         <div className={`${styles.container} ${isOpen ? styles.open : ""} ${isSubmitting ? styles.submitting : ""}`}>
-            <div className={`${styles.selected} ${roomRevealed ? styles.disabled : ''}`} onClick={roomRevealed ? undefined : () => setIsOpen(!isOpen)}>
+            <div
+                className={`${styles.selected} ${roomRevealed ? styles.disabled : ""}`}
+                onClick={roomRevealed ? undefined : () => setIsOpen(!isOpen)}
+            >
                 <div className={styles.display}>{ESTIMATION_SCHEMES[room.estimation].display}</div>
                 <FontAwesomeIcon className={styles.caret} icon={faCaretDown} />
             </div>
