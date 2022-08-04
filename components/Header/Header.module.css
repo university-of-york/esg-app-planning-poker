@@ -108,3 +108,21 @@
 .github:hover {
     color: var(--palette-grey-dark);
 }
+
+@media only screen and (max-width: 1000px) {
+    .logo {
+        width: 195px;
+        object-fit: cover;
+        object-position: left;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        display: none;
+    }
+
+    .githubLink {
+        display: none;
+    }
+}
