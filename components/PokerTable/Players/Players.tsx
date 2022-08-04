@@ -1,13 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faHourglass } from "@fortawesome/free-solid-svg-icons";
-import { getHost, getUser } from "../../../utils/session";
+import { faCheck, faHourglass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import type { Room } from "../../../types/room";
+import { getHost, getUser, userIsHost } from "../../../utils/session";
+import { kickMember } from "../../../utils/api";
 // @ts-ignore
 import styles from "./Players.module.css";
 
-const Players = ({ room }: { room: Room }) => {
+const Players = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
     const user = getUser(room);
     const host = getHost(room);
+
+    const handleKickPlayer = async (memberId: string) => {
+        await kickMember(room.id, memberId);
+
+        await refresh();
+    };
 
     const players = room.members?.map((member) => {
         let choice;
@@ -31,6 +38,17 @@ const Players = ({ room }: { room: Room }) => {
                 }`}
                 key={member.id}
             >
+                {userIsHost(room) && member.id !== user?.id ? (
+                    <FontAwesomeIcon
+                        className={styles.kick}
+                        icon={faXmark}
+                        title={`Kick ${member.displayName}`}
+                        onClick={async () => handleKickPlayer(member.id)}
+                    />
+                ) : (
+                    ""
+                )}
+
                 <span className={styles.display}>{member.displayName}</span>
 
                 {choice}

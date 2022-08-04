@@ -13,7 +13,7 @@ const PokerTable = ({ room, refresh }: { room: Room; refresh: () => Promise<void
             {userIsHost(room) ? <Controls room={room} refresh={refresh} /> : undefined}
 
             <Results room={room} />
-            <Players room={room} />
+            <Players room={room} refresh={refresh} />
             <Cards room={room} refresh={refresh} />
         </div>
     );

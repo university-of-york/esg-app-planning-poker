@@ -9,6 +9,7 @@
 }
 
 .player {
+    position: relative;
     width: 18ch;
     height: fit-content;
     margin: 0.5em;
@@ -27,6 +28,20 @@
     color: var(--palette-yellow-main);
     box-shadow: var(--palette-yellow-light) 1px 1px 1.6pt 1.6pt, var(--palette-yellow-light) -1px 1px 1.6pt 1.6pt,
         var(--palette-yellow-light) 1px -1px 1.6pt 1.6pt, var(--palette-yellow-light) -1px -1px 1.6pt 1.6pt;
+}
+
+.kick {
+    position: absolute;
+    top: 0.2em;
+    right: 0.5em;
+    width: 1em;
+    color: var(--palette-white);
+    z-index: 4;
+    cursor: pointer;
+}
+
+.kick:hover {
+    color: var(--palette-grey-light);
 }
 
 .display {

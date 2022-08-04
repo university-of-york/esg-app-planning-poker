@@ -58,6 +58,16 @@ const leaveRoom = (roomId: string, memberId: string): void => {
     navigator.sendBeacon(`${BASE_URL}/room/${roomId}/leave`, JSON.stringify({ memberId }));
 };
 
+const kickMember = async (roomId: string, memberId: string): Promise<void> => {
+    const response = await request("POST", `${BASE_URL}/room/${roomId}/leave`, {
+        memberId,
+    });
+
+    if (!response.success) {
+        throw new Error(`Could not kick member`);
+    }
+};
+
 const submitChoice = async (roomId: string, memberId: string, choice: string): Promise<void> => {
     const response = await request("POST", `${BASE_URL}/room/${roomId}/choice`, {
         memberId,
@@ -112,6 +122,7 @@ export {
     renameRoom,
     joinRoom,
     leaveRoom,
+    kickMember,
     submitChoice,
     revealRoom,
     resetRoom,
