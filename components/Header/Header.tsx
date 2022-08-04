@@ -11,7 +11,7 @@ import { renameRoom } from "../../utils/api";
 // @ts-ignore
 import styles from "./Header.module.css";
 
-const Header = ({ room, refresh }: { room?: Room; refresh?: () => void }) => {
+const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> }) => {
     const [roomName, setRoomName] = useState<string | undefined>(room?.name);
     const [editable, setEditable] = useState<boolean>(false);
     const [linkCopied, setLinkCopied] = useState<boolean>(false);

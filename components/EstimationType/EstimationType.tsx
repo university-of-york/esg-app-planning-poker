@@ -33,7 +33,7 @@ const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<
     const remainingOptions = Object.keys(ESTIMATION_SCHEMES).filter((option) => option !== room.estimation);
 
     const options = remainingOptions.map((scheme) => (
-        <div className={styles.option} key={scheme} onClick={() => handleSelect(scheme)}>
+        <div className={styles.option} key={scheme} onClick={async () => handleSelect(scheme)}>
             {ESTIMATION_SCHEMES[scheme].display}
         </div>
     ));

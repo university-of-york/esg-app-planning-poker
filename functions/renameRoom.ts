@@ -2,7 +2,7 @@ import { Buffer } from "buffer";
 import { v4 as uuid } from "uuid";
 import { APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
-import { message, result } from "../utils/responses.js";
+import { message } from "../utils/responses.js";
 import { rename } from "../utils/database.js";
 
 const renameRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {

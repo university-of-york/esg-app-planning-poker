@@ -5,7 +5,7 @@
     "requireConfigFile": false
   },
   "extends": ["xo", "prettier"],
-  "ignore": ["docs/**", "spec/**"],
+  "ignore": ["docs/**", "spec/**", "tests/**"],
   "overrides": [
     {
       "files": ["**/*.test.js", "e2e/**", "jest/*"],
@@ -15,6 +15,7 @@
   "envs": ["browser"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/consistent-indexed-object-style": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-floating-promises": "off",
