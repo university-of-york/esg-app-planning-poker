@@ -1,5 +1,4 @@
 import { Buffer } from "buffer";
-import { v4 as uuid } from "uuid";
 import { APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
@@ -8,7 +7,11 @@ import { rename } from "../utils/database.js";
 const renameRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
     console.debug(`Event: ${JSON.stringify(event)}`);
 
-    const id = uuid();
+    const id = event.pathParameters?.id;
+
+    if (!id) {
+        return message(400, "Room ID is required");
+    }
 
     if (!event.body) {
         return message(400, "Request body not found");
