@@ -1,6 +1,11 @@
 .container {
 }
 
+.wrapper {
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -8,7 +13,7 @@
     justify-content: flex-start;
     margin: auto;
     width: 70%;
-    height: calc(100vh - 200px);
+    padding-bottom: 14vh;
 }
 
 .join {

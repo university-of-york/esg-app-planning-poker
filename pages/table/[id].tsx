@@ -91,16 +91,18 @@ const PlanningRoom = (props: PlanningRoomProps) => {
                 </div>
             </Modal>
 
-            <div className={styles.content}>
-                {hasJoinedRoom ? (
-                    <>
-                        <EstimationType room={room} refresh={refresh} />
+            <div className={styles.wrapper}>
+                <div className={styles.content}>
+                    {hasJoinedRoom ? (
+                        <>
+                            <EstimationType room={room} refresh={refresh} />
 
-                        <NowEstimating room={room} />
+                            <NowEstimating room={room} />
 
-                        <PokerTable room={room} refresh={refresh} />
-                    </>
-                ) : undefined}
+                            <PokerTable room={room} refresh={refresh} />
+                        </>
+                    ) : undefined}
+                </div>
             </div>
         </div>
     );
