@@ -14,7 +14,7 @@ const nextConfig = {
         domains: ["www.york.ac.uk"],
     },
     experimental: {
-      forceSwcTransforms: true,
+        forceSwcTransforms: true,
     },
     webpack: (config) => {
         config.plugins = config.plugins || [];

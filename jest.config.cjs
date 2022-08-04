@@ -7,10 +7,10 @@ const config = {
     moduleFileExtensions: ["js", "mjs", "ts", "jsx", "tsx"],
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-        "\\.(jpg|jpeg|png|webp|svg)$": "<rootDir>/tests/helpers/assetMock.cjs"
+        "\\.(jpg|jpeg|png|webp|svg)$": "<rootDir>/tests/helpers/assetMock.cjs",
     },
     testMatch: ["**/*.test.mjs", "**/*.test.ts"],
-    extensionsToTreatAsEsm: [ ".ts"],
+    extensionsToTreatAsEsm: [".ts"],
     transform: {
         "^.+\\.(js|mjs|jsx)$": "babel-jest",
         "^.+\\.(ts|tsx)$": "ts-jest",

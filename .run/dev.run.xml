@@ -1,5 +1,15 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="true" name="dev" type="js.build_tools.npm">
+  <configuration default="true" type="js.build_tools.npm" nameIsGenerated="true">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="dev" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+  <configuration default="false" name="dev" type="js.build_tools.npm" nameIsGenerated="true">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>

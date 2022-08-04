@@ -56,7 +56,7 @@ const rename = async (id: string, name: string): Promise<void> => {
         },
         ExpressionAttributeValues: {
             ":name": { S: name },
-        }
+        },
     });
 
     const result = await client.send(command);

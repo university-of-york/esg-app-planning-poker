@@ -1,16 +1,16 @@
 import { DateTime } from "luxon";
 import type { Session } from "../types/session";
-import { Room } from "../types/room";
+import { Member, Room } from "../types/room";
 
 const BROWSER_STORAGE_KEY = "planning-poker-session";
 
 const withSession = (): Session => {
-    const json = localStorage.getItem(BROWSER_STORAGE_KEY);
-    let session: Session;
-
     if (!window.crypto) {
         throw new Error("Crypto is not defined - this code should only be run within a browser context (client-side)");
     }
+
+    const json = localStorage.getItem(BROWSER_STORAGE_KEY);
+    let session: Session;
 
     if (json) {
         session = JSON.parse(json);
@@ -65,21 +65,25 @@ const addRoomToHistory = (roomId: string, roomName: string): void => {
     localStorage.setItem(BROWSER_STORAGE_KEY, JSON.stringify(session));
 };
 
-const getUser = (room: Room) => {
+const getUser = (room: Room): Member | undefined => {
     const session = withSession();
 
     return room.members.find((member) => member.id === session.id);
 };
 
-const getHost = (room: Room) => {
+const getHost = (room: Room): Member | undefined => {
     return room.members.find((member) => member.id === room.hostId);
 };
 
-const userIsHost = (room: Room) => {
+const userIsHost = (room: Room): boolean => {
     const user = getUser(room);
     const host = getHost(room);
 
-    return host!.id === user!.id;
+    if (!user || !host) {
+        return false;
+    }
+
+    return host.id === user.id;
 };
 
 export { BROWSER_STORAGE_KEY, withSession, updateDisplayName, addRoomToHistory, getUser, getHost, userIsHost };

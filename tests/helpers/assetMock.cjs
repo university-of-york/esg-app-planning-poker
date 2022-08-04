@@ -1,5 +1,5 @@
 const asset = {
-    src: 'mock-url'
+    src: "mock-url",
 };
 
 module.exports = asset;
