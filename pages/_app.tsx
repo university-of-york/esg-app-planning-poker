@@ -1,11 +1,13 @@
 import type { AppProps } from "next/app";
-import { configureLogging } from "../utils/logger";
+import { ErrorBoundary } from "../components";
 import "../styles/globals.css";
 
 const PlanningPoker = ({ Component, pageProps }: AppProps) => {
-    configureLogging();
-
-    return <Component {...pageProps} />;
+    return (
+        <ErrorBoundary>
+            <Component {...pageProps} />
+        </ErrorBoundary>
+    );
 };
 
 export default PlanningPoker;

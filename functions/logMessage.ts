@@ -9,7 +9,7 @@ import { log } from "../utils/database.js";
 const logMessage = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
     console.debug(`Event: ${JSON.stringify(event)}`);
 
-    const timestamp = DateTime.now().toISODate();
+    const timestamp = DateTime.now().toISO();
     const id = uuid();
 
     if (!event.body) {
