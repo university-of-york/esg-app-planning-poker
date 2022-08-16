@@ -33,6 +33,7 @@
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unassigned-import": "off",
+    "max-params": "off",
     "no-else-return": "off",
     "no-lonely-if": "off",
     "no-warning-comments": "off",

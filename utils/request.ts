@@ -33,7 +33,7 @@ const request = async <T extends Message>(
             body: json,
         };
     } catch (error) {
-        console.error(error);
+        console.warn(error);
         return {
             success: false,
             status: 500,

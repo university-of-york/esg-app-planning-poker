@@ -6,7 +6,7 @@ import {
     AttributeValue,
 } from "@aws-sdk/client-dynamodb";
 import type { Room } from "../types/room";
-import { pokerTable } from "./environment.js";
+import { pokerTable, logTable } from "./environment.js";
 
 const client = new DynamoDBClient({
     region: "eu-west-1",
@@ -293,4 +293,29 @@ const ticket = async (id: string, ticketId: string, jiraTicket: boolean): Promis
     }
 };
 
-export { create, rename, get, join, leave, submit, reveal, reset, estimation, ticket };
+const log = async (
+    id: string,
+    timestamp: string,
+    level: string,
+    message: string,
+    stacktrace?: string
+): Promise<void> => {
+    const command = new PutItemCommand({
+        TableName: logTable(),
+        Item: {
+            id: { S: id },
+            timestamp: { S: timestamp },
+            level: { S: level },
+            message: { S: message },
+            stacktrace: { S: stacktrace ? stacktrace : "" },
+        },
+    });
+
+    const result = await client.send(command);
+
+    if (result.$metadata.httpStatusCode !== 200) {
+        throw new Error(`Could not save log message: ${id}`);
+    }
+};
+
+export { create, rename, get, join, leave, submit, reveal, reset, estimation, ticket, log };

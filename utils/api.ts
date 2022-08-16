@@ -116,6 +116,18 @@ const setTicket = async (roomId: string, ticketId: string, jiraTicket: boolean):
     }
 };
 
+const logMessage = async (level: string, message: string, stacktrace: string): Promise<void> => {
+    const response = await request("POST", `${BASE_URL}/log`, {
+        level,
+        message,
+        stacktrace,
+    });
+
+    if (!response.success) {
+        throw new Error(`Could not log message`);
+    }
+};
+
 export {
     createRoom,
     getRoom,
@@ -128,4 +140,5 @@ export {
     resetRoom,
     switchEstimation,
     setTicket,
+    logMessage,
 };

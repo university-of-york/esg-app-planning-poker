@@ -12,6 +12,7 @@ import revealRoom from "./functions/revealRoom.js";
 import submitChoice from "./functions/submitChoice.js";
 import setTicket from "./functions/setTicket.js";
 import switchEstimation from "./functions/switchEstimation.js";
+import logMessage from "./functions/logMessage.js";
 
 const handler = sls(server, {
     binary: binaryMimeTypes,
@@ -39,4 +40,5 @@ export {
     submitChoice,
     setTicket,
     switchEstimation,
+    logMessage,
 };

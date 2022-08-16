@@ -39,6 +39,9 @@ provider:
         - Effect: Allow
           Resource: !GetAtt PokerTable.Arn
           Action: dynamodb:UpdateItem
+        - Effect: Allow
+          Resource: !GetAtt LogTable.Arn
+          Action: dynamodb:PutItem
 
 plugins:
   - serverless-apigw-binary
@@ -50,6 +53,7 @@ custom:
       - "*/*"
   domainName: ${env:DOMAIN_NAME, ''}
   pokerTableName: planning-poker-${self:provider.stage}
+  logTableName: planning-poker-logs-${self:provider.stage}
   sslCertificateArn: ${env:SSL_CERTIFICATE_ARN, ''}
 
 functions:
@@ -168,6 +172,16 @@ functions:
           method: POST
           cors:
             origin: "*"
+  log:
+    handler: index.logMessage
+    environment:
+      LOG_TABLE: ${self:custom.logTableName}
+    events:
+      - http:
+          path: /log
+          method: POST
+          cors:
+            origin: "*"
 
 resources:
   Conditions:
@@ -181,6 +195,18 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:custom.pokerTableName}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+    LogTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.logTableName}
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
