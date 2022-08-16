@@ -1,14 +1,11 @@
 import { DateTime } from "luxon";
+import { v4 as uuid } from "uuid";
 import type { Session } from "../types/session";
 import { Member, Room } from "../types/room";
 
 const BROWSER_STORAGE_KEY = "planning-poker-session";
 
 const withSession = (): Session => {
-    if (!window.crypto) {
-        throw new Error("Crypto is not defined - this code should only be run within a browser context (client-side)");
-    }
-
     const json = localStorage.getItem(BROWSER_STORAGE_KEY);
     let session: Session;
 
@@ -16,7 +13,7 @@ const withSession = (): Session => {
         session = JSON.parse(json);
 
         if (!session.id) {
-            session.id = window.crypto.randomUUID();
+            session.id = uuid();
         }
 
         if (!session.displayName) {
@@ -30,7 +27,7 @@ const withSession = (): Session => {
         localStorage.setItem(BROWSER_STORAGE_KEY, JSON.stringify(session));
     } else {
         session = {
-            id: window.crypto.randomUUID(),
+            id: uuid(),
             displayName: "",
             history: [],
         };
