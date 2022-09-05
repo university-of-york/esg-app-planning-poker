@@ -83,3 +83,32 @@
     cursor: wait;
     background-color: var(--palette-grey-light);
 }
+
+@media only screen and (max-width: 800px) {
+    .container {
+        font-size: 1.4em;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .container {
+        font-size: 1.2em;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .container {
+        position: initial;
+        width: 100vw;
+        font-size: 1.4em;
+    }
+
+    .selected {
+        border-radius: 0;
+        justify-content: space-between;
+    }
+
+    .option:last-child {
+        border-radius: 0;
+    }
+}

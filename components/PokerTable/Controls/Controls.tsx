@@ -18,7 +18,9 @@ const Controls = ({ room, refresh }: { room: Room; refresh: () => Promise<void> 
         const reveal = async () => {
             await revealRoom(room.id);
             await refresh();
-            setIsSubmitting(false);
+
+            // 1 second delay before button is re-enabled to prevent user double-clicking without seeing the button change
+            setTimeout(() => setIsSubmitting(false), 1000);
         };
 
         setIsSubmitting(true);
@@ -29,7 +31,9 @@ const Controls = ({ room, refresh }: { room: Room; refresh: () => Promise<void> 
         const reset = async () => {
             await resetRoom(room.id);
             await refresh();
-            setIsSubmitting(false);
+
+            // 1 second delay before button is re-enabled to prevent user double-clicking without seeing the button change
+            setTimeout(() => setIsSubmitting(false), 1000);
         };
 
         setIsSubmitting(true);

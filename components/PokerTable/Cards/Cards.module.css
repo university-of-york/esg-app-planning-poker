@@ -1,8 +1,17 @@
-.container {
+.wrapper {
     position: absolute;
     bottom: 0;
+    width: 100vw;
+    overflow-x: auto;
+}
+
+.container {
+    width: fit-content;
+    padding: 0 2vw;
+    margin: auto;
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
     align-items: flex-end;
 }
 
@@ -10,6 +19,7 @@
 }
 
 .card {
+    flex-shrink: 0;
     width: 4ch;
     height: 1.6em;
     margin: 0.15em 0.15em 0;
@@ -54,4 +64,28 @@
         contrast(100%);
     max-width: 2.6ch;
     margin: -0.1em auto auto;
+}
+
+@media only screen and (max-width: 800px) {
+    .card {
+        font-size: 3.5em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        font-size: 3em;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .card {
+        font-size: 2.5em;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .card {
+        font-size: 2em;
+    }
 }

@@ -29,22 +29,24 @@ const Cards = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) 
     const isNumerical = room.estimation !== "T-SHIRT";
 
     return (
-        <div className={`${styles.container} ${isDisabled ? styles.disabled : ""}`}>
-            {options.map((option) => (
-                <div
-                    className={`${styles.card} ${option === user!.choice ? styles.selected : ""} ${
-                        submittingChoice === option ? styles.submitting : ""
-                    } ${isNumerical ? styles.numerical : ""}`}
-                    key={option}
-                    onClick={isDisabled ? undefined : () => handleChoice(option)}
-                >
-                    {submittingChoice === option ? (
-                        <Spinner className={styles.spinner} />
-                    ) : (
-                        <span className={styles.option}>{option}</span>
-                    )}
-                </div>
-            ))}
+        <div className={styles.wrapper}>
+            <div className={`${styles.container} ${isDisabled ? styles.disabled : ""}`}>
+                {options.map((option) => (
+                    <div
+                        className={`${styles.card} ${option === user!.choice ? styles.selected : ""} ${
+                            submittingChoice === option ? styles.submitting : ""
+                        } ${isNumerical ? styles.numerical : ""}`}
+                        key={option}
+                        onClick={isDisabled ? undefined : () => handleChoice(option)}
+                    >
+                        {submittingChoice === option ? (
+                            <Spinner className={styles.spinner} />
+                        ) : (
+                            <span className={styles.option}>{option}</span>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

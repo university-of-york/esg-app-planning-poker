@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
@@ -11,11 +11,46 @@ import { renameRoom } from "../../utils/api";
 // @ts-ignore
 import styles from "./Header.module.css";
 
+const UNIVERSITY_LOGO = "https://www.york.ac.uk/static/stable/img/logo.svg";
+const LOGO_FULL_WIDTH = 415;
+const LOGO_ICON_WIDTH = 195;
+
 const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> }) => {
+    const logo = useRef(null);
+    const info = useRef(null);
+    const github = useRef(null);
+
     const [roomName, setRoomName] = useState<string | undefined>(room?.name);
     const [editable, setEditable] = useState<boolean>(false);
     const [linkCopied, setLinkCopied] = useState<boolean>(false);
     const [renameModelOpen, setRenameModalOpen] = useState<boolean>(false);
+    const [logoPartialOverlap, setLogoPartialOverlap] = useState<boolean>(false);
+    const [logoFullOverlap, setLogoFullOverlap] = useState<boolean>(false);
+    const [githubOverlap, setGithubOverlap] = useState<boolean>(false);
+
+    const resize = () => {
+        if (logo.current && info.current && github.current) {
+            // @ts-ignore
+            const infoLeft = info.current.getBoundingClientRect().left;
+            // @ts-ignore
+            const infoRight = info.current.getBoundingClientRect().right;
+            // @ts-ignore
+            const githubLeft = github.current.getBoundingClientRect().left;
+
+            setLogoPartialOverlap(LOGO_FULL_WIDTH >= infoLeft);
+            setLogoFullOverlap(LOGO_ICON_WIDTH >= infoLeft);
+            setGithubOverlap(githubLeft <= infoRight);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", resize);
+        resize();
+
+        return () => {
+            window.removeEventListener("resize", resize);
+        };
+    }, []);
 
     useEffect(() => {
         return () => {
@@ -70,12 +105,15 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
             </Head>
             <div className={styles.content}>
                 <img
-                    className={styles.logo}
-                    src="https://www.york.ac.uk/static/stable/img/logo.svg"
+                    ref={logo}
+                    className={`${styles.logo} ${logoPartialOverlap ? styles.cropped : ""} ${
+                        logoFullOverlap ? styles.hidden : ""
+                    }`}
+                    src={UNIVERSITY_LOGO}
                     alt="University of York Logo"
                 />
 
-                <div className={styles.info}>
+                <div ref={info} className={styles.info}>
                     <a href="/">
                         <h1 className={styles.title}>Planning Poker</h1>
                     </a>
@@ -117,7 +155,8 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
                 )}
 
                 <a
-                    className={styles.githubLink}
+                    ref={github}
+                    className={`${styles.githubLink} ${githubOverlap ? styles.hidden : ""}`}
                     href="https://github.com/university-of-york/esg-app-planning-poker"
                     target="_blank"
                     rel="noopener noreferrer"
