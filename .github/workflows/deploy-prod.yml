@@ -30,9 +30,6 @@ jobs:
       - name: Check code conforms to linting rules
         run: npm run lint
 
-      - name: Check tests run
-        run: npm run test
-
       - name: Deploy - production
         if: github.ref == 'refs/heads/main'
         run: npm run deploy:prod
