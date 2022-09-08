@@ -7,6 +7,7 @@ import { Button, Header, Modal } from "../components";
 import { createRoom } from "../utils/api";
 import { addRoomToHistory, updateDisplayName, withSession } from "../utils/session";
 import styles from "../styles/Home.module.css";
+import modalStyles from "../components/Modal/Modal.module.css";
 
 const Home: NextPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,7 +55,10 @@ const Home: NextPage = () => {
                     <span>Welcome to planning poker!</span>
                     <p>Click the button below to create a new room</p>
                     <p>Creating the room automatically makes you the host</p>
-                    <p>Only the host has the ability to reveal & reset the table</p>
+                    <p>
+                        The host has the ability to reveal & reset the table, switch estimation scheme, set a ticket ID,
+                        and kick idle members from the room
+                    </p>
                 </div>
 
                 <Modal
@@ -65,18 +69,25 @@ const Home: NextPage = () => {
                     }
                     callback={handleSubmit}
                 >
-                    <div className={styles.create}>
-                        <label htmlFor="room-name">Room name:</label>
+                    <div className={modalStyles.field}>
+                        <label className={modalStyles.label} htmlFor="room-name">
+                            Room name:
+                        </label>
                         <input
+                            className={modalStyles.input}
                             type="text"
                             id="room-name"
                             name="roomName"
                             value={form.roomName}
                             onChange={handleChange}
                         />
-
-                        <label htmlFor="display-name">Your name:</label>
+                    </div>
+                    <div className={modalStyles.field}>
+                        <label className={modalStyles.label} htmlFor="display-name">
+                            Your name:
+                        </label>
                         <input
+                            className={modalStyles.input}
                             type="text"
                             id="display-name"
                             name="displayName"
@@ -92,7 +103,10 @@ const Home: NextPage = () => {
                         Digital Services Teaching & Learning team
                     </p>
                     <p>Use this app during planning sessions to determine blind/unbiased estimates for tasks</p>
-                    <p>This app currently only supports estimation in T-shirt sizes</p>
+                    <p>
+                        This app currently supports estimation in T-shirt sizes, Fibonacci sequence numbers, and
+                        standard linear numbers
+                    </p>
                 </div>
 
                 {historyLength > 0 ? (

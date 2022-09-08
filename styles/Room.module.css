@@ -3,7 +3,7 @@
 
 .wrapper {
     height: calc(100vh - 200px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .content {
@@ -14,9 +14,4 @@
     margin: auto;
     width: 70%;
     padding-bottom: 14vh;
-}
-
-.join {
-    display: flex;
-    flex-direction: column;
 }

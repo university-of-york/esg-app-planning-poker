@@ -33,6 +33,7 @@
     user-select: none;
     transition-property: background-color, height, padding;
     transition-duration: 0.25s;
+    z-index: 5;
 }
 
 .card.numerical {

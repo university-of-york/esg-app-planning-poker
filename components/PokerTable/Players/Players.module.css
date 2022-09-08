@@ -3,17 +3,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: fit-content;
-    max-width: 80vw;
+    width: 80vw;
     padding: 1em;
 }
 
 .player {
     position: relative;
-    width: 18ch;
+    width: 20ch;
     height: fit-content;
     margin: 0.5em;
-    padding: 1em;
+    padding: 1.6em 1em 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

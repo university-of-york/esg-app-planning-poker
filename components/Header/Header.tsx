@@ -9,6 +9,8 @@ import { Room } from "../../types/room";
 import { userIsHost } from "../../utils/session";
 import { renameRoom } from "../../utils/api";
 // @ts-ignore
+import modalStyles from "../Modal/Modal.module.css";
+// @ts-ignore
 import styles from "./Header.module.css";
 
 const UNIVERSITY_LOGO = "https://www.york.ac.uk/static/stable/img/logo.svg";
@@ -145,9 +147,14 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
 
                 {room ? (
                     <Modal open={renameModelOpen} callback={handleRenameRoom} onClose={() => setRenameModalOpen(false)}>
-                        <div className={styles.rename}>
-                            <label className={styles.name}>Room name</label>
-                            <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
+                        <div className={modalStyles.field}>
+                            <label className={modalStyles.label}>Room name</label>
+                            <input
+                                className={modalStyles.input}
+                                type="text"
+                                value={roomName}
+                                onChange={(e) => setRoomName(e.target.value)}
+                            />
                         </div>
                     </Modal>
                 ) : (

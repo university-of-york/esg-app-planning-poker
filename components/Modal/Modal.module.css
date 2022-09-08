@@ -23,6 +23,7 @@
     font-size: 1em;
     padding: 0.6em;
     width: 400px;
+    max-width: 90vw;
     height: fit-content;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1em 2em 0 rgba(0, 0, 0, 0.19);
     animation: frombottom 0.35s;
@@ -58,6 +59,19 @@
     width: fit-content;
 }
 
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin-bottom: 0.4em;
+}
+
+.input {
+    width: 100%;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -73,5 +87,23 @@
     }
     to {
         top: 50%;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .control {
+        font-size: 1em;
+    }
+}
+
+@media only screen and (max-width: 250px) {
+    .control {
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (max-width: 200px) {
+    .control {
+        font-size: 0.7em;
     }
 }

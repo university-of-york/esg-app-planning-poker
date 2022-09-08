@@ -6,6 +6,8 @@ import { getRoom, joinRoom, leaveRoom } from "../../utils/api";
 import { addRoomToHistory, updateDisplayName, withSession } from "../../utils/session";
 // @ts-ignore
 import styles from "../../styles/Room.module.css";
+// @ts-ignore
+import modalStyles from "../../components/Modal/Modal.module.css";
 
 const getServerSideProps = async ({ params }: { params: any }) => {
     const id = params.id! as string;
@@ -85,9 +87,14 @@ const PlanningRoom = (props: PlanningRoomProps) => {
             <Header room={room} refresh={refresh} />
 
             <Modal mandatory open={!hasJoinedRoom && !isLeaving} valid={displayName !== ""} callback={handleJoinRoom}>
-                <div className={styles.join}>
-                    <label className={styles.name}>Your name</label>
-                    <input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+                <div className={modalStyles.field}>
+                    <label className={modalStyles.label}>Your name</label>
+                    <input
+                        className={modalStyles.input}
+                        type="text"
+                        value={displayName}
+                        onChange={(e) => setDisplayName(e.target.value)}
+                    />
                 </div>
             </Modal>
 
