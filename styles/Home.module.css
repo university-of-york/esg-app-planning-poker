@@ -28,6 +28,10 @@
     flex-direction: column;
     width: 70%;
     text-align: center;
+    align-items: center;
+}
+
+.tableWrapper {
 }
 
 .history table {

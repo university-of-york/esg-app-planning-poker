@@ -112,20 +112,22 @@ const Home: NextPage = () => {
                 {historyLength > 0 ? (
                     <div className={styles.history}>
                         <h2>Recent rooms:</h2>
-                        <table>
-                            <tbody>
-                                {session!.history.map((room) => (
-                                    <Link href={`/table/${room.roomId}`} passHref key={room.roomId}>
-                                        <tr className={styles.room} onClick={() => setIsLoading(true)}>
-                                            <td className={styles.name}>{room.roomName}</td>
-                                            <td className={styles.timestamp}>
-                                                {DateTime.fromISO(room.lastVisited).toRelative()}
-                                            </td>
-                                        </tr>
-                                    </Link>
-                                ))}
-                            </tbody>
-                        </table>
+                        <div className={styles.tableWrapper}>
+                            <table>
+                                <tbody>
+                                    {session!.history.map((room) => (
+                                        <Link href={`/table/${room.roomId}`} passHref key={room.roomId}>
+                                            <tr className={styles.room} onClick={() => setIsLoading(true)}>
+                                                <td className={styles.name}>{room.roomName}</td>
+                                                <td className={styles.timestamp}>
+                                                    {DateTime.fromISO(room.lastVisited).toRelative()}
+                                                </td>
+                                            </tr>
+                                        </Link>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 ) : undefined}
             </div>
