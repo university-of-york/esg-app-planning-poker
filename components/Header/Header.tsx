@@ -15,12 +15,11 @@ import styles from "./Header.module.css";
 
 const UNIVERSITY_LOGO = "https://www.york.ac.uk/static/stable/img/logo.svg";
 const LOGO_FULL_WIDTH = 415;
-const LOGO_ICON_WIDTH = 195;
+const LOGO_ICON_WIDTH = 150;
+const GITHUB_ICON_WIDTH = 130;
 
 const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> }) => {
-    const logo = useRef(null);
     const info = useRef(null);
-    const github = useRef(null);
 
     const [roomName, setRoomName] = useState<string | undefined>(room?.name);
     const [editable, setEditable] = useState<boolean>(false);
@@ -31,17 +30,15 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
     const [githubOverlap, setGithubOverlap] = useState<boolean>(false);
 
     const resize = () => {
-        if (logo.current && info.current && github.current) {
+        if (info.current) {
             // @ts-ignore
             const infoLeft = info.current.getBoundingClientRect().left;
             // @ts-ignore
             const infoRight = info.current.getBoundingClientRect().right;
-            // @ts-ignore
-            const githubLeft = github.current.getBoundingClientRect().left;
 
             setLogoPartialOverlap(LOGO_FULL_WIDTH >= infoLeft);
             setLogoFullOverlap(LOGO_ICON_WIDTH >= infoLeft);
-            setGithubOverlap(githubLeft <= infoRight);
+            setGithubOverlap(window.innerWidth - GITHUB_ICON_WIDTH <= infoRight);
         }
     };
 
@@ -107,7 +104,6 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
             </Head>
             <div className={styles.content}>
                 <img
-                    ref={logo}
                     className={`${styles.logo} ${logoPartialOverlap ? styles.cropped : ""} ${
                         logoFullOverlap ? styles.hidden : ""
                     }`}
@@ -162,7 +158,6 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
                 )}
 
                 <a
-                    ref={github}
                     className={`${styles.githubLink} ${githubOverlap ? styles.hidden : ""}`}
                     href="https://github.com/university-of-york/esg-app-planning-poker"
                     target="_blank"
