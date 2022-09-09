@@ -116,16 +116,19 @@ const setTicket = async (roomId: string, ticketId: string, jiraTicket: boolean):
     }
 };
 
-const logMessage = async (level: string, message: string, stacktrace: string): Promise<void> => {
-    const response = await request("POST", `${BASE_URL}/log`, {
+const logMessage = async (level: string, message: string, stacktrace: string): Promise<string | undefined> => {
+    const response = await request<Result>("POST", `${BASE_URL}/log`, {
         level,
         message,
         stacktrace,
     });
 
     if (!response.success) {
-        throw new Error(`Could not log message`);
+        // Do not throw an error here as this may prevent the ErrorBoundary component from rendering properly
+        return;
     }
+
+    return response.body.result.id;
 };
 
 export {

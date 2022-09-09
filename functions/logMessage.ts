@@ -3,7 +3,7 @@ import { APIGatewayEvent } from "aws-lambda";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import type { LambdaResponse } from "../types/lambda";
-import { message } from "../utils/responses.js";
+import { message, result } from "../utils/responses.js";
 import { log } from "../utils/database.js";
 
 const logMessage = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
@@ -24,7 +24,7 @@ const logMessage = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     await log(id, timestamp, level, msg, stacktrace);
 
-    return message(200, "OK");
+    return result({ id });
 };
 
 export default logMessage;

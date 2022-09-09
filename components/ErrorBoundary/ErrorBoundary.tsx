@@ -1,21 +1,26 @@
 import React, { ErrorInfo } from "react";
 import { logMessage } from "../../utils/api";
+import { Button } from "../Button/Button";
+// @ts-ignore
+import styles from "./ErrorBoundary.module.css";
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component<any, { hasError: boolean; reference?: string }> {
     static getDerivedStateFromError() {
         // Update state so the next render will show the fallback UI
-        return { hasError: true };
+        return { hasError: true, reference: undefined };
     }
 
     constructor(props: any) {
         super(props);
 
         // Define a state variable to track whether is an error or not
-        this.state = { hasError: false };
+        this.state = { hasError: false, reference: undefined };
     }
 
-    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        logMessage("ERROR", error.message, errorInfo.componentStack);
+    async componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        const reference = await logMessage("ERROR", error.message, errorInfo.componentStack);
+
+        this.setState({ ...this.state, reference });
     }
 
     render() {
@@ -24,11 +29,28 @@ class ErrorBoundary extends React.Component {
         if (this.state.hasError) {
             // You can render any custom fallback UI
             return (
-                <div>
-                    <h2>Oops, there is an error!</h2>
-                    <button type="button" onClick={() => this.setState({ hasError: false })}>
+                <div className={styles.container}>
+                    <img
+                        className={styles.logo}
+                        src="https://www.york.ac.uk/static/stable/img/logo.svg"
+                        alt="University of York Logo"
+                    />
+
+                    <h2 className={styles.heading}>A client-side error has occurred.</h2>
+
+                    {this.state.reference ? (
+                        <p className={styles.reference}>
+                            Your error reference code is <strong>{this.state.reference}</strong>.
+                            <br />
+                            Please provide this code if you report this issue.
+                        </p>
+                    ) : (
+                        ""
+                    )}
+
+                    <Button className={styles.retry} onClick={() => this.setState({ hasError: false })}>
                         Try again?
-                    </button>
+                    </Button>
                 </div>
             );
         }
