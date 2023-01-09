@@ -47,7 +47,7 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "dotenv-webpack": "^7.1.0",
     "express": "^4.17.3",
-    "luxon": "^2.3.1",
+    "luxon": "^2.5.2",
     "next": "^12.2.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
