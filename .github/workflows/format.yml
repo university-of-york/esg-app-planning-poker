@@ -4,18 +4,16 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches:
-      - dev
 
 jobs:
   check-format:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the application's source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
