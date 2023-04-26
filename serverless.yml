@@ -4,7 +4,6 @@ provider:
   name: aws
   runtime: nodejs16.x
   stage: ${env:STACK_ENV, 'dev'}
-  cfnRole: ${env:DEPLOY_ROLE_ARN, ''}
   region: eu-west-1
   memorySize: 1024
   endpointType: regional
