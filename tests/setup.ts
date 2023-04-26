@@ -32,3 +32,7 @@ jest.mock("@aws-sdk/client-dynamodb", () => ({
         Type: "UPDATE",
     })),
 }));
+
+jest.mock("uuid", () => ({
+    v4: jest.fn(() => "mock-uuid"),
+}));

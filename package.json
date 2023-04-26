@@ -16,6 +16,8 @@
     "format": "prettier --write .",
     "checkformat": "prettier --check .",
     "cf": "npm run checkformat",
+    "formatandlint": "npm run format && npm run lint",
+    "fl": "npm run formatandlint",
     "lint": "xo .",
     "cypress:run": "npm run await && cypress run",
     "cypress:open": "npm run await && cypress open",
