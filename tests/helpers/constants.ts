@@ -16,6 +16,4 @@ const TEST_DB_POKER_ROOM = {
     },
 };
 
-const UUID_REGEX = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-
-export { TEST_DB_POKER_ROOM, UUID_REGEX };
+export { TEST_DB_POKER_ROOM };

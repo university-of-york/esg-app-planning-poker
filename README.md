@@ -1,13 +1,10 @@
 # Planning Poker
 
-[![format](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml)
-[![lint](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml)
-[![test](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml)
-[![build](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml)
-[![package](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/package.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/package.yml)
-
-[![dev deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml/badge.svg?branch=dev)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-dev.yml)
-[![prod deployment](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml/badge.svg?branch=main)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/deploy-prod.yml)
+[![format](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml/badge.svg)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/format.yml)
+[![lint](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml/badge.svg)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/lint.yml)
+[![test](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml/badge.svg)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/test.yml)
+[![build](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml/badge.svg)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/build.yml)
+[![package](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/package.yml/badge.svg)](https://github.com/university-of-york/esg-app-planning-poker/actions/workflows/package.yml)
 
 This application has post-deployment verification - following a successful deployment, 
 both the [Cypress](https://www.cypress.io/) functional test suite and a [Performance check](https://github.com/university-of-york/esg-action-performance-check) are run against the actual deployment.
@@ -81,11 +78,6 @@ To use a separately deployed backend, such as a sandbox deployment, create a `.e
 You can deploy the application with:
  - `npm run deploy:dev` to deploy to development
  - `npm run deploy:prod` to deploy to production
- 
-Note that to run a local deployment using the above scripts, you will need to have the following system variables populated with your aws credentials:
- - `AWS_ACCOUNT_ID`
- - `AWS_ACCESS_KEY_ID`
- - `AWS_SECRET_ACCESS_KEY`
 
 ## Project overview
 

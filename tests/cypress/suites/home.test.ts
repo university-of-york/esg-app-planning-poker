@@ -19,18 +19,18 @@ describe("Home screen", () => {
     });
 
     it("Contains the link to Github", () => {
-        cy.get("svg.fa-github-square").should(
-            "have.attr",
-            "href",
-            "https://github.com/university-of-york/esg-app-planning-poker"
-        );
+        cy.get("svg.fa-github-square")
+            .parent()
+            .should("have.attr", "href", "https://github.com/university-of-york/esg-app-planning-poker");
     });
 
     it("Contains the intro text", () => {
         cy.contains("Welcome to planning poker!").should("be.visible");
         cy.contains("Click the button below to create a new room").should("be.visible");
         cy.contains("Creating the room automatically makes you the host").should("be.visible");
-        cy.contains("Only the host has the ability to reveal & reset the table").should("be.visible");
+        cy.contains(
+            "The host has the ability to reveal & reset the table, switch estimation scheme, set a ticket ID, and kick idle members from the room"
+        ).should("be.visible");
     });
 
     it("Contains the create new room button", () => {

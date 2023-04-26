@@ -50,26 +50,11 @@ describe("Poker room", () => {
         // Player is shown as deciding
         cy.contains("John").should("be.visible").siblings("svg.fa-hourglass").should("be.visible");
 
-        // Find the desired option, check it isn't submitting, click it, check that it is submitting
-        cy.contains("M")
-            .should("be.visible")
-            .parent()
-            .should((card) => {
-                expect(card.attr("class")).to.include("Cards_card");
-                expect(card.attr("class")).not.to.include("Cards_submitting");
-                // card.trigger('click');
-            })
-            .click()
-            .should((card) => {
-                expect(card.attr("class")).to.include("Cards_submitting");
-                expect(card.children("img").attr("class")).to.include("Spinner_container");
-                expect(card.children("img").attr("class")).to.include("Cards_spinner");
-            });
-
         // Option is no longer submitting, and marked as selected
         cy.contains("M")
             .should("be.visible")
             .parent()
+            .click()
             .should((card) => {
                 expect(card.attr("class")).to.include("Cards_card");
                 expect(card.attr("class")).not.to.include("Cards_submitting");

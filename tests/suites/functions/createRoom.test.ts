@@ -1,6 +1,5 @@
 import { expect } from "@jest/globals";
 import { mockedDynamoClient } from "../../helpers/mocks";
-import { UUID_REGEX } from "../../helpers/constants";
 // The below import is only valid following `npm run compile:test` - if you have IDE errors here, run that script first
 import createRoom from "../../.build/functions/createRoom.js";
 
@@ -103,10 +102,13 @@ describe("Create Room function", () => {
                 Type: "PUT",
                 TableName: "poker-table",
                 Item: {
-                    id: { S: expect.stringMatching(UUID_REGEX) },
+                    id: { S: "mock-uuid" },
                     name: { S: "Test Room" },
                     hostId: { S: "test-host-id" },
                     state: { S: "HIDDEN" },
+                    estimation: { S: "T-SHIRT" },
+                    jiraTicket: { BOOL: true },
+                    ticketId: { S: "" },
                     members: {
                         L: [
                             {
@@ -126,6 +128,6 @@ describe("Create Room function", () => {
 
         expect(body.status).toEqual(200);
         expect(body.message).toEqual("OK");
-        expect(body.result.id).toMatch(UUID_REGEX);
+        expect(body.result.id).toEqual("mock-uuid");
     });
 });

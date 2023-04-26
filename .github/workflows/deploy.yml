@@ -1,28 +1,35 @@
-name: dev deployment
+name: Deploy to AWS & verify application behaviour/performance
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - dev
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
 
 jobs:
   deploy:
+    name: "Deploy to AWS"
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["dev", "prod"]
+    environment: ${{ matrix.environment }}
     steps:
       - name: Check out the application's source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: Install application dependencies
         run: npm ci
-
-      - name: Install cypress system dependencies
-        run: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
       - name: Check code is formatted correctly
         run: npm run checkformat
@@ -30,26 +37,35 @@ jobs:
       - name: Check code conforms to linting rules
         run: npm run lint
 
-      - name: Deploy - dev
-        if: github.ref == 'refs/heads/dev'
-        run: npm run deploy:dev
+      - name: Configure AWS authentication
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.DEPLOY_ROLE_ARN }}
+          role-duration-seconds: 1800
+          aws-region: eu-west-1
+
+      - name: Deploy to AWS
+        run: npm run deploy
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
-          AWS_ACCOUNT_ID: ${{ secrets.DEV_AWS_ACCOUNT_ID }}
-          SSL_CERTIFICATE_ARN: ${{ secrets.DEV_SSL_CERTIFICATE_ARN }}
-          DOMAIN_NAME: planning-poker.dev.app.york.ac.uk
+          STACK_ENV: ${{ matrix.environment }}
+          SSL_CERTIFICATE_ARN: ${{ vars.SSL_CERTIFICATE_ARN }}
+          DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
 
   verify:
+    name: "Verify application behaviour"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs: deploy
+    strategy:
+      matrix:
+        environment: ["dev", "prod"]
+    environment: ${{ matrix.environment }}
     steps:
       - name: Check out the application's source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -59,19 +75,26 @@ jobs:
       - name: Install cypress system dependencies
         run: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
-      - name: Verify development deployment
-        run: npm run verify:dev
+      - name: Verify deployment behaviour
+        run: npm run verify
+        env:
+          CYPRESS_BASE_URL: https://${{ vars.DOMAIN_NAME }}/
 
   performance-check:
+    name: "Verify application performance"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs: deploy
+    strategy:
+      matrix:
+        environment: ["dev", "prod"]
+    environment: ${{ matrix.environment }}
     steps:
       - name: Check out the application's source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -83,5 +106,4 @@ jobs:
           minimum-desktop-score: 80
           minimum-mobile-score: 60
           urls: |
-            https://planning-poker.dev.app.york.ac.uk/
-            https://planning-poker.dev.app.york.ac.uk/table/6a9105cc-4671-4eab-a884-7f763a5411cf
+            https://${{ vars.DOMAIN_NAME }}/
