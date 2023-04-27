@@ -24,3 +24,11 @@ jobs:
         run: npm run package
         env:
           STACK_ENV: dev
+          AWS_ACCOUNT_ID: 1234567890
+
+      - name: Store packaged application as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: serverless
+          path: .serverless/
+          retention-days: 14

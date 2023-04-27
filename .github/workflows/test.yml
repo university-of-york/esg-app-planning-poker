@@ -28,3 +28,12 @@ jobs:
 
       - name: Run functional tests
         run: npm run test:functional
+
+      - name: Store cypress captures as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress
+          path: |
+            tests/cypress/screenshots
+            tests/cypress/videos
+          retention-days: 14
