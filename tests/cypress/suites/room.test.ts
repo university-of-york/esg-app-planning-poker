@@ -8,6 +8,8 @@ describe("Poker room", () => {
     });
 
     afterEach(() => {
+        cy.screenshot();
+
         // @ts-ignore
         cy.saveSession();
     });

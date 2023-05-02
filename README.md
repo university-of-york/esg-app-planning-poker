@@ -10,7 +10,7 @@ This application has post-deployment verification - following a successful deplo
 both the [Cypress](https://www.cypress.io/) functional test suite and a [Performance check](https://github.com/university-of-york/esg-action-performance-check) are run against the actual deployment.
 
 Production: [planning-poker.app.york.ac.uk](https://planning-poker.app.york.ac.uk/)  
-Development: [planning-poker.dev.app.york.ac.uk](https://planning-poker.dev.app.york.ac.uk/)
+Development: [planning-poker.app-dev.york.ac.uk](https://planning-poker.app-dev.york.ac.uk/)
 
 ## Introduction
 
@@ -75,9 +75,7 @@ To use a separately deployed backend, such as a sandbox deployment, create a `.e
 
 ### Deploying the application
 
-You can deploy the application with:
- - `npm run deploy:dev` to deploy to development
- - `npm run deploy:prod` to deploy to production
+You can deploy the application with `npm run deploy`  
 
 ## Project overview
 

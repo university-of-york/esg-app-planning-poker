@@ -8,6 +8,8 @@ describe("Home screen", () => {
     });
 
     afterEach(() => {
+        cy.screenshot();
+
         // @ts-ignore
         cy.saveSession();
     });

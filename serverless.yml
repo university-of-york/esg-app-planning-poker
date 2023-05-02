@@ -53,6 +53,7 @@ custom:
   pokerTableName: planning-poker-${self:provider.stage}
   logTableName: planning-poker-logs-${self:provider.stage}
   sslCertificateArn: ${env:SSL_CERTIFICATE_ARN, ''}
+  dnsRequestQueue: ${env:DNS_REQUEST_QUEUE, ''}
 
 functions:
   server:
@@ -240,82 +241,83 @@ resources:
       Type: Custom::CNAME
       Condition: UseCustomDomainName
       Properties:
-        ServiceToken: arn:aws:sns:eu-west-1:230504789214:RequestRecordSet
+        ServiceToken: ${self:custom.dnsRequestQueue}
         Source: ${self:custom.domainName}.
         Target: !Join ["", [!GetAtt ApiGatewayCustomDomainName.RegionalDomainName, "."]]
 
 # Exclude files and next.js dependencies that are not needed at runtime
 package:
-  include:
-    - .next/**
-    - .env.dev
-    - .env.prod
-  exclude:
-    - .*
-    - .gradle/**
-    - .github/**
-    - .idea/**
-    - package-lock.json
-    - README.md
-    - tsconfig.tsbuildinfo
-    - .next/cache/webpack/client-development/**
-    - .next/cache/webpack/client-development-fallback/**
-    - .next/cache/webpack/server-development/**
-    - node_modules/@babel/**
-    - node_modules/ally.js/**
-    - node_modules/caniuse-lite/**
-    - node_modules/lodash/**
-    - node_modules/webpack/**
-    - node_modules/terser/**
-    - node_modules/es5-ext/**
-    - node_modules/resolve-url-loader/**
-    - node_modules/postcss/**
-    - node_modules/acorn/**
-    - node_modules/ajv/**
-    - node_modules/@webassemblyjs/**
-    - node_modules/cssnano-preset-simple/**
-    - node_modules/snapdragon/**
-    - node_modules/regenerate-unicode-properties/**
-    - node_modules/pako/**
-    - node_modules/source-map/**
-    - node_modules/bluebird/**
-    - node_modules/uri-js/**
-    - node_modules/ast-types/**
-    - node_modules/watchpack-chokidar2/**
-    - node_modules/terser-webpack-plugin/**
-    - node_modules/core-js-compat/**
-    - node_modules/neo-async/**
-    - node_modules/postcss-selector-parser/**
-    - node_modules/css-loader/**
-    - node_modules/sass-loader/**
-    - node_modules/buffer/**
-    - node_modules/adjust-sourcemap-loader/**
-    - node_modules/ext/**
-    - node_modules/tr46/**
-    - node_modules/micromatch/**
-    - node_modules/@ampproject/**
-    - node_modules/postcss-modules-parser/**
-    - node_modules/css-modules-loader-core/**
-    - node_modules/babel-plugin-react-css-modules/**
-    - node_modules/es-abstract/**
-    - node_modules/string.prototype.trimstart/**
-    - node_modules/string.prototype.trimend/**
-    - node_modules/**/CHANGELOG*
-    - node_modules/**/README*
-    - node_modules/*/test/**
-    - node_modules/**/.github/**
-    - node_modules/@opentelemetry/**
-    - node_modules/encoding/**
-    - node_modules/@next/swc-android-arm64/**
-    - node_modules/@next/swc-darwin-arm64/**
-    - node_modules/@next/swc-darwin-x64/**
-    - node_modules/@next/swc-linux-arm64-gnu/**
-    - node_modules/@next/swc-linux-arm64-musl/**
-    - node_modules/@next/swc-linux-arm-gnueabihf/**
-    - node_modules/@next/swc-linux-x64-gnu/**
-    - node_modules/@next/swc-linux-x64-musl/**
-    - node_modules/@next/swc-win32-arm64-msvc/**
-    - node_modules/@next/swc-win32-x64-msvc/**
-    - node_modules/@next/swc-win32-ia32-msvc/**
-    - node_modules/next/dist/compiled/babel/**
-    - node_modules/next/dist/compiled/babel-packages/**
+  patterns:
+    # Include the following:
+    - ".next/**"
+    - ".env.dev"
+    - ".env.prod"
+    # Exclude the following:
+    - "!.*"
+    - "!.gradle/**"
+    - "!.github/**"
+    - "!.idea/**"
+    - "!package-lock.json"
+    - "!README.md"
+    - "!tsconfig.tsbuildinfo"
+    - "!.next/cache/webpack/client-development/**"
+    - "!.next/cache/webpack/client-development-fallback/**"
+    - "!.next/cache/webpack/server-development/**"
+    - "!node_modules/@babel/**"
+    - "!node_modules/ally.js/**"
+    - "!node_modules/caniuse-lite/**"
+    - "!node_modules/lodash/**"
+    - "!node_modules/webpack/**"
+    - "!node_modules/terser/**"
+    - "!node_modules/es5-ext/**"
+    - "!node_modules/resolve-url-loader/**"
+    - "!node_modules/postcss/**"
+    - "!node_modules/acorn/**"
+    - "!node_modules/ajv/**"
+    - "!node_modules/@webassemblyjs/**"
+    - "!node_modules/cssnano-preset-simple/**"
+    - "!node_modules/snapdragon/**"
+    - "!node_modules/regenerate-unicode-properties/**"
+    - "!node_modules/pako/**"
+    - "!node_modules/source-map/**"
+    - "!node_modules/bluebird/**"
+    - "!node_modules/uri-js/**"
+    - "!node_modules/ast-types/**"
+    - "!node_modules/watchpack-chokidar2/**"
+    - "!node_modules/terser-webpack-plugin/**"
+    - "!node_modules/core-js-compat/**"
+    - "!node_modules/neo-async/**"
+    - "!node_modules/postcss-selector-parser/**"
+    - "!node_modules/css-loader/**"
+    - "!node_modules/sass-loader/**"
+    - "!node_modules/buffer/**"
+    - "!node_modules/adjust-sourcemap-loader/**"
+    - "!node_modules/ext/**"
+    - "!node_modules/tr46/**"
+    - "!node_modules/micromatch/**"
+    - "!node_modules/@ampproject/**"
+    - "!node_modules/postcss-modules-parser/**"
+    - "!node_modules/css-modules-loader-core/**"
+    - "!node_modules/babel-plugin-react-css-modules/**"
+    - "!node_modules/es-abstract/**"
+    - "!node_modules/string.prototype.trimstart/**"
+    - "!node_modules/string.prototype.trimend/**"
+    - "!node_modules/**/CHANGELOG*"
+    - "!node_modules/**/README*"
+    - "!node_modules/*/test/**"
+    - "!node_modules/**/.github/**"
+    - "!node_modules/@opentelemetry/**"
+    - "!node_modules/encoding/**"
+    - "!node_modules/@next/swc-android-arm64/**"
+    - "!node_modules/@next/swc-darwin-arm64/**"
+    - "!node_modules/@next/swc-darwin-x64/**"
+    - "!node_modules/@next/swc-linux-arm64-gnu/**"
+    - "!node_modules/@next/swc-linux-arm64-musl/**"
+    - "!node_modules/@next/swc-linux-arm-gnueabihf/**"
+    - "!node_modules/@next/swc-linux-x64-gnu/**"
+    - "!node_modules/@next/swc-linux-x64-musl/**"
+    - "!node_modules/@next/swc-win32-arm64-msvc/**"
+    - "!node_modules/@next/swc-win32-x64-msvc/**"
+    - "!node_modules/@next/swc-win32-ia32-msvc/**"
+    - "!node_modules/next/dist/compiled/babel/**"
+    - "!node_modules/next/dist/compiled/babel-packages/**"
