@@ -18,8 +18,6 @@ provider:
     defined_in: serverless
     pushed_by: github
     status: dev
-  deploymentBucket:
-    blockPublicAccess: false
   apiGateway:
     minimumCompressionSize: 1000
   iam:
@@ -46,7 +44,6 @@ provider:
 plugins:
   - serverless-apigw-binary
   - serverless-plugin-typescript
-  - serverless-deployment-bucket
 
 custom:
   apigwBinary:
@@ -57,8 +54,6 @@ custom:
   logTableName: planning-poker-logs-${self:provider.stage}
   sslCertificateArn: ${env:SSL_CERTIFICATE_ARN, ''}
   dnsRequestQueue: ${env:DNS_REQUEST_QUEUE, ''}
-  deploymentBucket:
-    policy: ${env:DEPLOYMENT_BUCKET_POLICY, ''}
 
 functions:
   server:

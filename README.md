@@ -75,7 +75,25 @@ To use a separately deployed backend, such as a sandbox deployment, create a `.e
 
 ### Deploying the application
 
-You can deploy the application with `npm run deploy`  
+You can deploy the application with `npm run deploy`.  
+
+When the stack is deployed to an ESG AWS account for the first time, it must be given a custom bucket policy in order to allow serverless to access it.  
+The policy should look like:
+```json
+{
+   "Effect": "Allow",
+   "Principal": {
+       "AWS": "arn:aws:iam::<ACCOUNT_ID>:role/GithubActionsDeploymentRole"
+   },
+   "Action": "s3:*",
+   "Resource": [
+       "arn:aws:s3:::esg-app-planning-poker-<BUCKET_ID>/*",
+       "arn:aws:s3:::esg-app-planning-poker-<BUCKET_ID>"
+   ]
+}
+```
+
+Where `ACCOUNT_ID` is the value of the relevant AWS account and `BUCKET_ID` is the remaining qualifier for the bucket name e.g. `serverlessdeploymentbuck-zbawdfbnndvs`
 
 ## Project overview
 
