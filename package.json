@@ -36,7 +36,7 @@
     "verify": "cypress run"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.58.0",
+    "@aws-sdk/client-dynamodb": "^3.351.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
