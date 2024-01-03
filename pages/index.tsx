@@ -116,7 +116,7 @@ const Home: NextPage = () => {
                             <table>
                                 <tbody>
                                     {session!.history.map((room) => (
-                                        <Link key={room.roomId} passHref href={`/table/${room.roomId}`}>
+                                        <Link key={room.roomId} passHref legacyBehavior href={`/table/${room.roomId}`}>
                                             <tr className={styles.room} onClick={() => setIsLoading(true)}>
                                                 <td className={styles.name}>{room.roomName}</td>
                                                 <td className={styles.timestamp}>

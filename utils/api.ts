@@ -116,7 +116,7 @@ const setTicket = async (roomId: string, ticketId: string, jiraTicket: boolean):
     }
 };
 
-const logMessage = async (level: string, message: string, stacktrace: string): Promise<string | undefined> => {
+const logMessage = async (level: string, message: string, stacktrace?: string): Promise<string | undefined> => {
     const response = await request<Result>("POST", `${BASE_URL}/log`, {
         level,
         message,

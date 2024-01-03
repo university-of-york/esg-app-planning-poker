@@ -18,7 +18,7 @@ class ErrorBoundary extends React.Component<any, { hasError: boolean; reference?
     }
 
     async componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        const reference = await logMessage("ERROR", error.message, errorInfo.componentStack);
+        const reference = await logMessage("ERROR", error.message, errorInfo.componentStack ?? undefined);
 
         this.setState({ ...this.state, reference });
     }
