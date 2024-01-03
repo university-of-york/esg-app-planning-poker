@@ -125,7 +125,7 @@ describe("Join Room function", () => {
                         ],
                     },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));

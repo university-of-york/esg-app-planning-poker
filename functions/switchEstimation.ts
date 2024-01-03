@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
 import { estimation } from "../utils/database.js";
@@ -21,7 +21,7 @@ const switchEstimation = async (event: APIGatewayEvent): Promise<LambdaResponse>
 
     const { estimationType } = JSON.parse(body);
 
-    if (!estimationType) {
+    if (!estimationType || typeof estimationType !== "string") {
         return message(400, "Estimation type required");
     }
 

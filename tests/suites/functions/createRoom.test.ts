@@ -121,7 +121,7 @@ describe("Create Room function", () => {
                         ],
                     },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));

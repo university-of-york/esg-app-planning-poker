@@ -38,8 +38,6 @@
     "no-lonely-if": "off",
     "no-warning-comments": "off",
     "no-undef": "off",
-    "node/file-extension-in-import": ["error", "always"],
-    "node/prefer-global/process": ["error", "always"],
     "one-var": "off",
     "unicorn/better-regex": "off",
     "unicorn/catch-error-name": "off",

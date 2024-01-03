@@ -15,7 +15,9 @@
     cursor: pointer;
     background: var(--palette-grey-dark);
     border-bottom-right-radius: 0.8em;
-    transition: opacity 0.2s, background-color 0.2s;
+    transition:
+        opacity 0.2s,
+        background-color 0.2s;
 }
 
 .selected.disabled {

@@ -31,7 +31,7 @@ describe("Home screen", () => {
         cy.contains("Click the button below to create a new room").should("be.visible");
         cy.contains("Creating the room automatically makes you the host").should("be.visible");
         cy.contains(
-            "The host has the ability to reveal & reset the table, switch estimation scheme, set a ticket ID, and kick idle members from the room"
+            "The host has the ability to reveal & reset the table, switch estimation scheme, set a ticket ID, and kick idle members from the room",
         ).should("be.visible");
     });
 

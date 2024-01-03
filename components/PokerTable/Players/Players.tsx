@@ -20,9 +20,7 @@ const Players = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }
         let choice;
 
         if (room.state === "REVEALED") {
-            choice = (
-                <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ? member.choice : "??"}</span>
-            );
+            choice = <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ?? "??"}</span>;
         } else {
             if (member.choice === "") {
                 choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass} />;

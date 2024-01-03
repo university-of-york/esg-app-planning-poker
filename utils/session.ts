@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import type { Session } from "../types/session";
-import { Member, Room } from "../types/room";
+import { type Member, type Room } from "../types/room";
 
 const BROWSER_STORAGE_KEY = "planning-poker-session";
 

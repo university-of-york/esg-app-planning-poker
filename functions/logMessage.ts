@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import { DateTime } from "luxon";
 import { v4 as uuid } from "uuid";
 import type { LambdaResponse } from "../types/lambda";
@@ -20,9 +20,15 @@ const logMessage = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const { level, message: msg, stacktrace } = JSON.parse(body);
 
+    if (!level || typeof level !== "string" || !msg || typeof msg !== "string") {
+        return message(400, "Level and message are required");
+    }
+
+    const stack = typeof stacktrace === "string" ? stacktrace : undefined;
+
     console.info(`Received log: ${id}: ${level}: ${msg}`);
 
-    await log(id, timestamp, level, msg, stacktrace);
+    await log(id, timestamp, level, msg, stack);
 
     return result({ id });
 };

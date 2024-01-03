@@ -3,7 +3,7 @@ import {
     GetItemCommand,
     PutItemCommand,
     UpdateItemCommand,
-    AttributeValue,
+    type AttributeValue,
 } from "@aws-sdk/client-dynamodb";
 import type { Room } from "../types/room";
 import { pokerTable, logTable } from "./environment.js";
@@ -298,7 +298,7 @@ const log = async (
     timestamp: string,
     level: string,
     message: string,
-    stacktrace?: string
+    stacktrace?: string,
 ): Promise<void> => {
     const command = new PutItemCommand({
         TableName: logTable(),
@@ -307,7 +307,7 @@ const log = async (
             timestamp: { S: timestamp },
             level: { S: level },
             message: { S: message },
-            stacktrace: { S: stacktrace ? stacktrace : "" },
+            stacktrace: { S: stacktrace ?? "" },
         },
     });
 

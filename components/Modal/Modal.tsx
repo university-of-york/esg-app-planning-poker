@@ -18,7 +18,7 @@ const Modal = ({
     open?: boolean;
     mandatory?: boolean;
     valid?: boolean;
-    trigger?: any;
+    trigger?: React.DetailedReactHTMLElement<unknown, unknown>;
     children: any;
     className?: string;
     callback?: () => void | Promise<void>;
@@ -27,7 +27,7 @@ const Modal = ({
     const [_open, setIsOpen] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    let _trigger;
+    let _trigger: React.DetailedReactHTMLElement;
 
     if (trigger) {
         _trigger = React.cloneElement(trigger, {
@@ -57,7 +57,7 @@ const Modal = ({
     const isOpen = open || _open;
 
     return (
-        <div className={`${styles.container} ${className ? className : ""}`}>
+        <div className={`${styles.container} ${className ?? ""}`}>
             {_trigger}
 
             <div className={`${styles.overlay} ${isOpen ? "" : styles.hidden}`} onClick={close} />

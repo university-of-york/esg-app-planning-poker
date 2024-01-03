@@ -23,8 +23,19 @@ body {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    font-family: Ubuntu, Droid Sans, Fira Sans, Oxygen, Cantarell, Roboto, Segoe UI, BlinkMacSystemFont, Helvetica Neue,
-        system-ui, -apple-system, sans-serif;
+    font-family:
+        Ubuntu,
+        Droid Sans,
+        Fira Sans,
+        Oxygen,
+        Cantarell,
+        Roboto,
+        Segoe UI,
+        BlinkMacSystemFont,
+        Helvetica Neue,
+        system-ui,
+        -apple-system,
+        sans-serif;
 }
 
 #__next {
@@ -52,12 +63,17 @@ input {
     border: solid 2pt #404040;
     border-radius: 0.4em;
     outline: solid 0 #404040;
-    transition: outline-color 0.2s, outline-width 0.2s;
+    transition:
+        outline-color 0.2s,
+        outline-width 0.2s;
 }
 
 input:focus,
 input:focus-within,
 input:focus-visible {
-    box-shadow: var(--palette-blue-main) 1px 1px 1pt 1pt, var(--palette-blue-main) -1px 1px 1pt 1pt,
-        var(--palette-blue-main) 1px -1px 1pt 1pt, var(--palette-blue-main) -1px -1px 1pt 1pt;
+    box-shadow:
+        var(--palette-blue-main) 1px 1px 1pt 1pt,
+        var(--palette-blue-main) -1px 1px 1pt 1pt,
+        var(--palette-blue-main) 1px -1px 1pt 1pt,
+        var(--palette-blue-main) -1px -1px 1pt 1pt;
 }

@@ -5,7 +5,7 @@ import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../Button/Button";
 import { Modal } from "../Modal/Modal";
-import { Room } from "../../types/room";
+import { type Room } from "../../types/room";
 import { userIsHost } from "../../utils/session";
 import { renameRoom } from "../../utils/api";
 // @ts-ignore

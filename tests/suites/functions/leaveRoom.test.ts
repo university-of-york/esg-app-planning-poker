@@ -91,7 +91,7 @@ describe("Leave Room function", () => {
                 Key: {
                     id: { S: "test-id" },
                 },
-            })
+            }),
         );
 
         expect(client.send).toHaveBeenCalledWith(
@@ -105,7 +105,7 @@ describe("Leave Room function", () => {
                 ExpressionAttributeValues: {
                     ":members": { L: [] },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));
