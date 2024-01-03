@@ -21,12 +21,10 @@ const Players = ({ room, refresh }: { readonly room: Room; readonly refresh: () 
 
         if (room.state === "REVEALED") {
             choice = <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ?? "??"}</span>;
+        } else if (member.choice === "") {
+            choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass} />;
         } else {
-            if (member.choice === "") {
-                choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass} />;
-            } else {
-                choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faCheck} />;
-            }
+            choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faCheck} />;
         }
 
         return (
