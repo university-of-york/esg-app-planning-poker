@@ -1,5 +1,5 @@
 import React from "react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom/jest-globals";
 import fetchMock from "jest-fetch-mock";
 import { TEST_DB_POKER_ROOM } from "./helpers/constants";
 
