@@ -18,7 +18,7 @@ const LOGO_FULL_WIDTH = 415;
 const LOGO_ICON_WIDTH = 150;
 const GITHUB_ICON_WIDTH = 130;
 
-const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> }) => {
+const Header = ({ room, refresh }: { readonly room?: Room; readonly refresh?: () => Promise<void> }) => {
     const info = useRef(null);
 
     const [roomName, setRoomName] = useState<string | undefined>(room?.name);

@@ -1,4 +1,4 @@
-import process from "node:process";
+import process from "process";
 
 const getEnvironmentVariable = (key: string): string => {
     const value = process.env[key];

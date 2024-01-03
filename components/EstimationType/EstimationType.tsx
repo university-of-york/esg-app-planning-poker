@@ -8,7 +8,7 @@ import { ESTIMATION_SCHEMES } from "../../constants/estimates";
 // @ts-ignore
 import styles from "./EstimationType.module.css";
 
-const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
+const EstimationType = ({ room, refresh }: { readonly room: Room; readonly refresh: () => Promise<void> }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<
     }, [room]);
 
     if (!userIsHost(room)) {
-        return <></>;
+        return;
     }
 
     const handleSelect = async (scheme: string) => {
@@ -41,7 +41,7 @@ const EstimationType = ({ room, refresh }: { room: Room; refresh: () => Promise<
     const remainingOptions = Object.keys(ESTIMATION_SCHEMES).filter((option) => option !== room.estimation);
 
     const options = remainingOptions.map((scheme) => (
-        <div className={styles.option} key={scheme} onClick={async () => handleSelect(scheme)}>
+        <div key={scheme} className={styles.option} onClick={async () => handleSelect(scheme)}>
             {ESTIMATION_SCHEMES[scheme].display}
         </div>
     ));

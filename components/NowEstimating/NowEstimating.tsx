@@ -6,7 +6,7 @@ import type { Room } from "../../types/room";
 // @ts-ignore
 import styles from "./NowEstimating.module.css";
 
-const NowEstimating = ({ room }: { room: Room }) => {
+const NowEstimating = ({ room }: { readonly room: Room }) => {
     const [ticketId, setTicketId] = useState<string>(room.ticketId);
     const [isJira, setIsJira] = useState<boolean>(room.jiraTicket);
 
@@ -44,29 +44,25 @@ const NowEstimating = ({ room }: { room: Room }) => {
                 </div>
             </Modal>
         );
-    } else {
-        if (room.ticketId) {
-            const display = (
-                <span className={`${styles.ticket} ${room.jiraTicket ? styles.linked : ""}`}>
-                    Now estimating: <strong>{room.ticketId}</strong>
-                </span>
-            );
+    } else if (room.ticketId) {
+        const display = (
+            <span className={`${styles.ticket} ${room.jiraTicket ? styles.linked : ""}`}>
+                Now estimating: <strong>{room.ticketId}</strong>
+            </span>
+        );
 
-            return room.jiraTicket ? (
-                <a
-                    className={styles.link}
-                    href={`https://uoy.atlassian.net/browse/${room.ticketId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {display}
-                </a>
-            ) : (
-                display
-            );
-        } else {
-            return <></>;
-        }
+        return room.jiraTicket ? (
+            <a
+                className={styles.link}
+                href={`https://uoy.atlassian.net/browse/${room.ticketId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {display}
+            </a>
+        ) : (
+            display
+        );
     }
 };
 

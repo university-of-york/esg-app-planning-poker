@@ -15,14 +15,14 @@ const Modal = ({
     callback,
     onClose,
 }: {
-    open?: boolean;
-    mandatory?: boolean;
-    valid?: boolean;
-    trigger?: React.DetailedReactHTMLElement<unknown, unknown>;
-    children: any;
-    className?: string;
-    callback?: () => void | Promise<void>;
-    onClose?: () => void | Promise<void>;
+    readonly open?: boolean;
+    readonly mandatory?: boolean;
+    readonly valid?: boolean;
+    readonly trigger?: React.DetailedReactHTMLElement<unknown, unknown>;
+    readonly children: any;
+    readonly className?: string;
+    readonly callback?: () => void | Promise<void>;
+    readonly onClose?: () => void | Promise<void>;
 }) => {
     const [_open, setIsOpen] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -86,11 +86,11 @@ const ModalControls = ({
     isValid,
     isSubmitting,
 }: {
-    confirm: () => void;
-    close: () => void;
-    isMandatory: boolean;
-    isValid: boolean;
-    isSubmitting: boolean;
+    readonly confirm: () => void;
+    readonly close: () => void;
+    readonly isMandatory: boolean;
+    readonly isValid: boolean;
+    readonly isSubmitting: boolean;
 }) => {
     return isMandatory ? (
         <div className={`${styles.controls} ${styles.single}`}>

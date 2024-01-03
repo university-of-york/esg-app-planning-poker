@@ -7,7 +7,7 @@ import { ESTIMATION_SCHEMES } from "../../../constants/estimates";
 // @ts-ignore
 import styles from "./Cards.module.css";
 
-const Cards = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
+const Cards = ({ room, refresh }: { readonly room: Room; readonly refresh: () => Promise<void> }) => {
     const [submittingChoice, setSubmittingChoice] = useState<string>();
 
     const user = getUser(room);
@@ -33,10 +33,10 @@ const Cards = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) 
             <div className={`${styles.container} ${isDisabled ? styles.disabled : ""}`}>
                 {options.map((option) => (
                     <div
+                        key={option}
                         className={`${styles.card} ${option === user!.choice ? styles.selected : ""} ${
                             submittingChoice === option ? styles.submitting : ""
                         } ${isNumerical ? styles.numerical : ""}`}
-                        key={option}
                         onClick={isDisabled ? undefined : () => handleChoice(option)}
                     >
                         {submittingChoice === option ? (

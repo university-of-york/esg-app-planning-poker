@@ -1,14 +1,16 @@
+/* eslint-disable react/button-has-type */
+
 import Link from "next/link";
 // @ts-ignore
 import styles from "./Button.module.css";
 
 declare type ButtonProps = {
-    className?: string;
-    children: any;
-    link?: string;
-    onClick?: () => void;
-    isSubmitting?: boolean;
-    isDisabled?: boolean;
+    readonly className?: string;
+    readonly children: any;
+    readonly link?: string;
+    readonly onClick?: () => void;
+    readonly isSubmitting?: boolean;
+    readonly isDisabled?: boolean;
 };
 
 const Button = ({ className, children, link, onClick, isSubmitting = false, isDisabled = false }: ButtonProps) => {
@@ -25,7 +27,7 @@ const Button = ({ className, children, link, onClick, isSubmitting = false, isDi
 
     if (link) {
         return (
-            <Link href={link} passHref>
+            <Link passHref href={link}>
                 {button}
             </Link>
         );

@@ -3,15 +3,15 @@ import { ESTIMATION_SCHEMES } from "../../../constants/estimates";
 // @ts-ignore
 import styles from "./Results.module.css";
 
-const Results = ({ room }: { room: Room }) => {
+const Results = ({ room }: { readonly room: Room }) => {
     if (room.state === "HIDDEN") {
-        return <></>;
+        return;
     }
 
     const membersWithChoicesMade = room.members.filter((member) => member.choice !== "");
 
     if (!membersWithChoicesMade || membersWithChoicesMade.length === 0) {
-        return <></>;
+        return;
     }
 
     const options = ESTIMATION_SCHEMES[room.estimation].options;

@@ -29,8 +29,8 @@ const getServerSideProps = async ({ params }: { params: any }) => {
 };
 
 declare type PlanningRoomProps = {
-    id: string;
-    room: Room;
+    readonly id: string;
+    readonly room: Room;
 };
 
 const PlanningRoom = (props: PlanningRoomProps) => {
