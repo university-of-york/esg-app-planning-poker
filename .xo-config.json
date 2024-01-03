@@ -40,7 +40,6 @@
     "no-lonely-if": "off",
     "no-warning-comments": "off",
     "no-undef": "off",
-    "one-var": "off",
     "react/hook-use-state": "off",
     "react/no-access-state-in-setstate": "off",
     "react/no-invalid-html-attribute": "off",

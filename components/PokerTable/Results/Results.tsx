@@ -35,17 +35,9 @@ const Results = ({ room }: { readonly room: Room }) => {
     const tiedVotes = otherVotes.filter((it) => it.votes === winningVote.votes);
     const isTied = tiedVotes.length > 0;
 
-    let title, result;
-
-    if (isTied) {
-        const tiedOptions = tiedVotes.map((vote) => vote.option);
-
-        title = "It's a draw!";
-        result = `${winningVote.option} ${tiedOptions.join(" ")}`;
-    } else {
-        title = "We have a winner!";
-        result = winningVote.option;
-    }
+    const [title, result] = isTied
+        ? ["It's a draw!", `${winningVote.option} ${tiedVotes.map((vote) => vote.option).join(" ")}`]
+        : ["We have a winner!", winningVote.option];
 
     return (
         <div className={`${styles.container} ${isTied ? styles.tied : ""}`}>
