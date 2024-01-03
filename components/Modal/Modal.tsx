@@ -18,7 +18,7 @@ const Modal = ({
     readonly open?: boolean;
     readonly mandatory?: boolean;
     readonly valid?: boolean;
-    readonly trigger?: React.DetailedReactHTMLElement<unknown, unknown>;
+    readonly trigger?: JSX.Element;
     readonly children: any;
     readonly className?: string;
     readonly callback?: () => void | Promise<void>;
@@ -27,7 +27,7 @@ const Modal = ({
     const [_open, setIsOpen] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    let _trigger: React.DetailedReactHTMLElement;
+    let _trigger;
 
     if (trigger) {
         _trigger = React.cloneElement(trigger, {

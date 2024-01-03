@@ -5,13 +5,13 @@ import styles from "./Results.module.css";
 
 const Results = ({ room }: { readonly room: Room }) => {
     if (room.state === "HIDDEN") {
-        return;
+        return null;
     }
 
     const membersWithChoicesMade = room.members.filter((member) => member.choice !== "");
 
     if (!membersWithChoicesMade || membersWithChoicesMade.length === 0) {
-        return;
+        return null;
     }
 
     const options = ESTIMATION_SCHEMES[room.estimation].options;

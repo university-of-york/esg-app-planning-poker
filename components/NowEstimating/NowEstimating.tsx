@@ -64,6 +64,8 @@ const NowEstimating = ({ room }: { readonly room: Room }) => {
             display
         );
     }
+
+    return null;
 };
 
 export { NowEstimating };

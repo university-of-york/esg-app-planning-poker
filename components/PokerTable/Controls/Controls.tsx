@@ -11,7 +11,7 @@ const Controls = ({ room, refresh }: { readonly room: Room; readonly refresh: ()
     const allChoicesMade = !room.members.find((member) => member.choice === "");
 
     if (!allChoicesMade && room.state === "HIDDEN") {
-        return;
+        return null;
     }
 
     const handleReveal = () => {

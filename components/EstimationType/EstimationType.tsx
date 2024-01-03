@@ -21,7 +21,7 @@ const EstimationType = ({ room, refresh }: { readonly room: Room; readonly refre
     }, [room]);
 
     if (!userIsHost(room)) {
-        return;
+        return null;
     }
 
     const handleSelect = async (scheme: string) => {
