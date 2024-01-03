@@ -6,7 +6,7 @@ import { kickMember } from "../../../utils/api";
 // @ts-ignore
 import styles from "./Players.module.css";
 
-const Players = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
+const Players = ({ room, refresh }: { readonly room: Room; readonly refresh: () => Promise<void> }) => {
     const user = getUser(room);
     const host = getHost(room);
 
@@ -20,23 +20,19 @@ const Players = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }
         let choice;
 
         if (room.state === "REVEALED") {
-            choice = (
-                <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ? member.choice : "??"}</span>
-            );
+            choice = <span className={`${styles.choice} ${styles.revealed}`}>{member.choice ?? "??"}</span>;
+        } else if (member.choice === "") {
+            choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass} />;
         } else {
-            if (member.choice === "") {
-                choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faHourglass} />;
-            } else {
-                choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faCheck} />;
-            }
+            choice = <FontAwesomeIcon className={`${styles.choice} ${styles.icon}`} icon={faCheck} />;
         }
 
         return (
             <div
+                key={member.id}
                 className={`${styles.player} ${host?.id === member.id ? styles.host : ""} ${
                     user?.id === member.id ? styles.current : ""
                 }`}
-                key={member.id}
             >
                 {userIsHost(room) && member.id !== user?.id ? (
                     <FontAwesomeIcon

@@ -1,4 +1,4 @@
-import React, { ErrorInfo } from "react";
+import React, { type ErrorInfo } from "react";
 import { logMessage } from "../../utils/api";
 import { Button } from "../Button/Button";
 // @ts-ignore

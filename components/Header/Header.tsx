@@ -5,7 +5,7 @@ import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../Button/Button";
 import { Modal } from "../Modal/Modal";
-import { Room } from "../../types/room";
+import { type Room } from "../../types/room";
 import { userIsHost } from "../../utils/session";
 import { renameRoom } from "../../utils/api";
 // @ts-ignore
@@ -18,7 +18,7 @@ const LOGO_FULL_WIDTH = 415;
 const LOGO_ICON_WIDTH = 150;
 const GITHUB_ICON_WIDTH = 130;
 
-const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> }) => {
+const Header = ({ room, refresh }: { readonly room?: Room; readonly refresh?: () => Promise<void> }) => {
     const info = useRef(null);
 
     const [roomName, setRoomName] = useState<string | undefined>(room?.name);
@@ -149,7 +149,7 @@ const Header = ({ room, refresh }: { room?: Room; refresh?: () => Promise<void> 
                                 className={modalStyles.input}
                                 type="text"
                                 value={roomName}
-                                onChange={(e) => setRoomName(e.target.value)}
+                                onChange={(event) => setRoomName(event.target.value)}
                             />
                         </div>
                     </Modal>

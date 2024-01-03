@@ -1,6 +1,6 @@
 import { Buffer } from "buffer";
 import { v4 as uuid } from "uuid";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message, result } from "../utils/responses.js";
 import { create } from "../utils/database.js";
@@ -18,7 +18,14 @@ const createRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const { name, hostId, hostName } = JSON.parse(body);
 
-    if (!name || !hostId || !hostName) {
+    if (
+        !name ||
+        typeof name !== "string" ||
+        !hostId ||
+        typeof hostId !== "string" ||
+        !hostName ||
+        typeof hostName !== "string"
+    ) {
         return message(400, "Name & creator parameters required");
     }
 

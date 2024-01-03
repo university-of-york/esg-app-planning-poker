@@ -53,7 +53,7 @@ describe("Get Room function", () => {
                 Key: {
                     id: { S: "test-id" },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));
@@ -75,7 +75,7 @@ describe("Get Room function", () => {
                         },
                     ],
                 },
-            })
+            }),
         );
     });
 });

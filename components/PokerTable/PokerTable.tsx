@@ -7,7 +7,7 @@ import { Cards } from "./Cards/Cards";
 // @ts-ignore
 import styles from "./PokerTable.module.css";
 
-const PokerTable = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
+const PokerTable = ({ room, refresh }: { readonly room: Room; readonly refresh: () => Promise<void> }) => {
     return (
         <div className={styles.container}>
             {userIsHost(room) ? <Controls room={room} refresh={refresh} /> : undefined}

@@ -1,6 +1,6 @@
+import { type Context } from "aws-lambda";
 import sls from "serverless-http";
 import binaryMimeTypes from "./binaryMimeTypes.js";
-
 import server from "./server.js";
 import getRoom from "./functions/getRoom.js";
 import createRoom from "./functions/createRoom.js";
@@ -18,7 +18,7 @@ const handler = sls(server, {
     binary: binaryMimeTypes,
 });
 
-const serverHandler = async (event: any, context: any) => {
+const serverHandler = async (event: unknown, context: Context) => {
     console.debug(`Event: ${JSON.stringify(event)}`);
 
     const response = await handler(event, context);

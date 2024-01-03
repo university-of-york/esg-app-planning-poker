@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
 import { rename } from "../utils/database.js";
@@ -21,7 +21,7 @@ const renameRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const { name } = JSON.parse(body);
 
-    if (!name) {
+    if (!name || typeof name !== "string") {
         return message(400, "Name parameter required");
     }
 

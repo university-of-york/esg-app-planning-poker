@@ -45,7 +45,9 @@
     background-color: white;
     opacity: 0.8;
     cursor: pointer;
-    transition: background-color 0.25s, opacity 0.25s;
+    transition:
+        background-color 0.25s,
+        opacity 0.25s;
 }
 
 .room td {

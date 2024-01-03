@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
 import { submit } from "../utils/database.js";
@@ -21,7 +21,7 @@ const submitChoice = async (event: APIGatewayEvent): Promise<LambdaResponse> => 
 
     const { memberId, choice } = JSON.parse(body);
 
-    if (!memberId || !choice) {
+    if (!memberId || typeof memberId !== "string" || !choice || typeof choice !== "string") {
         return message(400, "Member ID & choice parameters required");
     }
 

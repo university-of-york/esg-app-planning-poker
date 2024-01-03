@@ -5,13 +5,13 @@ import { resetRoom, revealRoom } from "../../../utils/api";
 // @ts-ignore
 import styles from "./Controls.module.css";
 
-const Controls = ({ room, refresh }: { room: Room; refresh: () => Promise<void> }) => {
+const Controls = ({ room, refresh }: { readonly room: Room; readonly refresh: () => Promise<void> }) => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const allChoicesMade = !room.members.find((member) => member.choice === "");
 
     if (!allChoicesMade && room.state === "HIDDEN") {
-        return <></>;
+        return null;
     }
 
     const handleReveal = () => {

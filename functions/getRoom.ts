@@ -1,4 +1,4 @@
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message, result } from "../utils/responses.js";
 import { get } from "../utils/database.js";

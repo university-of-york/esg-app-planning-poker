@@ -29,8 +29,8 @@ const getServerSideProps = async ({ params }: { params: any }) => {
 };
 
 declare type PlanningRoomProps = {
-    id: string;
-    room: Room;
+    readonly id: string;
+    readonly room: Room;
 };
 
 const PlanningRoom = (props: PlanningRoomProps) => {
@@ -93,7 +93,7 @@ const PlanningRoom = (props: PlanningRoomProps) => {
                         className={modalStyles.input}
                         type="text"
                         value={displayName}
-                        onChange={(e) => setDisplayName(e.target.value)}
+                        onChange={(event) => setDisplayName(event.target.value)}
                     />
                 </div>
             </Modal>

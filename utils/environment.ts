@@ -1,3 +1,5 @@
+import process from "process";
+
 const getEnvironmentVariable = (key: string): string => {
     const value = process.env[key];
 
@@ -8,7 +10,7 @@ const getEnvironmentVariable = (key: string): string => {
     return value;
 };
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ? process.env.NEXT_PUBLIC_BASE_URL : "";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "";
 
 const pokerTable = () => getEnvironmentVariable("POKER_TABLE");
 const logTable = () => getEnvironmentVariable("LOG_TABLE");

@@ -59,7 +59,7 @@ describe("Reveal Room function", () => {
                 ExpressionAttributeValues: {
                     ":state": { S: "REVEALED" },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));

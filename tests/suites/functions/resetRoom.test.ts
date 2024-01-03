@@ -53,7 +53,7 @@ describe("Reset Room function", () => {
                 Key: {
                     id: { S: "test-id" },
                 },
-            })
+            }),
         );
 
         expect(client.send).toHaveBeenCalledWith(
@@ -81,7 +81,7 @@ describe("Reset Room function", () => {
                         ],
                     },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));

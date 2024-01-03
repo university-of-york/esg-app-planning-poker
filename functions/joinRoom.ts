@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
 import { join } from "../utils/database.js";
@@ -21,7 +21,7 @@ const joinRoom = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const { memberId, memberName } = JSON.parse(body);
 
-    if (!memberId || !memberName) {
+    if (!memberId || typeof memberId !== "string" || !memberName || typeof memberName !== "string") {
         return message(400, "Member ID & name required");
     }
 

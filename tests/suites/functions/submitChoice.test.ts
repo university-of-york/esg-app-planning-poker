@@ -112,7 +112,7 @@ describe("Submit Choice function", () => {
                 Key: {
                     id: { S: "test-id" },
                 },
-            })
+            }),
         );
 
         expect(client.send).toHaveBeenCalledWith(
@@ -126,7 +126,7 @@ describe("Submit Choice function", () => {
                 ExpressionAttributeValues: {
                     ":choice": { S: "M" },
                 },
-            })
+            }),
         );
 
         expect(result).toEqual(expect.objectContaining({ statusCode: 200 }));

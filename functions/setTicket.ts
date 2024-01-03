@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-import { APIGatewayEvent } from "aws-lambda";
+import { type APIGatewayEvent } from "aws-lambda";
 import type { LambdaResponse } from "../types/lambda";
 import { message } from "../utils/responses.js";
 import { ticket } from "../utils/database.js";
@@ -21,7 +21,12 @@ const setTicket = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const { ticketId, jiraTicket } = JSON.parse(body);
 
-    if (ticketId === undefined || jiraTicket === undefined) {
+    if (
+        ticketId === undefined ||
+        typeof ticketId !== "string" ||
+        jiraTicket === undefined ||
+        typeof jiraTicket !== "boolean"
+    ) {
         return message(400, "Ticket ID & Jira flag required");
     }
 
