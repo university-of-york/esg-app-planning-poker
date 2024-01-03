@@ -18,17 +18,17 @@ const logMessage = async (event: APIGatewayEvent): Promise<LambdaResponse> => {
 
     const body = event.isBase64Encoded ? Buffer.from(event.body, "base64").toString() : event.body;
 
-    const { level, message: msg, stacktrace } = JSON.parse(body);
+    const { level, message: message_, stacktrace } = JSON.parse(body);
 
-    if (!level || typeof level !== "string" || !msg || typeof msg !== "string") {
+    if (!level || typeof level !== "string" || !message_ || typeof message_ !== "string") {
         return message(400, "Level and message are required");
     }
 
     const stack = typeof stacktrace === "string" ? stacktrace : undefined;
 
-    console.info(`Received log: ${id}: ${level}: ${msg}`);
+    console.info(`Received log: ${id}: ${level}: ${message_}`);
 
-    await log(id, timestamp, level, msg, stack);
+    await log(id, timestamp, level, message_, stack);
 
     return result({ id });
 };

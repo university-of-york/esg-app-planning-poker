@@ -149,7 +149,7 @@ const Header = ({ room, refresh }: { readonly room?: Room; readonly refresh?: ()
                                 className={modalStyles.input}
                                 type="text"
                                 value={roomName}
-                                onChange={(e) => setRoomName(e.target.value)}
+                                onChange={(event) => setRoomName(event.target.value)}
                             />
                         </div>
                     </Modal>

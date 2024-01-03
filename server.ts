@@ -14,9 +14,9 @@ server.use(
 );
 
 // serve requests with Next by default
-server.get("*", (req: IncomingMessage, res: ServerResponse) => {
-    // res.setHeader("Cache-Control", "public, max-age=86400");
-    handle(req, res);
+server.get("*", (request: IncomingMessage, response: ServerResponse) => {
+    // response.setHeader("Cache-Control", "public, max-age=86400");
+    handle(request, response);
 });
 
 export default server;
