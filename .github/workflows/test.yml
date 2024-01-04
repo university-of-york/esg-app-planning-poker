@@ -15,7 +15,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install application dependencies
         run: npm ci
@@ -30,6 +30,7 @@ jobs:
         run: npm run test:functional
 
       - name: Store cypress captures as artifact
+        if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: cypress

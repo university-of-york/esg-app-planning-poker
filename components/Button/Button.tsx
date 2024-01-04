@@ -27,7 +27,7 @@ const Button = ({ className, children, link, onClick, isSubmitting = false, isDi
 
     if (link) {
         return (
-            <Link passHref href={link}>
+            <Link passHref legacyBehavior href={link}>
                 {button}
             </Link>
         );

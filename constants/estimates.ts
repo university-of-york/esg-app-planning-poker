@@ -1,9 +1,9 @@
-declare type EstimationSchemes = {
-    [key: string]: {
-        display: string;
-        options: string[];
-    };
+declare type EstimationScheme = {
+    display: string;
+    options: string[];
 };
+
+declare type EstimationSchemes = Record<string, EstimationScheme>;
 
 const ESTIMATION_SCHEMES: EstimationSchemes = {
     "T-SHIRT": {

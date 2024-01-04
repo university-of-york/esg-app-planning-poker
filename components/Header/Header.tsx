@@ -158,7 +158,7 @@ const Header = ({ room, refresh }: { readonly room?: Room; readonly refresh?: ()
                 )}
 
                 <a
-                    className={`${styles.githubLink} ${githubOverlap ? styles.hidden : ""}`}
+                    className={`cy-github ${styles.githubLink} ${githubOverlap ? styles.hidden : ""}`}
                     href="https://github.com/university-of-york/esg-app-planning-poker"
                     target="_blank"
                     rel="noopener noreferrer"

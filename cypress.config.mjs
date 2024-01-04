@@ -15,6 +15,7 @@ const cypressConfig = defineConfig({
         viewportHeight: 1000,
         viewportWidth: 1200,
     },
+    video: true,
 });
 
 export default cypressConfig;

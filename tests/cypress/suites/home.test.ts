@@ -21,9 +21,11 @@ describe("Home screen", () => {
     });
 
     it("Contains the link to Github", () => {
-        cy.get("svg.fa-github-square")
-            .parent()
-            .should("have.attr", "href", "https://github.com/university-of-york/esg-app-planning-poker");
+        cy.get(".cy-github").should(
+            "have.attr",
+            "href",
+            "https://github.com/university-of-york/esg-app-planning-poker",
+        );
     });
 
     it("Contains the intro text", () => {

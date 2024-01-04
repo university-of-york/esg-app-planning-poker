@@ -8,7 +8,7 @@ import styles from "./Controls.module.css";
 const Controls = ({ room, refresh }: { readonly room: Room; readonly refresh: () => Promise<void> }) => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const allChoicesMade = !room.members.find((member) => member.choice === "");
+    const allChoicesMade = !room.members.some((member) => member.choice === "");
 
     if (!allChoicesMade && room.state === "HIDDEN") {
         return null;

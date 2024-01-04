@@ -2,7 +2,7 @@ service: esg-app-planning-poker
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs18.x
   stage: ${env:STACK_ENV, 'dev'}
   region: eu-west-1
   memorySize: 1024
