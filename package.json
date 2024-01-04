@@ -36,7 +36,7 @@
     "verify": "cypress run"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.58.0",
+    "@aws-sdk/client-dynamodb": "^3.485.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
@@ -52,7 +52,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@aws-sdk/types": "^3.55.0",
+    "@aws-sdk/types": "^3.485.0",
     "@babel/eslint-parser": "^7.23.3",
     "@babel/preset-env": "^7.23.7",
     "@babel/preset-react": "^7.23.3",
