@@ -6,7 +6,7 @@
     "requireConfigFile": false
   },
   "extends": ["xo-nextjs", "plugin:cypress/recommended"],
-  "ignore": ["docs/**", "spec/**", "tests/**"],
+  "ignore": ["docs/**", "spec/**", "tests/**", "jest.config.cjs", "next.config.mjs", "next-env.d.ts", "tests/setup.ts"],
   "overrides": [
     {
       "files": ["**/*.test.js", "e2e/**", "jest/*"],
