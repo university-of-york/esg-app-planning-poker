@@ -19,7 +19,6 @@
     "@next/next/no-img-element": "off",
     "@next/next/no-page-custom-font": "off",
     "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/consistent-indexed-object-style": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-floating-promises": "off",
