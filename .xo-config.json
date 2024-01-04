@@ -38,7 +38,6 @@
     "max-params": "off",
     "no-else-return": "off",
     "no-warning-comments": "off",
-    "no-undef": "off",
     "react/hook-use-state": "off",
     "react/no-access-state-in-setstate": "off",
     "react/no-invalid-html-attribute": "off",
@@ -46,12 +45,9 @@
     "unicorn/better-regex": "off",
     "unicorn/catch-error-name": "off",
     "unicorn/filename-case": "off",
-    "unicorn/import-index": "off",
-    "unicorn/no-empty-file": "off",
     "unicorn/prefer-add-event-listener": "off",
     "unicorn/prefer-export-from": "off",
-    "unicorn/prefer-node-protocol": "off",
-    "unicorn/prefer-ternary": "off"
+    "unicorn/prefer-node-protocol": "off"
   },
   "space": 4
 }
