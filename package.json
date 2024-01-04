@@ -49,7 +49,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "serverless-http": "^2.7.0",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.485.0",
@@ -67,7 +67,7 @@
     "@types/luxon": "^3.3.8",
     "@types/node": "^18.19.4",
     "@types/react": "^18.2.46",
-    "@types/uuid": "^8.3.4",
+    "@types/uuid": "^9.0.7",
     "@types/wait-on": "^5.3.1",
     "babel-jest": "^29.7.0",
     "copyfiles": "^2.4.1",
