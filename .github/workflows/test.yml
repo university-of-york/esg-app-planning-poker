@@ -30,6 +30,7 @@ jobs:
         run: npm run test:functional
 
       - name: Store cypress captures as artifact
+        if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: cypress
